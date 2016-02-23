@@ -11,6 +11,7 @@ export default function(app) {
   // Insert routes below
   app.use('/api/v1/things', require('./api/thing'));
   app.use('/api/v1/users', require('./api/user'));
+  app.use('/api/v1/organizations', require('./api/organization'));
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
