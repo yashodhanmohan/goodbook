@@ -100,11 +100,3 @@ export function destroy(req, res) {
         .then(removeEntity(res))
         .catch(handleError(res));
 }
-
-// Login if user exists and return document or empty
-export function login(req, res) {
-    // console.log(req.body.name);
-    User.findAsync({name: req.body.name})
-        .then(respondWithResult(res, 200))
-        .catch(handleError(res));
-}

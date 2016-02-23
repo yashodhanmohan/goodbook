@@ -77,7 +77,7 @@ module.exports = function (grunt) {
         tasks: ['injector:css']
       },
       mochaTest: {
-        files: ['<%= yeoman.server %>/**/*.{spec,integration}.js'],
+        files: ['<%= yeoman.server %>/**/*.{spec}.js'],
         tasks: ['env:test', 'mochaTest']
       },
       jsTest: {
@@ -662,7 +662,7 @@ module.exports = function (grunt) {
         'env:all',
         'env:test',
         'mochaTest:unit',
-        'mochaTest:integration'
+        // 'mochaTest:integration'
       ]);
     }
 
