@@ -40,7 +40,16 @@ describe('User API:', function() {
     		"email": "nunc@nibh.co.uk",
     		"username": "AvramChrist",
     		"password": "YFY89IPH2FA",
-    		"contactNo": "(0220) 678 4471"
+    		"contactNo": "(0220) 678 4471",
+            "interests": ["reading", "writing"],
+            "creditCard" : "1234",
+            "wallet": "2345",
+            "lastLogin":new Date('2014-01-22T14:56:59.301Z'),
+            "karma": 404,
+            "location": [33.2, 22.3],
+            "aboutMe": "I am a dummy object created for testing. I will be killed soon.",
+            subscribedNGO:["1","2"]
+            
     	})
         .expect(201)
         .expect('Content-Type', /json/)
@@ -61,6 +70,15 @@ describe('User API:', function() {
       newUser.username.should.equal('AvramChrist');
       newUser.password.should.equal('YFY89IPH2FA');
       newUser.contactNo.should.equal('(0220) 678 4471');
+      newUser.interests.should.have.length(2);
+      newUser.creditCard.should.equal("1234");
+      newUser.wallet.should.equal("2345");
+      newUser.lastLogin.should.equal('2014-01-22T14:56:59.301Z');
+      newUser.karma.should.equal(404);
+      newUser.location.should.have.length(2);
+      newUser.aboutMe.should.equal("I am a dummy object created for testing. I will be killed soon.");
+      newUser.subscribedNGO.should.have.length(2);
+        
     });
 
   });
@@ -87,13 +105,21 @@ describe('User API:', function() {
     });
 
     it('should respond with the requested user', function() {
-        user.firstName.should.equal('Lion');
-        user.lastName.should.equal('Giraffe');
-        user.dob.should.equal('2016-06-22T03:59:41.000Z');
-        user.email.should.equal('nunc@nibh.co.uk');
-        user.username.should.equal('AvramChrist');
-        user.password.should.equal('YFY89IPH2FA');
-        user.contactNo.should.equal('(0220) 678 4471');
+      user.firstName.should.equal('Lion');
+      user.lastName.should.equal('Giraffe');
+      user.dob.should.equal('2016-06-22T03:59:41.000Z');
+      user.email.should.equal('nunc@nibh.co.uk');
+      user.username.should.equal('AvramChrist');
+      user.password.should.equal('YFY89IPH2FA');
+      user.contactNo.should.equal('(0220) 678 4471');
+      user.interests.should.have.length(2);
+      user.creditCard.should.equal("1234");
+      user.wallet.should.equal("2345");
+      user.lastLogin.should.equal('2014-01-22T14:56:59.301Z');
+      user.karma.should.equal(404);
+      user.location.should.have.length(2);
+      user.aboutMe.should.equal("I am a dummy object created for testing. I will be killed soon.");
+      user.subscribedNGO.should.have.length(2);
     });
 
   });
@@ -124,13 +150,21 @@ describe('User API:', function() {
     });
 
     it('should respond with the updated user', function() {
-        updatedUser.firstName.should.equal('Tiger');
-        updatedUser.lastName.should.equal('Shroff');
-        updatedUser.dob.should.equal('2016-06-22T03:59:41.000Z');
-        updatedUser.email.should.equal('nunc@nibh.co.uk');
-        updatedUser.username.should.equal('AvramChrist');
-        updatedUser.password.should.equal('YFY89IPH2FA');
-        updatedUser.contactNo.should.equal('(0220) 678 4471');
+      updatedUser.firstName.should.equal('Tiger');
+      updatedUser.lastName.should.equal('Shroff');
+      updatedUser.dob.should.equal('2016-06-22T03:59:41.000Z');
+      updatedUser.email.should.equal('nunc@nibh.co.uk');
+      updatedUser.username.should.equal('AvramChrist');
+      updatedUser.password.should.equal('YFY89IPH2FA');
+      updatedUser.contactNo.should.equal('(0220) 678 4471');
+      updatedUser.interests.should.have.length(2);
+      updatedUser.creditCard.should.equal("1234");
+      updatedUser.wallet.should.equal("2345");
+      updatedUser.lastLogin.should.equal('2014-01-22T14:56:59.301Z');
+      updatedUser.karma.should.equal(404);
+      updatedUser.location.should.have.length(2);
+      updatedUser.aboutMe.should.equal("I am a dummy object created for testing. I will be killed soon.");
+      updatedUser.subscribedNGO.should.have.length(2);
     });
 
   });

@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/organizations              ->  index
- * POST    /api/organizations              ->  create
- * GET     /api/organizations/:id          ->  show
- * PUT     /api/organizations/:id          ->  update
- * DELETE  /api/organizations/:id          ->  destroy
+ * GET     /api/users              ->  index
+ * POST    /api/users              ->  create
+ * GET     /api/users/:id          ->  show
+ * PUT     /api/users/:id          ->  update
+ * DELETE  /api/users/:id          ->  destroy
  */
 
 'use strict';
 
 import _ from 'lodash';
-import Organization from './organization.model';
-console.log("asjdahsdjkashdkjasshdkjashd");
+import Transaction from './transaction.model';
+
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -59,43 +59,43 @@ function handleError(res, statusCode) {
     };
 }
 
-// Gets a list of Organizations
+// Gets a list of Transactions
 export function index(req, res) {
-    Organization.findAsync()
+    Transaction.findAsync()
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
-// Gets a single Organization from the DB
+// Gets a single Transaction from the DB
 export function show(req, res) {
-    Organization.findByIdAsync(req.params.id)
+    Transaction.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
-// Creates a new Organization in the DB
+// Creates a new Transaction in the DB
 export function create(req, res) {
-    Organization.createAsync(req.body)
+    Transaction.createAsync(req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
 
-// Updates an existing Organization in the DB
+// Updates an existing Transaction in the DB
 export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Organization.findByIdAsync(req.params.id)
+    Transaction.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
-// Deletes a Organization from the DB
+// Deletes a Transaction from the DB
 export function destroy(req, res) {
-    Organization.findByIdAsync(req.params.id)
+    Transaction.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
