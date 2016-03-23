@@ -92,7 +92,7 @@ export function update(req, res) {
         .catch(handleError(res));
 }
 
-// Deletes a Event from the DB
+// Deletes a Event from the Database
 export function destroy(req, res) {
     Event.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
