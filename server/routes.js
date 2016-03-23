@@ -19,6 +19,7 @@ export default function(app) {
   app.use('/api/v1/notifications', require('./api/notification'));
   app.use('/api/v1/oneTimeTransactions', require('./api/oneTimeTransaction'));
   app.use('/api/v1/querys', require('./api/query'));
+  app.use('/api/v1/eventRequests', require('./api/eventRequest'));
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
