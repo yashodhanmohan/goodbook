@@ -12,6 +12,44 @@
 import _ from 'lodash';
 import User from './user.model';
 
+
+
+function checkPassword(req, res, statusCode) {
+    statusCode = statusCode || 200;
+    
+    return function(entity) {
+		if (!entity) {
+            res.status(301).end();
+            return null;
+        }
+	    if (entity.password === req.body.password) {
+	    	console.log("Passwords match");        
+	    	res.status(statusCode).json(entity);
+        }
+	else {
+		res.status(301).end();
+		return null;
+	}
+	
+    };
+}
+
+
+function registerCheck(req, res, statusCode) {
+    return function(entity) {
+		statusCode = statusCode || 200;
+		if(entity){
+            res.status(302).end();
+            return null;
+		}
+		else{
+			User.createAsync(req.body);
+	    	res.status(statusCode).json(entity);
+		}
+	};
+}
+
+
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -52,6 +90,7 @@ function handleEntityNotFound(res) {
     };
 }
 
+
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
@@ -80,6 +119,22 @@ export function create(req, res) {
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
+
+
+//To check for login
+export function login(req, res) {
+    User.findOne({username:req.body.username})
+	.then(checkPassword(req,res))
+	.catch(handleError(res));
+}
+
+export function register(req, res) {
+    User.findOne({username:req.body.username})
+	.then(registerCheck(req,res))
+    .catch(handleError(res));
+}
+
+
 
 // Updates an existing User in the DB
 export function update(req, res) {
