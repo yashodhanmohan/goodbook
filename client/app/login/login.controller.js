@@ -8,10 +8,13 @@
             this.$location = $location;
             this.error = false;
             this.errorMessage = "Invalid username and/or password";
+            this.username = '';
+            this.password = '';
         }
 
-        login = (username, password) => {
-            this.$http.post('/api/v1/users/login', { username: username, password: password })
+        login = () => {
+            console.log('Entering login function with values '+this.username+', '+this.password);
+            this.$http.post('/api/v1/users/login', { username: this.username, password: this.password })
                 .success((data, status) => {
                     if (status == 200 && data.status) {
                         this.$location.path('/');
@@ -26,7 +29,7 @@
                 });
         }
     }
-    
+
     angular.module('goodbookApp')
         .controller('LoginController', LoginController);
 })();
