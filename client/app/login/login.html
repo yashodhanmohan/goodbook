@@ -1,0 +1,17 @@
+<div layout="column" flex="33">
+        <h1>Login</h1>
+        <div ng-show="login.error" class="alert-danger">{{login.errorMessage}}</div>
+        <form class="form" ng-submit="login.login(username, password)">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username" ng-model="username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" ng-model="password" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-default" ng-disabled="disabled">Login</button>
+            </div>
+        </form>
+</div>

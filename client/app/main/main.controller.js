@@ -1,31 +1,31 @@
-'use strict';
+// 'use strict';
 
-(function() {
+// (function() {
 
-class MainController {
+// class MainController {
 
-  constructor($http) {
-    this.$http = $http;
-    this.awesomeThings = [];
+//   constructor($http) {
+//     this.$http = $http;
+//     this.awesomeThings = [];
 
-    $http.get('/api/v1/things').then(response => {
-      this.awesomeThings = response.data;
-    });
-  }
+//     $http.get('/api/v1/things').then(response => {
+//       this.awesomeThings = response.data;
+//     });
+//   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/v1/things', { name: this.newThing });
-      this.newThing = '';
-    }
-  }
+//   addThing() {
+//     if (this.newThing) {
+//       this.$http.post('/api/v1/things', { name: this.newThing });
+//       this.newThing = '';
+//     }
+//   }
 
-  deleteThing(thing) {
-    this.$http.delete('/api/v1/things/' + thing._id);
-  }
-}
+//   deleteThing(thing) {
+//     this.$http.delete('/api/v1/things/' + thing._id);
+//   }
+// }
 
-angular.module('goodbookApp')
-  .controller('MainController', MainController);
+// angular.module('goodbookApp')
+//   .controller('MainController', MainController);
 
-})();
+// })();
