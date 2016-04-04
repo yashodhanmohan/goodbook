@@ -1,3 +1,6 @@
-.formheader {
-	background-color: #03A9F4
+.form-header {
+	background-color: #03A9F4;
+	color: white;
+	font-weight: 900;
+	font-size: 500%;
 }

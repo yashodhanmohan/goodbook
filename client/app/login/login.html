@@ -1,26 +1,33 @@
-<div layout="row" layout-align="center">
-    <div flex="33">
-        <md-card>
-            <md-card-header layout-align="center center" style="background-color: #03A9F4; color: white">
-                <md-card-header-text>
-                    <center class="md-title">Login</center>
-                </md-card-header-text>
-            </md-card-header>
-            <md-card-content>
-                <form onsubmit="login.login()">
-                    <md-input-container>
-                        <label>Username</label>
-                        <input type="text" ng-model="login.username"></input>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Password</label>
-                        <input type="password" ng-model="login.password"></input>
-                    </md-input-container>
-                    <div layout="row" layout-align="center center">
-                        <md-button style="background-color: #03A9F4; color: white">Login</md-button>
+<div class="container">
+    <div class="row">
+        <div class="col s4 offset-s4">
+            <div class="card">
+                <center class="card-title light-blue white-text">Login</center>
+                <div class="card-content">
+                    <div class="column">
+                        <form ng-submit="login.login()">
+                            <div class="input-field">
+                                <label class='light-blue-text'>Username</label>
+                                <input type="text" ng-model="login.username"></input>
+                            </div>
+                            <div class='input-field'>
+                                <label class='light-blue-text'>Password</label>
+                                <input type="password" ng-model="login.password"></input>
+                            </div>
+                            <div class="row">
+                                <center>
+                                    <button class="btn waves-effect waves-light offset-s1 light-blue white-text" type="submit">
+                                        Login
+                                    </button>
+                                </center>
+                            </div>
+                            <div ng-show="login.error">
+                                <center class='red-text'>Invalid username or password</center>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </md-card-content>
-        </md-card>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
