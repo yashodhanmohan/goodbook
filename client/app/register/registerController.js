@@ -1,6 +1,6 @@
 'use strict';
-angular.module('myApp', [])
-.controller('registerController', function ($scope, $http, $location) {
+angular.module('goodbookApp', [])
+.controller('registerController',['$scope','$http','$location', function ($scope, $http, $location) {
     $scope.register = function() {
         $scope.error = false;
         var data = $.param({
@@ -24,4 +24,4 @@ angular.module('myApp', [])
             $scope.disabled = true;
         });
     }                   
-})
+}])

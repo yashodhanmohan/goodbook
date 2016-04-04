@@ -1,6 +1,6 @@
 'use strict';
-angular.module('myApp')
-.controller('loginController',[$scope,$location,AuthService,function($scope,$location,AuthService){
+angular.module('goodbookApp')
+.controller('loginController',['$scope','$location','AuthService',function($scope,$location,AuthService){
 	$scope.login=function(){
 		//Initial values
 		$scope.error=false;

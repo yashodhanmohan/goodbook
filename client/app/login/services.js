@@ -4,7 +4,7 @@ injected the dependencies that we will be using - $q, $timeout, $http -
 and then returned the functions, which we still need to write, for use 
 outside the service.
 */
-angular.module('myApp').factory('AuthService',
+angular.module('goodbookApp').factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
 
