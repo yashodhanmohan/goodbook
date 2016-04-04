@@ -3,7 +3,7 @@
  angular.module('goodbookApp')
      .config(function($routeProvider) {
          $routeProvider
-             .when('/', {
+             .when('/login', {
                  templateUrl: 'app/login/login.html',
                  controller: 'LoginController',
                  controllerAs: 'login'

@@ -5,8 +5,7 @@ angular.module('goodbookApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
-  'ngMaterial'
+  'ngRoute'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider

@@ -32,7 +32,7 @@
 
         <div class="form-group">
             <label>Mobile number</label>
-            <input type="text" name="MobileNumber" class="form-control" ng-model="register.mobile" ng-pattern="/^[0-9]{10,10}$/;">
+            <input type="text" name="MobileNumber" class="form-control" ng-model="register.mobile" ng-pattern="/^[0-9]{10,10}$/">
         </div>
 
         <div class="form-group">
@@ -41,7 +41,7 @@
         </div>               
         
         <div class="form-group">
-            <label><input type="radio" ng-change="register.change()">I accept all the terms and conditions</label>
+            <label><input type="radio" ng-model="register.disabled2">I accept all the terms and conditions</label>
         </div>
         <!-- SUBMIT BUTTON -->
         <button type="submit" class="btn btn-primary" ng-disabled="register.disabled1 && register.disabled2">Submit</button>

@@ -5,7 +5,7 @@ angular.module('goodbookApp')
         $routeProvider
             .when('/', {
                 templateUrl: 'app/register/register.html',
-                controller: 'RegisterController'
+                controller: 'RegisterController',
                 controllerAs: 'register'
             });
     });
