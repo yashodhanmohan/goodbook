@@ -3,7 +3,7 @@
 angular.module('goodbookApp')
     .config(function($routeProvider) {
         $routeProvider
-            .when('/', {
+            .when('/register', {
                 templateUrl: 'app/register/register.html',
                 controller: 'RegisterController',
                 controllerAs: 'register'

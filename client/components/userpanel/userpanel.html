@@ -1,0 +1,29 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="col s2" style="height: 100vh; position: fixed;">
+    <img src="assets/images/yeoman.png" alt="yeoman" class="circle responsive-img" style="min-width: 100%; max-height: 25%; min-height: 25%; margin-top: 5px">
+    <center>
+        <p class="flow-text">{{userpanel.name}}</p>
+    </center>
+    <center>
+        <p>Studied at: <span class="light-blue-text">{{userpanel.office}}</span></p>
+    </center>
+    <center>
+        <p>Lives in: <span class='light-blue-text'>{{userpanel.location}}</span></p>
+    </center>
+    <div class="card light-blue white-text" style="padding: 5px">
+        <center>{{userpanel.description}}</center>
+    </div>
+    <div class="row">
+        <div class="col progress s9">
+            <div class="determinate" style="width: 70%"></div>
+        </div>
+        <div class="col s3">{{userpanel.grading}}</div>
+    </div>
+    <center>
+        <p style="display: inline-flex;vertical-align: middle"><i class="material-icons small light-blue-text">av_timer</i><span class="flow-text" style="padding-left: 10px">{{userpanel.hours}} hours</span></p>
+    </center>
+    <center>
+        <p style="display: inline-flex;vertical-align: middle"><i class="material-icons small light-blue-text">stars</i><span class="flow-text" style="padding-left: 10px">Rs. {{userpanel.donation}}</span></p>
+    </center>
+    <center><a class="waves-effect waves-light btn"><span style="display: inline-flex; vertical-align: middle;">Donate<i class="material-icons small white-text" style="padding-left: 10px">play_arrow</i></span></a></center>
+</div>

@@ -1,33 +1,33 @@
-<div class="container">
-    <div class="row">
-        <div class="col s4 offset-s4">
-            <div class="card">
-                <center class="card-title light-blue white-text">Login</center>
-                <div class="card-content">
-                    <div class="column">
-                        <form ng-submit="login.login()">
-                            <div class="input-field">
-                                <label class='light-blue-text'>Username</label>
-                                <input type="text" ng-model="login.username"></input>
-                            </div>
-                            <div class='input-field'>
-                                <label class='light-blue-text'>Password</label>
-                                <input type="password" ng-model="login.password"></input>
-                            </div>
-                            <div class="row">
-                                <center>
-                                    <button class="btn waves-effect waves-light offset-s1 light-blue white-text" type="submit">
-                                        Login
-                                    </button>
-                                </center>
-                            </div>
-                            <div ng-show="login.error">
-                                <center class='red-text'>Invalid username or password</center>
-                            </div>
-                        </form>
-                    </div>
+<!-- <div class="container"> -->
+<div class="row">
+    <div class="col s4 offset-s4">
+        <div class="card">
+            <center class="card-title light-blue white-text">Login</center>
+            <div class="card-content">
+                <div class="column">
+                    <form ng-submit="login.login()">
+                        <div class="input-field">
+                            <label class='light-blue-text'>Username</label>
+                            <input type="text" ng-model="login.username"></input>
+                        </div>
+                        <div class='input-field'>
+                            <label class='light-blue-text'>Password</label>
+                            <input type="password" ng-model="login.password"></input>
+                        </div>
+                        <div class="row">
+                            <center>
+                                <button class="btn waves-effect waves-light offset-s1 light-blue white-text" type="submit">
+                                    Login
+                                </button>
+                            </center>
+                        </div>
+                        <div ng-show="login.error">
+                            <center class='red-text'>Invalid username or password</center>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
