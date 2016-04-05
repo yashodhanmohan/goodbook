@@ -13,6 +13,20 @@ import _ from 'lodash';
 import User from './user.model';
 
 
+function tagData(x) {
+	var dataNew = x;
+	var tempTags = JSON.parse(JSON.stringify(dataNew.interests));
+	console.log(tempTags);
+	tempTags.push(x.firstName);
+	tempTags.push(x.lastName);
+	tempTags.push(x.email);
+	tempTags.push(x.gender);
+	tempTags.push(x.subscribedNGO);
+	tempTags.push(x.username);
+	x.tags = tempTags;
+	return x;
+}
+
 
 function checkPassword(req, res, statusCode) {
     statusCode = statusCode || 200;
@@ -43,7 +57,7 @@ function registerCheck(req, res, statusCode) {
             return null;
 		}
 		else{
-			User.createAsync(req.body);
+			User.createAsync(tagData(req.body));
 	    	res.status(statusCode).json(entity);
 		}
 	};
@@ -123,7 +137,7 @@ export function show(req, res) {
 
 // Creates a new User in the DB
 export function create(req, res) {
-    User.createAsync(req.body)
+    User.createAsync(tagData(req.body))
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }

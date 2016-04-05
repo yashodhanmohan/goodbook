@@ -20,6 +20,8 @@ var UserSchema = new mongoose.Schema({
         index: '2d'
     },
     aboutMe: String,
+    gender: String,
+    tags : [String],
     /*subscribedNGO :[{
 	type: mongoose.Schema.Types.ObjectId,
 	ref : NGO
