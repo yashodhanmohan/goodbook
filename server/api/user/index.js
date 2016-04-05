@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/u/:uname', controller.showUname);
 router.post('/login/', controller.login);
 router.post('/register/', controller.register);
 router.post('/', controller.create);

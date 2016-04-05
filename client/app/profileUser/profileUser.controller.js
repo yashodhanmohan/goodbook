@@ -54,6 +54,7 @@
                 })
                 .error((status) => {
                     this.error = "Error Occured";
+		    this.$location.path('/login');
                 });
         }
 

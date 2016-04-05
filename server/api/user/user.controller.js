@@ -105,6 +105,14 @@ export function index(req, res) {
         .catch(handleError(res));
 }
 
+
+// Gets a single User from the DB
+export function showUname(req, res) {
+    User.findOne({username: req.params.uname})
+        .then(handleEntityNotFound(res))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
 // Gets a single User from the DB
 export function show(req, res) {
     User.findByIdAsync(req.params.id)
