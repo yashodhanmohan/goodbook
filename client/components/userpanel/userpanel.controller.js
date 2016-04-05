@@ -6,11 +6,11 @@ class UserpanelController {
         var cache = $cacheFactory.get('goodbookCache');
         var userdata = cache.get('userdata');
         this.$location = $location;
-        this.name = userdata.firstName + " " + userdata.lastName;
+        this.name = "Yeoman Patel";
         this.office = 'DAIICT';
         this.location = 'Gandhinagar';
         this.grading = '7/10';
-        this.donation = userdata.contactNo;
+        this.donation = 1500;
         this.hours = 48;
         this.description_original = 'Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !';
         if (this.description_original.length > 50) {
