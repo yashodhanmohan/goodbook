@@ -14,17 +14,18 @@ import User from './user.model';
 
 
 function tagData(x) {
-	var dataNew = x;
-	var tempTags = JSON.parse(JSON.stringify(dataNew.interests));
-	console.log(tempTags);
-	tempTags.push(x.firstName);
-	tempTags.push(x.lastName);
-	tempTags.push(x.email);
-	tempTags.push(x.gender);
-	tempTags.push(x.subscribedNGO);
-	tempTags.push(x.username);
-	x.tags = tempTags;
-	return x;
+	console.log(x);
+	User.findById(x._id, function (err, result){
+		var tempTags = [result.username];
+		tempTags.push(result.firstName);
+		tempTags.push(result.lastName);
+		tempTags.push(result.email);
+		tempTags.push(result.gender);
+		tempTags = tempTags.concat(result.subscribedNGO);		
+		tempTags = tempTags.concat(result.interests);
+		result.tags = tempTags;
+		result.save();
+		});
 }
 
 
@@ -69,7 +70,9 @@ function respondWithResult(res, statusCode) {
     return function(entity) {
         if (entity) {
             res.status(statusCode).json(entity);
-        }
+	    //console.log(entity);
+	    return entity;        
+	}
     };
 }
 
@@ -137,8 +140,9 @@ export function show(req, res) {
 
 // Creates a new User in the DB
 export function create(req, res) {
-    User.createAsync(tagData(req.body))
+    User.createAsync(req.body)
         .then(respondWithResult(res, 201))
+	.then(tagData)
         .catch(handleError(res));
 }
 
@@ -167,6 +171,7 @@ export function update(req, res) {
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
+	.then(tagData)
         .catch(handleError(res));
 }
 
