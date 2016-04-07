@@ -1,4 +1,4 @@
-<!-- <div class="container"> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="col s4 offset-s4">
         <div class="card">
@@ -7,12 +7,14 @@
                 <div class="column">
                     <form ng-submit="login.login()">
                         <div class="input-field">
-                            <label class='light-blue-text'>Username</label>
-                            <input type="text" ng-model="login.username"></input>
+                            <i class="material-icons prefix light-blue-text">person</i>
+                            <label class='light-blue-text' data-error="wrong" data-success="right">Username</label>
+                            <input type="text" class="validate" ng-model="login.username" ng-required="true"></input>
                         </div>
                         <div class='input-field'>
+                            <i class="material-icons prefix light-blue-text">lock</i>
                             <label class='light-blue-text'>Password</label>
-                            <input type="password" ng-model="login.password"></input>
+                            <input type="password" class="validate" ng-model="login.password" ng-required="true"></input>
                         </div>
                         <div class="row">
                             <center>
@@ -21,8 +23,15 @@
                                 </button>
                             </center>
                         </div>
-                        <div ng-show="login.error">
+                        <div class="row" ng-show="login.error">
                             <center class='red-text'>Invalid username or password</center>
+                        </div>
+                        <div class="row">
+                            <center>
+                                <a class="light-blue-text" href="#">
+                                    Forgot password ?
+                                </a>
+                            </center>
                         </div>
                     </form>
                 </div>
@@ -30,4 +39,3 @@
         </div>
     </div>
 </div>
-<!-- </div> -->

@@ -3,34 +3,41 @@
 (function() {
 
     class RegisterController {
-        constructor($http, $location) {
+        constructor($scope, $http, $location) {
             this.$http = $http;
             this.$location = $location;
             this.error = false;
-            this.errorMessage = "ERROR!!";
-            this.disabled1 = false;
-            this.disabled2 = true;
+            this.ind = true;
+            this.first_name = "";
+            this.last_name = "";
+            this.org_name = "";
+            this.username = "";
+            this.email = "";
+            this.password = "";
+            this.accept_conditions = false;
         }
 
         register = () => {
-            var data = {
-                firstName: this.firstname,
-                lastName: this.lastname,
-                dob: this.birthday,
-                email: this.email,
-                username: this.username,
-                password: this.password,
-                contactNo: this.mobile
+            if (this.check_username()) {
+                console.log('Woot');
+                console.log(this);
             }
-            this.$http.post('/api/v1/users/register', data)
-                .success((data, status) => {
-                    this.$location.path('/');
-                    this.disabled1 = false;
-                })
-                .error((status) => {
-                    this.error = true;
-                    this.disabled1 = true;
-                });
+        }
+
+        check_username = () => {
+            if (this.username.length != 0) {
+                console.log('perform check here');
+                this.$http.get('/api/v1/users/u/' + this.username)
+                    .success((data, status) => {
+                        console.log('hjerasd');
+                        console.log(data);
+                        console.log(status);
+                        return false;
+                    })
+                    .error((status) => {
+                   		return true;
+                    });
+            }
         }
     }
 

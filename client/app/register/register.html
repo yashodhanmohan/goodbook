@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="col s7" style="font-weight: lighter">
         <div class="row flow-text blue-text">
@@ -62,42 +63,46 @@
             <div class="row" style="margin-top: -5%">
                 <div class="row">
                     <div class="input-field col s5 offset-s1 flow-text">
-                        <input id="ind" name="group1" type="radio">
+                        <input id="ind" name="group1" type="radio" ng-model="register.ind" ng-value="true">
                         <label for="ind">Individual</label>
                     </div>
                     <div class="input-field col s5 flow-text">
-                        <input id="org" name="group1" type="radio">
+                        <input id="org" name="group1" type="radio" ng-model="register.ind" ng-value="false">
                         <label for="org">Organization</label>
                     </div>
                 </div>
-                <div class="input-field col s5 offset-s1 flow-text">
-                    <input id="first_name" type="text" class="validate">
+                <div class="input-field col s5 offset-s1 flow-text" ng-show="register.ind">
+                    <input id="first_name" type="text" class="validate" ng-model="register.first_name" ng-required="true">
                     <label for="first_name">First Name</label>
                 </div>
-                <div class="input-field col s5 flow-text">
-                    <input id="last_name" type="text" class="validate">
+                <div class="input-field col s5 flow-text" ng-show="register.ind">
+                    <input id="last_name" type="text" class="validate" ng-model="register.last_name" ng-required="true">
                     <label for="last_name">Last Name</label>
                 </div>
-                <div class="input-field col s10 offset-s1 flow-text">
-                    <input id="username" type="text" class="validate"></input>
+                <div class="input-field col s10 offset-s1 flow-text" ng-hide="register.ind" ng-model="register.org_name">
+                    <input id="org_name" type="text" class="validate" ng-required="true">
+                    <label for="org_name">Organization name</label>
+                </div>
+                <div class="input-field col s8 offset-s1 flow-text">
+                    <input id="username" name="usernamea" type="text" class="validate tooltipped" data-position="bottom" data-delay="50" ng-model="register.username" ng-required="true" ng-blur="register.check_username()">
                     <label for="username">Username</label>
                 </div>
                 <div class="input-field col s10 offset-s1  flow-text">
-                    <input id="email" type="email" class="validate"></input>
+                    <input id="email" type="email" class="validate" ng-model="register.email" ng-required="true"></input>
                     <label for="email">E-mail Address</label>
                 </div>
                 <div class="input-field col s10 offset-s1 flow-text">
-                    <input id="password" type="password" class="validate"></input>
+                    <input id="password" type="password" class="validate" ng-model="register.password" ng-required="true">
                     <label for="password">Password</label>
                 </div>
                 <div class="input-field col s8 offset-s1 flow-text">
-                    <input id="accept_conditions" type="checkbox"></input>
+                    <input id="accept_conditions" type="checkbox" ng-model="register.accept_conditions"></input>
                     <label for="accept_conditions">I accept the <a href="#">Terms and Conditions</a></label>
                 </div>
             </div>
             <div class="row">
                 <div class="col s3 offset-s4">
-                    <button class="btn waves-effect waves-light blue">
+                    <button class="btn waves-effect waves-light blue" ng-click="register.register()">
                         Signup
                     </button>
                 </div>

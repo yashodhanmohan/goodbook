@@ -12,6 +12,5 @@ angular.module('goodbookApp', [
       .otherwise({
         redirectTo: '/'
       });
-
     $locationProvider.html5Mode(true);
   });

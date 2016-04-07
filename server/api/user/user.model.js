@@ -15,18 +15,18 @@ var UserSchema = new mongoose.Schema({
     wallet: String,
     lastLogin: Date,
     karma: Number,
-    location:{
+    location: {
         type: [Number],
         index: '2d'
     },
     aboutMe: String,
     gender: String,
-    tags : [String],
+    tags: [String],
     /*subscribedNGO :[{
-	type: mongoose.Schema.Types.ObjectId,
-	ref : NGO
-	}]*/
-    subscribedNGO : [String]
+    type: mongoose.Schema.Types.ObjectId,
+    ref : NGO
+    }]*/
+    subscribedNGO: [String]
 });
 
 export default mongoose.model('User', UserSchema);

@@ -10,18 +10,25 @@
             this.username = '';
             this.password = '';
             this.error = false;
-            this.cache = this.$cacheFactory('goodbookCache');
+            if (this.$cacheFactory.get('goodbookCache')) {
+                var cache = this.$cacheFactory.get('goodbookCache');
+                if (cache.get('loggedIn')) {
+                    var data = this.$cacheFactory.get('goodbookCache').get('userdata');
+                    this.$location.path('/uprofile/' + data.username);
+                }
+            }
+            else
+                this.cache = this.$cacheFactory('goodbookCache');
         }
 
         login = () => {
-            console.log('Entering login function with values '+this.username+', '+this.password);
             this.$http.post('/api/v1/users/login', { username: this.username, password: this.password })
                 .success((data, status) => {
                     if (status == 200 && data) {
-                        console.log(data);
                         delete data.password;
                         this.cache.put('userdata', data);
-                        this.$location.path('/uprofile/'+data.username);
+                        this.cache.put('loggedIn', true);
+                        this.$location.path('/uprofile/' + data.username);
                         this.disabled = false;
                     } else {
                         this.error = true;

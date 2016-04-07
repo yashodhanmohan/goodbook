@@ -5,9 +5,9 @@ var controller = require('./user.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
 router.get('/u/:uname', controller.showUname);
+router.get('/:id', controller.show);
+router.get('/', controller.index);
 router.post('/login/', controller.login);
 router.post('/register/', controller.register);
 router.post('/', controller.create);
