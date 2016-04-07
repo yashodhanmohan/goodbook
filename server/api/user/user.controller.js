@@ -22,12 +22,28 @@ var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com
 // send mail with defined transport object
 
 
-function welcomeMail(x) {
+
+function changePassword(x){
+		var randomstring = Math.random().toString(36).slice(-8);
+			
+		console.log(x);
+		User.findById(x._id, function(err, result) {
+			result.password = randomstring;
+			result.save();
+		});
+	changePasswordMail(x, randomstring);
+	return x;
+
+		
+}
+		
+		
+function changePasswordMail(x, y) {
 	var mailOptions = {
 	    from: '"Project Goodbook" <info@goodbook.com>', // sender address
 	    to: x.email, // list of receivers
-	    subject: 'Welcome to Project Goodbook', // Subject line
-	    text: 'Dear ' + x.firstName + ' ' + x.lastName +',\n\nWelcome to Project Goodbook. Let us work together to make this world a better place to live in.\n\nTeam Project Goodbook' // 
+	    subject: 'Password Changed', // Subject line
+	    text: 'Dear ' + x.firstName + ' ' + x.lastName +',\n\nAs per your request your password has been changed. The new password is:' + y + '\n\nIf you had not requested this change, please let us know by replying to this mail.\n\nTrying to make a difference,\nTeam Project Goodbook' // 
 	};
 	transporter.sendMail(mailOptions,function(error, info){
     	if(error){
@@ -35,6 +51,22 @@ function welcomeMail(x) {
     	}
     	console.log('Message sent: ' + info.response);
 	});
+}
+
+
+function welcomeMail(x) {
+	var mailOptions = {
+	    from: '"Project Goodbook" <info@goodbook.com>', // sender address
+	    to: x.email, // list of receivers
+	    subject: 'Welcome to Project Goodbook', // Subject line
+	    text: 'Dear ' + x.firstName + ' ' + x.lastName +',\n\nWelcome to Project Goodbook. Let us work together to make this world a better place to live in.\n\nTeam Project Goodbook' // 
+	};
+	//transporter.sendMail(mailOptions,function(error, info){
+    	//if(error){
+        //	return console.log(error);
+    	//}
+    	//console.log('Message sent: ' + info.response);
+	//});
 }
 
 function tagData(x) {
@@ -126,6 +158,7 @@ function handleEntityNotFound(res) {
 			res.status(404).end();
 			return null;
 		}
+		console.log(entity);
 		return entity;
 	};
 }
@@ -205,4 +238,13 @@ export function destroy(req, res) {
 		.then(handleEntityNotFound(res))
 		.then(removeEntity(res))
 		.catch(handleError(res));
+}
+
+export function forgotPassword(req, res) {
+	User.findOne({ username: req.body.username})
+		.then(handleEntityNotFound(res))
+		.then(changePassword)
+		.then(respondWithResult(res))
+		.catch(handleError(res))
+	
 }
