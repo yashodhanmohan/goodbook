@@ -1,53 +1,107 @@
-
-<div ><!--ANGULAR MATERIAL-->
-    <h1>REGISTER HERE</h1>
-    <!--FORM-->
-    <!-- pass in the variable if our form is valid or invalid -->
-    <div ng-show="register.error" class="alert-danger">{{register.errorMessage}}</div>
-    <form name="userForm" ng-submit="register.register()">
-
-         <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="firstname" class="form-control" ng-model="register.firstname" required>
+<div class="row">
+    <div class="col s7" style="font-weight: lighter">
+        <div class="row flow-text blue-text">
+            <div class="col offset-s3 s9" style="font-size: 150%; max-width: 100%; font-weight: lighter">
+                Welcome to
+                <br>Project Goodbook
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="lastname" class="form-control" ng-model="register.lastname" required>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <div class="row">
+                    <div class="col s5">
+                        <div class="row blue z-depth-2" style="margin-top: 5%">
+                            <center><img src="assets/images/yeoman.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">56 NGOs</span>
+                                <br>across the country</center>
+                        </div>
+                    </div>
+                    <div class="col s5">
+                        <div class="row blue z-depth-2" style="margin-top: 5%">
+                            <center><img src="assets/images/yeoman.png"></center>
+                        </div>
+                        <div class="row " style="font-size: 125%">
+                            <center><span class="blue-text">1200 Volunteers</span>
+                                <br>across the country</center>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s5">
+                        <div class="row blue z-depth-2" style="margin-top: 5%">
+                            <center><img src="assets/images/yeoman.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">Rs. 1,50,000</span>
+                                <br>worth of donations</center>
+                        </div>
+                    </div>
+                    <div class="col s5">
+                        <div class="row blue z-depth-2" style="margin-top: 5%">
+                            <center><img src="assets/images/yeoman.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">87 events</span>
+                                <br>covered till now</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" ng-model="register.email" required>
-        </div>
-
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" ng-model="register.username" ng-minlength="3" ng-maxlength="8" required>
-        </div>
-
-        <div class="form-group">
-            <label>Password</label>
-            <input type="text" name="password" class="form-control" ng-model="register.password" ng-minlength="5" ng-maxlength="15" required>
-        </div> 
-
-        <div class="form-group">
-            <label>Mobile number</label>
-            <input type="text" name="MobileNumber" class="form-control" ng-model="register.mobile" ng-pattern="/^[0-9]{10,10}$/">
-        </div>
-
-        <div class="form-group">
-            <label>Birthday</label>
-            <input type="date" name="birthday" class="form-control" ng-model="register.birthday" placeholder="dd-MM-yyyy">
-        </div>               
-        
-        <div class="form-group">
-            <label><input type="radio" ng-model="register.disabled2">I accept all the terms and conditions</label>
-        </div>
-        <!-- SUBMIT BUTTON -->
-        <button type="submit" class="btn btn-primary" ng-disabled="register.disabled1 && register.disabled2">Submit</button>
-
-    </form>
     </div>
-</div>
+    <div class="col s4 section">
+        <div class="row z-depth-1" style="margin-top: 2%">
+            <div class="row">
+                <div class="col s10 blue-text">
+                    <span style="font-weight: lighter; padding: 5% 0% 0% 5%; font-size: 300%">Sign up</span>
+                    <span style="font-weight: lighter; padding: 0% 0% 5% 5%; font-size: 110%"><br>Want to sign up ? Fill this form</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="input-field col s5 offset-s1 flow-text">
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s5 flow-text">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                    <div class="input-field col s10 offset-s1 flow-text">
+                        <input id="username" type="text" class="validate"></input>
+                        <label for="username">Username</label>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                    <div class="input-field col s10 offset-s1  flow-text">
+                        <input id="email" type="email" class="validate"></input>
+                        <label for="email">E-mail Address</label>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                    <div class="input-field col s10 offset-s1 flow-text">
+                        <input id="password" type="password" class="validate"></input>
+                        <label for="password">Password</label>
+                    </div>
+                <!-- </div> -->
+                <!-- <div class="row"> -->
+                    <div class="input-field col s8 offset-s1 flow-text">
+                        <input id="accept_conditions" type="checkbox"></input>
+                        <label for="accept_conditions">I accept the <a href="#">Terms and Conditions</a></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3 offset-s4">
+                        <button class="btn waves-effect waves-light blue">
+                            Signup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

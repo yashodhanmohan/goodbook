@@ -1,0 +1,66 @@
+<div class="row">
+    <userpanel></userpanel>
+    <div class="col s10 offset-s2">
+        <div class="row">
+            <div class="col s8">
+                <div class="row">
+                    <div class="col s6 offset-s3 flow-text white-text light-blue" style="text-align: center; border-radius: 5px; margin-top: 5px">
+                        CALL FOR VOLUNTEERS
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row z-depth-1" ng-repeat="notif in notification.notifications">
+                        <div class="col s3 light-blue white-text" style="padding-top: 2%; height: inherit;">
+                            <center>
+                                <div class="row flow-text">EARTH5 HOUR</div>
+                                <div class="row flow-text">23/02/16</div>
+                            </center>
+                        </div>
+                        <div class="col s9">
+                            <div class="col s9" style="padding-top: 5%">
+                                <div class="row" style="max-height: 50vh">
+                                    <span style="vertical-align: middle; text-align: justify;">Community awareness program for e-waste management at Sector 30, Gandhinagar, Gujarat. Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla... </span>
+                                </div>
+                                <div class="row" style="margin-bottom: 5px; max-height: 50vh">
+                                <center>
+                                    <div class="row btn waves-effect waves-light" style="margin-bottom: 0px">
+                                        <span style="display: inline-flex;vertical-align: middle;">
+                                        Read more
+                                        <i class="material-icons small" style="margin-left: 5px">info_outline</i>
+                                        </span>
+                                    </div>
+                                </center>
+                                </div>
+                            </div>
+                            <div class="col s3" style="padding: 7% 2% 0% 5%">
+                                <div class="row btn waves-effect waves-light green">
+                                    <i class="material-icons white-text">done</i>
+                                </div>
+                                <div class="row btn waves-effect waves-light red">
+                                    <i class="material-icons white-text">not_interested</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4" style="">
+            	<div class="row">
+                    <div class="col s6 offset-s3 flow-text white-text light-blue" style="text-align: center; border-radius: 5px; margin-top: 5px">
+                        QUERIES
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="row z-depth-1" ng-repeat="query in notification.queries">
+						<div class="row light-blue flow-text white-text" style="padding-left: 2%">
+							How to find NGO .. ?
+						</div>
+						<div class="row" ng-repeat="i in notification.getNumber(notification.numberRecentQuery) track by $index" style="padding-left: 2%">
+							Answer {{i}} to query
+						</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
