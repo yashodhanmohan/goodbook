@@ -8,10 +8,34 @@
  */
 
 'use strict';
-
+var nodemailer = require('nodemailer');
 import _ from 'lodash';
 import User from './user.model';
 
+
+
+// create reusable transporter object using the default SMTP transport
+var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com:goodbooksen30@smtp.gmail.com');
+
+
+
+// send mail with defined transport object
+
+
+function welcomeMail(x) {
+	var mailOptions = {
+	    from: '"Project Goodbook" <info@goodbook.com>', // sender address
+	    to: x.email, // list of receivers
+	    subject: 'Welcome to Project Goodbook', // Subject line
+	    text: 'Dear ' + x.firstName + ' ' + x.lastName +',\n\nWelcome to Project Goodbook. Let us work together to make this world a better place to live in.\n\nTeam Project Goodbook' // 
+	};
+	transporter.sendMail(mailOptions,function(error, info){
+    	if(error){
+        	return console.log(error);
+    	}
+    	console.log('Message sent: ' + info.response);
+	});
+}
 
 function tagData(x) {
 	console.log(x);
@@ -26,6 +50,7 @@ function tagData(x) {
 		result.tags = tempTags;
 		result.save();
 	});
+	return x;
 }
 
 
@@ -141,6 +166,7 @@ export function create(req, res) {
 	User.createAsync(req.body)
 		.then(respondWithResult(res, 201))
 		.then(tagData)
+		.then(welcomeMail)
 		.catch(handleError(res));
 }
 
