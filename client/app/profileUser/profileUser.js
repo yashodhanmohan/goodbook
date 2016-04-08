@@ -3,7 +3,7 @@
  angular.module('goodbookApp')
      .config(function($routeProvider) {
          $routeProvider
-             .when('/uprofile/:id', {
+             .when('/user/:id', {
                  templateUrl: 'app/profileUser/profileUser.html',
                  controller: 'ProfileController',
                  controllerAs: 'profileController'

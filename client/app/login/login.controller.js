@@ -3,10 +3,11 @@
 (function() {
 
     class LoginController {
-        constructor($http, $location, $cacheFactory) {
+        constructor($http, $location, $cacheFactory, UserService) {
             this.$http = $http;
             this.$location = $location;
             this.$cacheFactory = $cacheFactory;
+            this.UserService = UserService;
             this.username = '';
             this.password = '';
             this.error = false;
@@ -16,31 +17,24 @@
                     var data = this.$cacheFactory.get('goodbookCache').get('userdata');
                     this.$location.path('/uprofile/' + data.username);
                 }
-            }
-            else
+            } else
                 this.cache = this.$cacheFactory('goodbookCache');
         }
 
         login = () => {
-            this.$http.post('/api/v1/users/login', { username: this.username, password: this.password })
-                .success((data, status) => {
-                    if (status == 200 && data) {
+            this.UserService.login({ username: this.username, password: this.password }, (data, status) => {
+                if (status == 200 && data) {
+                    if (data.password)
                         delete data.password;
-                        this.cache.put('userdata', data);
-                        this.cache.put('loggedIn', true);
-                        this.$location.path('/uprofile/' + data.username);
-                        this.disabled = false;
-                    } else {
-                        this.error = true;
-                    }
-                })
-                .error((status) => {
-                    console.log(status);
+                    this.cache.put('user', data);
+                    this.cache.put('loggedIn', true);
+                    this.$location.path('/user/' + data.username);
+                    this.disabled = false;
+                } else {
                     this.error = true;
-                });
+                }
+            });
         }
     }
-
-    angular.module('goodbookApp')
-        .controller('LoginController', LoginController);
+    angular.module('goodbookApp').controller('LoginController', LoginController);
 })();
