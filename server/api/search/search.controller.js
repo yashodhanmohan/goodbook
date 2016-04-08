@@ -79,12 +79,14 @@ export function searchUser(req, res) {
 // Gets a single User from the DB
 export function searchEvent(req, res) {
     Event.findAsync({'tags' : { $in : req.body.tags }})
+        .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function searchNgo(req, res) {
     Org.findAsync({'tags' : { $in : req.body.tags }})
+        .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
