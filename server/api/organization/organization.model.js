@@ -23,7 +23,9 @@ var OrganizationSchema = new mongoose.Schema({
     karma: Number,
     NGO: Boolean,
     CSR: Boolean,
-    subscribers:[String]
+    subscribers:[String],
+	verified:{ type:Boolean,
+				default: false}
     /*subscribers :[{
 	type: mongoose.Schema.Types.ObjectId,
 	ref : User

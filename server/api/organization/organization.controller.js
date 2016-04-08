@@ -8,10 +8,73 @@
  */
 
 'use strict';
-
+var nodemailer = require('nodemailer');
 import _ from 'lodash';
 import Organization from './organization.model';
-console.log("asjdahsdjkashdkjasshdkjashd");
+
+var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com:goodbooksen30@smtp.gmail.com');
+
+
+
+
+function changePassword(x){
+		var randomstring = Math.random().toString(36).slice(-8);
+			
+		console.log(x);
+		User.findById(x._id, function(err, result) {
+			result.password = randomstring;
+			result.save();
+		});
+	changePasswordMail(x, randomstring);
+	return x;
+
+		
+}
+		
+		
+function changePasswordMail(x, y) {
+	var mailOptions = {
+	    from: '"Project Goodbook" <info@goodbook.com>', // sender address
+	    to: x.email, // list of receivers
+	    subject: 'Password Changed', // Subject line
+	    text: 'Dear ' + x.name +',\n\nAs per your request your password has been changed. The new password is:' + y + '\n\nIf you had not requested this change, please let us know by replying to this mail.\n\nTrying to make a difference,\nTeam Project Goodbook' // 
+	};
+	transporter.sendMail(mailOptions,function(error, info){
+    	if(error){
+        	return console.log(error);
+    	}
+    	console.log('Message sent: ' + info.response);
+	});
+}
+
+
+
+
+
+
+
+function welcomeMail(x) {
+	var mailOptions = {
+	    from: '"Project Goodbook" <info@goodbook.com>', // sender address
+	    to: x.email, // list of receivers
+	    subject: 'Welcome to Project Goodbook', // Subject line
+	    text: 'Dear ' + x.name +',\n\nWelcome to Project Goodbook. \nYour account will be verified by our team based on the documents that you have submitted. In case of any problems, we will get back to you.\n\nLet us work together to make this world a better place to live in.\nTeam Project Goodbook' // 
+	};
+	//transporter.sendMail(mailOptions,function(error, info){
+    	//if(error){
+        //	return console.log(error);
+    	//}
+    	//console.log('Message sent: ' + info.response);
+	//});
+}
+
+
+
+
+
+
+
+
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -78,6 +141,7 @@ export function show(req, res) {
 export function create(req, res) {
     Organization.createAsync(req.body)
         .then(respondWithResult(res, 201))
+	.then(welcomeMail)
         .catch(handleError(res));
 }
 
@@ -99,4 +163,13 @@ export function destroy(req, res) {
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
+}
+
+export function forgotPassword(req, res) {
+	Organization.findOne({ username: req.body.username})
+		.then(handleEntityNotFound(res))
+		.then(changePassword)
+		.then(respondWithResult(res))
+		.catch(handleError(res))
+	
 }
