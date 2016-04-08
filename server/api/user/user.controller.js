@@ -79,7 +79,8 @@ function tagData(x) {
 		tempTags.push(result.gender);
 		tempTags = tempTags.concat(result.subscribedNGO);
 		tempTags = tempTags.concat(result.interests);
-		result.tags = tempTags;
+		result.tags = [];
+		result.tags.push(tempTags);
 		result.save();
 	});
 	return x;
@@ -133,6 +134,9 @@ function respondWithResult(res, statusCode) {
 
 function saveUpdates(updates) {
 	return function(entity) {
+		entity.subscribedNGO = [];
+		entity.interests = [];
+		entity.tags = [];
 		var updated = _.merge(entity, updates);
 		return updated.saveAsync()
 			.spread(updated => {
@@ -221,9 +225,9 @@ export function register(req, res) {
 
 // Updates an existing User in the DB
 export function update(req, res) {
-	if (req.body._id) {
-		delete req.body._id;
-	}
+	//if (req.body._id) {
+	//	delete req.body._id;
+	//}
 	User.findByIdAsync(req.params.id)
 		.then(handleEntityNotFound(res))
 		.then(saveUpdates(req.body))
