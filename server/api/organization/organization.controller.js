@@ -69,6 +69,29 @@ function welcomeMail(x) {
 }
 
 
+function tagData(x) {
+
+	Organization.findById(x._id, function(err, result) {
+		var tempTags = [result.username];
+		tempTags.push(result.name);
+		tempTags.push(result.email);
+		var s = result.aboutUs.split(' ');
+		tempTags = tempTags.concat(s);
+		if (result.NGO) {
+			tempTags.push("NGO");
+		}
+		if (result.CSR) {
+			tempTags.push("CSR");
+		}
+		if (result.verified) {
+			tempTags.push("verified");
+		}
+		result.tags = [];
+		result.tags.push(tempTags);
+		result.save();
+	});
+	return x;
+}
 
 
 
@@ -80,12 +103,14 @@ function respondWithResult(res, statusCode) {
     return function(entity) {
         if (entity) {
             res.status(statusCode).json(entity);
+            return entity;
         }
     };
 }
 
 function saveUpdates(updates) {
     return function(entity) {
+	entity.subscribers = [];
         var updated = _.merge(entity, updates);
         return updated.saveAsync()
             .spread(updated => {
@@ -141,19 +166,21 @@ export function show(req, res) {
 export function create(req, res) {
     Organization.createAsync(req.body)
         .then(respondWithResult(res, 201))
-	.then(welcomeMail)
+        .then(tagData)
+        .then(welcomeMail)
         .catch(handleError(res));
 }
 
 // Updates an existing Organization in the DB
 export function update(req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
+    //if (req.body._id) {
+      //  delete req.body._id;
+    //}
     Organization.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
+    	.then(tagData)
         .catch(handleError(res));
 }
 

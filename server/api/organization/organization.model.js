@@ -23,6 +23,7 @@ var OrganizationSchema = new mongoose.Schema({
     karma: Number,
     NGO: Boolean,
     CSR: Boolean,
+	tags : [String],
     subscribers:[String],
 	verified:{ type:Boolean,
 				default: false}
