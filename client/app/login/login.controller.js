@@ -11,14 +11,7 @@
             this.username = '';
             this.password = '';
             this.error = false;
-            if (this.$cacheFactory.get('goodbookCache')) {
-                var cache = this.$cacheFactory.get('goodbookCache');
-                if (cache.get('loggedIn')) {
-                    var data = this.$cacheFactory.get('goodbookCache').get('userdata');
-                    this.$location.path('/uprofile/' + data.username);
-                }
-            } else
-                this.cache = this.$cacheFactory('goodbookCache');
+            this.cache = $cacheFactory.get('goodbookCache');
         }
 
         login = () => {
@@ -28,7 +21,8 @@
                         delete data.password;
                     this.cache.put('user', data);
                     this.cache.put('loggedIn', true);
-                    this.$location.path('/user/' + data.username);
+                    // this.$location.path('/user/' + data.username);
+                    this.$location.path('/notification');
                     this.disabled = false;
                 } else {
                     this.error = true;

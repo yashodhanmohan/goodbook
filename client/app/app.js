@@ -13,4 +13,10 @@ angular.module('goodbookApp', [
 				redirectTo: '/'
 			});
 		$locationProvider.html5Mode(true);
-	});	
+		
+	})
+	.run(function($cacheFactory){
+		$cacheFactory('goodbookCache');
+	})
+	.constant('api', '/api/v1/')
+	.constant('userRoute', 'users/');	

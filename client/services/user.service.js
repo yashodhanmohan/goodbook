@@ -28,7 +28,7 @@
         }
 
         login = (credentials, callback) => {
-            this.$http.post(this.api + this.userRoute + '/login', credentials)
+            this.$http.post(this.api + this.userRoute + 'login/', credentials)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {

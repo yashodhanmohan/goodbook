@@ -7,7 +7,7 @@
             this.$http = $http;
             this.$location = $location;
             this.$cacheFactory = $cacheFactory;
-            this.cache = this.$cacheFactory('goodbookCache');
+            this.cache = this.$cacheFactory.get('goodbookCache');
             this.notifications = [{}, {}, {}];
             this.queries = [{}, {}, {}];
             this.numberRecentQuery = 2;

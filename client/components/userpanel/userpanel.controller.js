@@ -4,9 +4,9 @@ class UserpanelController {
 
     constructor($location, $cacheFactory) {
         var cache = $cacheFactory.get('goodbookCache');
-        var userdata = cache.get('userdata');
+        var user = cache.get('user');
         this.$location = $location;
-        this.name = "Yeoman Patel";
+        this.name = user.firstName+" "+user.lastName;
         this.office = 'DAIICT';
         this.location = 'Gandhinagar';
         this.grading = '7/10';
