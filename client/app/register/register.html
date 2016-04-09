@@ -95,6 +95,10 @@
                     <input id="password" type="password" class="validate" ng-model="register.password" ng-required="true">
                     <label for="password">Password</label>
                 </div>
+                <div>
+                    <input type="file" file-model="register.myFile"/>
+                    <button ng-click="register.checkFile()">upload me</button>
+                </div>
                 <div class="input-field col s8 offset-s1 flow-text">
                     <input id="accept_conditions" type="checkbox" ng-model="register.accept_conditions"></input>
                     <label for="accept_conditions">I accept the <a href="#">Terms and Conditions</a></label>
