@@ -19,6 +19,8 @@ var UserSchema = new mongoose.Schema({
         type: [Number],
         index: '2d'
     },
+	studiedAt: String,
+	livesAt: String,
     aboutMe: String,
     gender: String,
     tags: [String],
