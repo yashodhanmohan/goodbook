@@ -126,7 +126,6 @@ function respondWithResult(res, statusCode) {
 	return function(entity) {
 		if (entity) {
 			res.status(statusCode).json(entity);
-			//console.log(entity);
 			return entity;
 		}
 	};
@@ -177,19 +176,16 @@ function handleError(res, statusCode) {
 
 // Gets a list of Users
 export function index(req, res) {
-	User.findAsync()
-		.then(respondWithResult(res))
-		.catch(handleError(res));
+	if(!_.isEmpty(req.query)){
+		User.findAsync(req.query)
+			.then(respondWithResult(res))
+			.catch(handleError(res));
+	}
+	else{
+		respondWithResult(res, 403)({});
+	}
 }
 
-
-// Gets a single User from the DB
-export function showUname(req, res) {
-	User.findOne({ username: req.params.uname })
-		.then(handleEntityNotFound(res))
-		.then(respondWithResult(res))
-		.catch(handleError(res));
-}
 // Gets a single User from the DB
 export function show(req, res) {
 	User.findByIdAsync(req.params.id)

@@ -83,13 +83,23 @@
                     <input id="org_name" type="text" class="validate" ng-required="true">
                     <label for="org_name">Organization name</label>
                 </div>
-                <div class="input-field col s8 offset-s1 flow-text">
-                    <input id="username" name="usernamea" type="text" class="validate tooltipped" data-position="bottom" data-delay="50" ng-model="register.username" ng-required="true" ng-blur="register.check_username()">
-                    <label for="username">Username</label>
+                <div class="row">
+                    <div class="input-field col s8 offset-s1 flow-text">
+                        <input id="username" type="text" ng-model="register.username" ng-required="true" ng-blur="register.check_username()">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="input-field col s2 flow-text" ng-hide="register.valid_username">
+                        <i class="material-icons white red-text">clear</i>
+                    </div>
                 </div>
-                <div class="input-field col s10 offset-s1  flow-text">
-                    <input id="email" type="email" class="validate" ng-model="register.email" ng-required="true"></input>
-                    <label for="email">E-mail Address</label>
+                <div class="row">
+                    <div class="input-field col s8 offset-s1  flow-text">
+                        <input id="email" type="email" class="validate" ng-model="register.email" ng-required="true" ng-blur="register.check_email()"></input>
+                        <label for="email">E-mail Address</label>
+                    </div>
+                    <div class="input-field col s2 flow-text" ng-hide="register.valid_email">
+                        <i class="material-icons white red-text">clear</i>
+                    </div>
                 </div>
                 <div class="input-field col s10 offset-s1 flow-text">
                     <input id="password" type="password" class="validate" ng-model="register.password" ng-required="true">

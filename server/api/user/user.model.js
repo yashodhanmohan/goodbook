@@ -24,6 +24,7 @@ var UserSchema = new mongoose.Schema({
     aboutMe: String,
     gender: String,
     tags: [String],
+    donated: Number,
     /*subscribedNGO :[{
     type: mongoose.Schema.Types.ObjectId,
     ref : NGO

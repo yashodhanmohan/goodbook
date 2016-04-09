@@ -3,14 +3,19 @@
 (function() {
 
     class NotificationController {
-        constructor($http, $location, $cacheFactory) {
-            this.$http = $http;
-            this.$location = $location;
-            this.$cacheFactory = $cacheFactory;
-            this.cache = this.$cacheFactory.get('goodbookCache');
-            this.notifications = [{}, {}, {}];
-            this.queries = [{}, {}, {}];
-            this.numberRecentQuery = 2;
+        constructor($http, $location, $routeParams, MyCache) {
+
+            this.cache = MyCache;
+            if (this.cache.loggedIn==false) {
+                $location.path('/login/redirect/notification');
+            } else {
+                this.$http = $http;
+                this.$location = $location;
+                this.notifications = [{}, {}, {}];
+                this.queries = [{}, {}, {}];
+                this.numberRecentQuery = 2;
+            }
+
         }
 
         getNumber = (number) => {

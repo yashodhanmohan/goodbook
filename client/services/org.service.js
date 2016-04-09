@@ -1,20 +1,21 @@
 'use strict';
 
 (function() {
-    class UserService {
+    class OrgService {
 
-        constructor($http, $location, api, userRoute, googleMapApiUrl, googleMapKey, MyCache) {
+        constructor($http, $location, api, userRoute, orgRoute, googleMapApiUrl, googleMapKey, MyCache) {
             this.$http = $http;
             this.api = api;
             this.userRoute = userRoute;
+            this.orgRoute = orgRoute;
             this.googleMapKey = googleMapKey;
             this.googleMapApiUrl = googleMapApiUrl;
             this.$location = $location;
             this.cache = MyCache;
         }
 
-        getUserByName = (username, callback) => {
-            this.$http.get(this.api + this.userRoute + '?username=' + username)
+        getOrgByName = (username, callback) => {
+            this.$http.get(this.api + this.orgRoute + '?username=' + username)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -22,8 +23,8 @@
                 });
         }
 
-        getUserById = (id, callback) => {
-            this.$http.get(this.api + this.userRoute + id)
+        getOrgById = (id, callback) => {
+            this.$http.get(this.api + this.orgRoute + id)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -31,8 +32,8 @@
                 });
         }
 
-        getUserByEmail = (email, callback) => {
-            this.$http.get(this.api + this.userRoute + '?email=' + email)
+        getOrgByEmail = (email, callback) => {
+            this.$http.get(this.api + this.orgRoute + '?email=' + email)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -40,8 +41,8 @@
                 });
         }
 
-        postUser = (user, callback) => {
-            this.$http.post(this.api + this.userRoute, user)
+        postOrg = (org, callback) => {
+            this.$http.post(this.api + this.orgRoute, org)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -50,28 +51,12 @@
         }
 
         login = (credentials, callback) => {
-            this.$http.post(this.api + this.userRoute + '/login', credentials)
+            this.$http.post(this.api + this.userRoute + 'login/', credentials)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
                     callback(response.data, response.status);
                 });
-        }
-
-        location = (latitude, longitude, callback) => {
-            this.$http.get(this.googleMapApiUrl, {
-                    params: {
-                        key: this.googleMapKey,
-                        latlng: latitude + "," + longitude,
-                        result_type: 'locality'
-                    }
-                })
-                .then((response) => {
-                    console.log(response);
-                    callback(response.data, response.status);
-                }, (response) => {
-                    callback(response.data, response.status);
-                })
         }
 
         checkLogin = (redirectUrl, callback) => {
@@ -84,6 +69,6 @@
     };
 
 
-    angular.module('goodbookApp').service('UserService', UserService);
+    angular.module('goodbookApp').service('OrgService', OrgService);
 
 })();

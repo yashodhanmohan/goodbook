@@ -3,11 +3,10 @@
 (function() {
 
     class SearchController {
-        constructor($http, $location, $cacheFactory) {
+        constructor($http, $location, MyCache) {
             this.$http = $http;
             this.$location = $location;
-            this.$cacheFactory = $cacheFactory;
-            this.cache = this.$cacheFactory('goodbookCache');
+            this.cache = MyCache;
             this.results = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
             this.resultCount = this.results.length;
             this.groupedResults = this.group(this.results)

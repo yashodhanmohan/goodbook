@@ -48,8 +48,13 @@ User.find({}).removeAsync()
     		"dob": "2015-04-30T09:03:53-07:00",
     		"email": "Integer.urna@inlobortistellus.ca",
     		"username": "IsaacKelley",
-    		"password": "TNG01JHV5AC",
-    		"contactNo": "(01170) 03723"
+    		"password": "1234",
+    		"contactNo": "(01170) 03723",
+            "studiedAt": "DA-IICT",
+            "aboutMe": "Lorem Ipsum Lorem Ipsom ",
+            "location": ["23.2156", "72.6369"],
+            "donated": "1500",
+            "karma": "48"
     	},
     	{
     		"firstName": "Lionel",

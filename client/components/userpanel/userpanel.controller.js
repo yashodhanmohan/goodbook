@@ -2,22 +2,34 @@
 
 class UserpanelController {
 
-    constructor($location, $cacheFactory) {
-        var cache = $cacheFactory.get('goodbookCache');
-        var user = cache.get('user');
-        this.$location = $location;
-        this.name = user.firstName+" "+user.lastName;
-        this.office = 'DAIICT';
-        this.location = 'Gandhinagar';
-        this.grading = '7/10';
-        this.donation = 1500;
-        this.hours = 48;
-        this.description_original = 'Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !Yeoman Patel is awesome man !';
-        if (this.description_original.length > 50) {
-            this.description = this.description_original.substring(0, 47) + '...';
-        } else {
-            this.description = this.description_original;
-        }
+    constructor($location, UserService, MyCache) {
+        var cache = MyCache;
+        var user = cache.user;
+        UserService.checkLogin($location.path(), () => {
+            this.$location = $location;
+            this.name = user.firstName + " " + user.lastName;
+            this.studiedAt = user.studiedAt;
+            // Get location using latitude and longitude
+            UserService.location(user.location[0], user.location[1], (data, status) => {
+                if (status == 200) {
+                    this.location = data.results[0].formatted_address;
+                    user.location = this.location;
+
+                } else
+                    this.location = ""
+            });
+            this.grading = '7/10';
+            this.donated = user.donated;
+            this.karma = user.karma;
+            this.description_original = user.aboutMe;
+            if (this.description_original.length > 50) {
+                this.description = this.description_original.substring(0, 47) + '...';
+            } else {
+                this.description = this.description_original;
+            }
+        });
+        
+
     }
 }
 
