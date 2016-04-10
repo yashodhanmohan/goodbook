@@ -17,7 +17,6 @@ var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
 
-    console.log(x);
     Organization.findById(x._id, function(err, result) {
         result.password = randomstring;
         result.save();
@@ -50,6 +49,8 @@ function welcomeMail(x) {
         subject: 'Welcome to Project Goodbook', // Subject line
         text: 'Dear ' + x.name + ',\n\nWelcome to Project Goodbook. \nYour account will be verified by our team based on the documents that you have submitted. In case of any problems, we will get back to you.\n\nLet us work together to make this world a better place to live in.\nTeam Project Goodbook' // 
     };
+
+    return x;
     //transporter.sendMail(mailOptions,function(error, info){
     //if(error){
     //  return console.log(error);
@@ -60,7 +61,6 @@ function welcomeMail(x) {
 
 
 function tagData(x) {
-    console.log('reaching here');
     var tempTags = [x.username];
     tempTags.push(x.name.toLowerCase());
     tempTags.push(x.email);
@@ -71,6 +71,7 @@ function tagData(x) {
     }}, function(err, result) {
         return result;
     });
+    return x;
 }
 
 function checkPassword(req, res, statusCode) {

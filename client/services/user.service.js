@@ -50,6 +50,15 @@
                 })
         }
 
+        putUser = (id, user, callback) => {
+            this.$http.put(this.api + this.userRoute + '/' + id, user)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                })
+        }
+
         login = (credentials, callback) => {
             this.$http.post(this.api + this.userRoute + '/login', credentials)
                 .then((response) => {
@@ -60,7 +69,7 @@
         }
 
         logout = (id, callback) => {
-            this.$http.post(this.api + this.userRoute + '/logout', {_id: id})
+            this.$http.post(this.api + this.userRoute + '/logout', { _id: id })
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -77,10 +86,10 @@
         }
 
         search = (searchString, callback) => {
-            this.$http.post(this.api+this.userRoute+this.searchRoute,{query: searchString})
-                .then((response)=>{
+            this.$http.post(this.api + this.userRoute + this.searchRoute, { query: searchString })
+                .then((response) => {
                     callback(response.data, response.status);
-                }, (response)=>{
+                }, (response) => {
                     callback(response.data, response.status);
                 })
         }

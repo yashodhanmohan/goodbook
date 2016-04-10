@@ -21,7 +21,7 @@
             this.valid_username = true;
             this.valid_email = true;
             this.myFile = "";
-            this.reader  = new FileReader();
+            this.reader = new FileReader();
             this.binaryData = "";
         }
 
@@ -36,6 +36,9 @@
                         password: this.password
                     }, (data, status) => {
                         this.cache.user = data;
+                        this.cache.loggedIn = true;
+                        this.cache.ind = this.ind;
+                        this.$location.path('/register/step2');
                     });
                 } else {
                     this.OrgService.postOrg({
@@ -44,7 +47,10 @@
                         username: this.username,
                         password: this.password
                     }, (data, status) => {
-                        this.cache.user = data;
+                        this.cache.org = data;
+                        this.cache.loggedIn = true;
+                        this.cache.ind = this.ind;
+                        this.$location.path('/register/step2');
                     })
                 }
             }
@@ -55,7 +61,7 @@
             fileReader.onload = function(event) {
                 console.log(event.target.result);
             };
-            this.binaryData = fileReader.readAsDataURL(this.myFile); 
+            this.binaryData = fileReader.readAsDataURL(this.myFile);
             console.log(this.myFile.size);
 
             console.log("Herererere");
@@ -64,23 +70,24 @@
             // this.binaryData = new FileReader().readAsBinaryString(this.myFile);
 
             this.$http({
-                headers: {'Authorization': 'Client-ID efd2a89d02947f6'},
-                url : 'https://api.imgur.com/3/image', 
-                method : "POST",
-                data : {"key" : "2788b8044f53817c2c983496c87ecd47f0b9c9f9","image" : this.binaryData}
-            })
-            .then(function successCallback(response) {
-                self.num = 2;
-                console.log('called and successful', response);
-            }, function errorCallback(err) {
-                self.num = 3;
-                console.log('called but error', err);
-            });
+                    headers: { 'Authorization': 'Client-ID efd2a89d02947f6' },
+                    url: 'https://api.imgur.com/3/image',
+                    method: "POST",
+                    data: { "key": "2788b8044f53817c2c983496c87ecd47f0b9c9f9", "image": this.binaryData }
+                })
+                .then(function successCallback(response) {
+                    self.num = 2;
+                    console.log('called and successful', response);
+                }, function errorCallback(err) {
+                    self.num = 3;
+                    console.log('called but error', err);
+                });
             // this.$http.post({
             //                 url:'https://api.imgur.com/3/upload',
             //                 headers : {'Authorization': 'Client-ID efd2a89d02947f6'},
             //                 data : {image: this.myFile});
         }
+
         check_username = () => {
             if (this.username.length != 0) {
                 this.UserService.getUserByName(this.username, (data, status) => {
@@ -110,8 +117,12 @@
                         this.valid_email = false;
                     } else {
                         this.OrgService.getOrgByEmail(this.email, (data, status) => {
+                            console.log(data);
                             if (status == 200 && data.length != 0) {
                                 this.valid_email = false;
+                            }
+                            else {
+                                this.valid_email = true;
                             }
                         });
 
@@ -123,15 +134,15 @@
 
     angular.module('goodbookApp')
         .controller('RegisterController', RegisterController)
-        .directive('fileModel', ['$parse', function ($parse) {
+        .directive('fileModel', ['$parse', function($parse) {
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
                     var model = $parse(attrs.fileModel);
                     var modelSetter = model.assign;
-                    
-                    element.bind('change', function(){
-                        scope.$apply(function(){
+
+                    element.bind('change', function() {
+                        scope.$apply(function() {
                             modelSetter(scope, element[0].files[0]);
                         });
                     });

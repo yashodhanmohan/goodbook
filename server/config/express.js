@@ -21,65 +21,67 @@ import mongoose from 'mongoose';
 // var mongoStore = connectMongo(session);
 
 export default function(app) {
-  var env = app.get('env');
+    var env = app.get('env');
 
-  app.set('views', config.root + '/server/views');
-  app.engine('html', require('ejs').renderFile);
-  app.set('view engine', 'html');
-  app.use(compression());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
-  app.use(methodOverride());
-  app.use(cookieParser());
+    app.set('views', config.root + '/server/views');
+    app.engine('html', require('ejs').renderFile);
+    app.set('view engine', 'html');
+    app.use(compression());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json({
+        limit: 6000000
+    }));
+    app.use(methodOverride());
+    app.use(cookieParser());
 
-  // Persist sessions with mongoStore / sequelizeStore
-  // We need to enable sessions for passport-twitter because it's an
-  // oauth 1.0 strategy, and Lusca depends on sessions
-  // app.use(session({
-  //   secret: config.secrets.session,
-  //   saveUninitialized: true,
-  //   resave: false,
-  //   store: new mongoStore({
-  //     mongooseConnection: mongoose.connection,
-  //     db: 'goodbook'
-  //   })
-  // }));
+    // Persist sessions with mongoStore / sequelizeStore
+    // We need to enable sessions for passport-twitter because it's an
+    // oauth 1.0 strategy, and Lusca depends on sessions
+    // app.use(session({
+    //   secret: config.secrets.session,
+    //   saveUninitialized: true,
+    //   resave: false,
+    //   store: new mongoStore({
+    //     mongooseConnection: mongoose.connection,
+    //     db: 'goodbook'
+    //   })
+    // }));
 
-  // *
-  //  * Lusca - express server security
-  //  * https://github.com/krakenjs/lusca
-   
-  // if ('test' !== env) {
-  //   app.use(lusca({
-  //     csrf: {
-  //       angular: true
-  //     },
-  //     xframe: 'SAMEORIGIN',
-  //     hsts: {
-  //       maxAge: 31536000, //1 year, in seconds
-  //       includeSubDomains: true,
-  //       preload: true
-  //     },
-  //     xssProtection: true
-  //   }));
-  // }
+    // *
+    //  * Lusca - express server security
+    //  * https://github.com/krakenjs/lusca
 
-  app.set('appPath', path.join(config.root, 'client'));
+    // if ('test' !== env) {
+    //   app.use(lusca({
+    //     csrf: {
+    //       angular: true
+    //     },
+    //     xframe: 'SAMEORIGIN',
+    //     hsts: {
+    //       maxAge: 31536000, //1 year, in seconds
+    //       includeSubDomains: true,
+    //       preload: true
+    //     },
+    //     xssProtection: true
+    //   }));
+    // }
 
-  if ('production' === env) {
-    app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
-    app.use(express.static(app.get('appPath')));
-    app.use(morgan('dev'));
-  }
+    app.set('appPath', path.join(config.root, 'client'));
 
-  if ('development' === env) {
-    app.use(require('connect-livereload')());
-  }
+    if ('production' === env) {
+        app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
+        app.use(express.static(app.get('appPath')));
+        app.use(morgan('dev'));
+    }
 
-  if ('development' === env || 'test' === env) {
-    app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(app.get('appPath')));
-    app.use(morgan('dev'));
-    app.use(errorHandler()); // Error handler - has to be last
-  }
+    if ('development' === env) {
+        app.use(require('connect-livereload')());
+    }
+
+    if ('development' === env || 'test' === env) {
+        app.use(express.static(path.join(config.root, '.tmp')));
+        app.use(express.static(app.get('appPath')));
+        app.use(morgan('dev'));
+        app.use(errorHandler()); // Error handler - has to be last
+    }
 }

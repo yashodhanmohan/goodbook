@@ -79,8 +79,8 @@
                     <input id="last_name" type="text" class="validate" ng-model="register.last_name" ng-required="true">
                     <label for="last_name">Last Name</label>
                 </div>
-                <div class="input-field col s10 offset-s1 flow-text" ng-hide="register.ind" ng-model="register.org_name">
-                    <input id="org_name" type="text" class="validate" ng-required="true">
+                <div class="input-field col s10 offset-s1 flow-text" ng-hide="register.ind" >
+                    <input id="org_name" type="text" class="validate" ng-model="register.org_name" ng-required="true">
                     <label for="org_name">Organization name</label>
                 </div>
                 <div class="row">
@@ -104,10 +104,6 @@
                 <div class="input-field col s10 offset-s1 flow-text">
                     <input id="password" type="password" class="validate" ng-model="register.password" ng-required="true">
                     <label for="password">Password</label>
-                </div>
-                <div>
-                    <input type="file" file-model="register.myFile"/>
-                    <button ng-click="register.checkFile()">upload me</button>
                 </div>
                 <div class="input-field col s8 offset-s1 flow-text">
                     <input id="accept_conditions" type="checkbox" ng-model="register.accept_conditions"></input>

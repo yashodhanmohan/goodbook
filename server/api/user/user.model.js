@@ -25,6 +25,7 @@ var UserSchema = new mongoose.Schema({
     gender: String,
     tags: [String],
     donated: Number,
+    profilePic: Buffer,
     /*subscribedNGO :[{
     type: mongoose.Schema.Types.ObjectId,
     ref : NGO

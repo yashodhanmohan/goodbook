@@ -50,6 +50,15 @@
                 })
         }
 
+        putOrg = (id, org, callback) => {
+            this.$http.put(this.api + this.orgRoute + '/' + id, org)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                })
+        }
+
         login = (credentials, callback) => {
             this.$http.post(this.api + this.orgRoute + '/login', credentials)
                 .then((response) => {
@@ -68,10 +77,10 @@
         }
 
         search = (searchString, callback) => {
-            this.$http.post(this.api+this.orgRoute+this.searchRoute,{query: searchString})
-                .then((response)=>{
+            this.$http.post(this.api + this.orgRoute + this.searchRoute, { query: searchString })
+                .then((response) => {
                     callback(response.data, response.status);
-                }, (response)=>{
+                }, (response) => {
                     callback(response.data, response.status);
                 })
         }

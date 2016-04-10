@@ -3,7 +3,7 @@
 (function() {
 
     angular.module('goodbookApp')
-        .factory('MyCache', function($cacheFactory){
+        .factory('MyCache', function(){
             var data = {};
             return data;
         });
