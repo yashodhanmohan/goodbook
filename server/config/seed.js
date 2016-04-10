@@ -9,6 +9,7 @@ import User from '../api/user/user.model';
 import Organization from '../api/organization/organization.model';
 import Event from '../api/event/event.model';
 import EventRequest from '../api/eventRequest/eventRequest.model';
+import Notification from '../api/notification/notification.model';
 
 function tagData(x) {
     var tempTags = [x.username];
@@ -123,6 +124,100 @@ function assignEvents(){
             });
         }
 
+}
+
+function createNotifications(){
+
+    Notification.removeAsync();
+    User.findOne({username:"201301047"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Welcome to goodbook"},
+                                {"nNo": 2, "content":"It is late. Time to sleep"}]
+        });
+    });
+    
+    User.findOne({username:"201301048"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Warm Welcome to goodbook"},
+                                {"nNo": 2, "content":"Congratulations!"}]
+        });
+    });
+
+    User.findOne({username:"201301100"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Welcome to Platform goodbook"},
+                                {"nNo": 2, "content":"100+ events"}]
+        });
+    });
+
+    User.findOne({username:"201301104"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Welcome to goodbook"},
+                                {"nNo": 2, "content":"you are on a roll"}]
+        });
+    });
+
+    User.findOne({username:"201301225"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"This is goodbook"},
+                                {"nNo": 2, "content":"I am almost done"}]
+        });
+    });
+
+    User.findOne({username:"201301417"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Welcome to Project GGoodbook"},
+                                {"nNo": 2, "content":"The mockups were great. Congratulations"}]
+        });
+    });
+
+    User.findOne({username:"201301433"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"Welcome to goodbook, Pradeet"},
+                                {"nNo": 2, "content":"It is late. Time to sleep"}]
+        });
+    });
+
+    User.findOne({username:"201301435"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : false,
+            "notifications" : [{"nNo": 1, "content":"This is goodbook"},
+                                {"nNo": 2, "content":"The testing part has started"}]
+        });
+    });
+
+    Organization.findOne({username:"peta"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : true,
+            "notifications" : [{"nNo": 1, "content":"This is goodbook"},
+                                {"nNo": 2, "content":"Saved 100 dogs. That is commendable"}]
+        });
+    });
+
+    Organization.findOne({username:"cry"}, function(err, result2){
+        Notification.create({
+            "userId" : result2._id,
+            "organization" : true,
+            "notifications" : [{"nNo": 1, "content":"This is goodbook"},
+                                {"nNo": 2, "content":"Please don't cry."}]
+        });
+    });
 }
 
 function createEventRequests() {
@@ -457,7 +552,8 @@ User.find({}).removeAsync()
         .then(createEvents)
             .then(assignUsersandNGOs)
                 .then(assignEvents)
-                    .then(createEventRequests);
+                    .then(createEventRequests)
+                        .then(createNotifications);
 
 function createUsers() {
 
