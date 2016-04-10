@@ -68,21 +68,6 @@
                 });
         }
 
-        location = (latitude, longitude, callback) => {
-            this.$http.get(this.googleMapApiUrl, {
-                    params: {
-                        key: this.googleMapKey,
-                        latlng: latitude + "," + longitude,
-                        result_type: 'locality'
-                    }
-                })
-                .then((response) => {
-                    callback(response.data, response.status);
-                }, (response) => {
-                    callback(response.data, response.status);
-                })
-        }
-
         checkLogin = (redirectUrl, callback) => {
             if (!this.cache.loggedIn) {
                 this.$location.path('/login/redirect' + redirectUrl);

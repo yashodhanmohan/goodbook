@@ -2,7 +2,7 @@
 
 class UserpanelController {
 
-    constructor($location, UserService, MyCache) {
+    constructor($location, UserService, GeolocationService, MyCache) {
         var cache = MyCache;
         var user = cache.user;
         UserService.checkLogin($location.path(), () => {
@@ -10,7 +10,7 @@ class UserpanelController {
             this.name = user.firstName + " " + user.lastName;
             this.studiedAt = user.studiedAt;
             // Get location using latitude and longitude
-            UserService.location(user.location[0], user.location[1], (data, status) => {
+            GeolocationService.location(user.location[0], user.location[1], (data, status) => {
                 if (status == 200) {
                     this.location = data.results[0].formatted_address;
                     user.location_text = this.location;

@@ -3,7 +3,7 @@
 angular.module('goodbookApp')
     .config(function($routeProvider) {
         $routeProvider
-            .when('/organization/:id', {
+            .when('/organization/:username', {
                 templateUrl: 'app/organizationView/organizationView.html',
                 controller: 'OrganizationViewController',
                 controllerAs: 'organizationView'

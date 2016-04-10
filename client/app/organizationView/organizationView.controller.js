@@ -3,12 +3,23 @@
 (function() {
 
     class OrganizationViewController {
-        constructor($http, $location, $cacheFactory) {
+        constructor($http, $location, $routeParams, OrgService, MyCache) {
             this.$http = $http;
             this.$location = $location;
-            this.$cacheFactory = $cacheFactory;
-            this.cache = this.$cacheFactory('goodbookCache');
+            this.$routeParams = $routeParams;
+            this.cache = MyCache;
             this.events = [{}, {}, {}, {}, {}, {}]
+            console.log($routeParams);
+            this.OrgService = OrgService;
+            OrgService.getOrgByName(this.$routeParams.username, (data, status) => {
+                if(status==200) {
+                    this.name = data.name;
+                    this.aboutUs = data.aboutUs;
+                    this.email = data.email;
+                    
+                }
+            });
+
         }
     }
 
