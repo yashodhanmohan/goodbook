@@ -12,7 +12,7 @@
                                     <center><img src="assets/images/yeoman.png" style="height: 100%; width: 100%;"></center>
                                 </div>
                                 <div class="row flow-text">
-                                	<center>EARTH 5R</center>
+                                	<center>{{organizationView.name}}</center>
                                 </div>
                             </div>
                         </div>
@@ -24,21 +24,21 @@
                     </div>
                     <div class="col s8" style="">
                         <div class="row" style=" margin-top: 2%; margin-bottom: 2%; padding-left: 2%; padding-top: 1%">
-                            <span style="font-size: 95%; text-align: justify-all;">Loremdo , sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut en</span>
+                            <span style="font-size: 95%; text-align: justify-all;">{{organizationView.aboutUs}}</span>
                         </div>
                         <div class="row">
                             <div class="col s6">
-                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">phone</i>+919909090909</span>
+                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">phone</i>{{organizationView.contactNo}}</span>
                                 <br>
-                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">email</i>xyz@abc.com</span>
+                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">email</i>{{organizationView.email}}</span>
                                 <br>
-                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">room</i>Gandhinagar</span>
+                                <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">room</i>{{organizationView.location}}</span>
                             </div>
                             <div class="col s6 ">
                                 <div class="row">
                                     Number of events organized
                                     <br>
-                                    <center><span class="flow-text" style="font-weight: bold">46</span></center>
+                                    <center><span class="flow-text" style="font-weight: bold">{{organizationView.events.length}}</span></center>
                                 </div>
                                 <div class="row">
                                     <center>

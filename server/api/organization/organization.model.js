@@ -21,6 +21,7 @@ var OrganizationSchema = new mongoose.Schema({
     aboutUs: String,
     contactNo: String,
     karma: Number,
+    aow: [String],
     NGO: Boolean,
     CSR: Boolean,
     tags: [String],
@@ -28,7 +29,8 @@ var OrganizationSchema = new mongoose.Schema({
     verified: {
         type: Boolean,
         default: false
-    }
+    },
+    profilePic: String
     /*subscribers :[{
     type: mongoose.Schema.Types.ObjectId,
     ref : User

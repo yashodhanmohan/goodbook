@@ -1,0 +1,159 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="row light-blue-text">
+    <div class="col s4 white" style="height: 100vh; position: fixed">
+        <div class="row">
+            <div class="col s12 flow-text" style="margin-top: 10%; font-size: 300%; font-weight: normal;">
+                Welcome to
+                <br> Project Goodbook !
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 flow-text" style="margin-top: 10%; font-size: 200%; font-weight: normal;">
+                Let's setup your
+                <span ng-show="!register2.ind"><br> organization's</span> profile ...
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 flow-text" style="margin-top: 10%; font-size: 150%; font-weight: lighter;">
+                ... or you can update this
+                <br> information later !
+            </div>
+        </div>
+    </div>
+    <form>
+        <div class="col s8 offset-s4">
+            <div class="row">
+                <div class="col s7">
+                    <div class="col s10 input-field">
+                        <input id="name" type="text" ng-model="register2.org_name" class="validate">
+                        <label for="name" class="active">Name</label>
+                    </div>
+                    <div class="col s10 input-field">
+                        <input disabled id="email" type="email" ng-model="register2.email" class="validate">
+                        <label for="email" class="active">Email</label>
+                    </div>
+                    <div class="col s7 input-field">
+                        <input id="contact" type="text" ng-model="register2.contactNo" class="validate">
+                        <label for="contact">Contact No.</label>
+                    </div>
+                    <div class="col s7 input-field">
+                        <input id="date" type="date" ng-model="register2.yoe" class="datepicker">
+                        <label>Year of establishment</label>
+                    </div>
+                    <div class="input-field col s5">
+                        <input id="reg_number" type="text" ng-model="register2.regNo" class="validate"></input>
+                        <label for="reg_number">Registration number</label>
+                    </div>
+                </div>
+                <div class="col s5" style="height: inherit;">
+                    <div class="row flow-text">
+                        <center>Profile picture</center>
+                    </div>
+                    <div class="row" style="padding-top: 2%">
+                        <div class="col s12">
+                            <center>
+                                <img src="" id="profilepic" class="z-depth-2" style="height: 140px; width: 140px">
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row file-field input-field">
+                        <div class="btn light-blue">
+                            <span>File</span>
+                            <input type="file" id="imagefile">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="address" class="materialize-textarea" ng-model="register2.address" required></textarea>
+                    <label for="address">Address</label>
+                </div>
+                <div class="input-field col s6">
+                    <textarea id="aboutUs" class="materialize-textarea" ng-model="register2.aboutUs" required></textarea>
+                    <label for="aboutUs">About Us</label>
+                </div>
+                <div class="col s7">
+                    <div class="row">
+                        <label style="font-size: 100%">Areas of work:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <span>
+                                <input type="checkbox" id="c1" ng-model="register2.aow[0]" />
+                                <label for="c1">Education</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c2" ng-model="register2.aow[1]" />
+                                <label for="c2">Farming</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c3" ng-model="register2.aow[2]" />
+                                <label for="c3">Animals</label>
+                            </span>
+                        </div>
+                        <div class="col s6">
+                            <span>
+                                <input type="checkbox" id="c4" ng-model="register2.aow[3]" />
+                                <label for="c4">Save Girl Child</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c5" ng-model="register2.aow[4]" />
+                                <label for="c5">Environment</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c6" ng-model="register2.aow[5]" />
+                                <label for="c6">Women Empowerment</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s5">
+                    <div class="row">
+                        <label style="font-size: 100%">Select the level of your operation:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col s7">
+                            <span>
+                                <input name="level" type="radio" id="r1" ng-model="register2.scale" ng-value="community_based"/>
+                                <label for="r1">Community based</label>
+                            </span>
+                            <span>
+                                <input name="level" type="radio" id="r2" ng-model="register2.scale" ng-value="city_wide"/>
+                                <label for="r2">City wide</label>
+                            </span>
+                        </div>
+                        <div class="col s5">
+                            <span>
+                                <input name="level" type="radio" id="r3" ng-model="register2.scale" ng-value="national"/>
+                                <label for="r3">National</label>
+                            </span>
+                            <span>
+                                <input name="level" type="radio" id="r4" ng-model="register2.scale" ng-value="international"/>
+                                <label for="r4">International</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <input id="founder" type="text" class="validate" ng-model="register2.founder" required>
+                    <label for="founder">Founder</label>
+                </div>
+                <div class="col s6">
+                    <center>
+                        <button type="submit" ng-click="register2.save()" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Save</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
