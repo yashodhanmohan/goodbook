@@ -15,14 +15,15 @@ angular.module('goodbookApp', [
         $locationProvider.html5Mode(true);
 
     })
-    .run(function($cacheFactory) {
+    .run(function() {
         $(document).ready(function() {
-            $('.tooltipped').tooltip({ delay: 50 });
         });
 
     })
     .constant('api', '/api/v1')
     .constant('userRoute', '/users')
     .constant('orgRoute', '/organizations')
+    .constant('eventRoute', '/events')
+    .constant('searchRoute', '/search')
     .constant('googleMapKey', 'AIzaSyCrc5Fv1KT0Hyzs9rA6ehHyrTe5ic_p-qQ')
     .constant('googleMapApiUrl', 'https://maps.googleapis.com/maps/api/geocode/json?');

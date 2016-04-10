@@ -13,7 +13,7 @@ class UserpanelController {
             UserService.location(user.location[0], user.location[1], (data, status) => {
                 if (status == 200) {
                     this.location = data.results[0].formatted_address;
-                    user.location = this.location;
+                    user.location_text = this.location;
 
                 } else
                     this.location = ""

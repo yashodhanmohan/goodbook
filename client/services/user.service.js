@@ -3,10 +3,11 @@
 (function() {
     class UserService {
 
-        constructor($http, $location, api, userRoute, googleMapApiUrl, googleMapKey, MyCache) {
+        constructor($http, $location, api, userRoute, searchRoute, googleMapApiUrl, googleMapKey, MyCache) {
             this.$http = $http;
             this.api = api;
             this.userRoute = userRoute;
+            this.searchRoute = searchRoute;
             this.googleMapKey = googleMapKey;
             this.googleMapApiUrl = googleMapApiUrl;
             this.$location = $location;
@@ -58,6 +59,15 @@
                 });
         }
 
+        logout = (id, callback) => {
+            this.$http.post(this.api + this.userRoute + '/logout', {_id: id})
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                });
+        }
+
         location = (latitude, longitude, callback) => {
             this.$http.get(this.googleMapApiUrl, {
                     params: {
@@ -67,7 +77,6 @@
                     }
                 })
                 .then((response) => {
-                    console.log(response);
                     callback(response.data, response.status);
                 }, (response) => {
                     callback(response.data, response.status);
@@ -81,6 +90,16 @@
                 callback();
             }
         }
+
+        search = (searchString, callback) => {
+            this.$http.post(this.api+this.userRoute+this.searchRoute,{query: searchString})
+                .then((response)=>{
+                    callback(response.data, response.status);
+                }, (response)=>{
+                    callback(response.data, response.status);
+                })
+        }
+
     };
 
 

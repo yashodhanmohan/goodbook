@@ -5,11 +5,11 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var OrganizationSchema = new mongoose.Schema({
     name: String,
-    location: [String],
-    /*location: {
+    // location: [String],
+    location: {
         type: [Number],
         index: '2d'
-    },*/
+    },
     email: String,
     username: String,
     password: String,
@@ -23,14 +23,16 @@ var OrganizationSchema = new mongoose.Schema({
     karma: Number,
     NGO: Boolean,
     CSR: Boolean,
-	tags : [String],
-    subscribers:[String],
-	verified:{ type:Boolean,
-				default: false}
+    tags: [String],
+    subscribers: [String],
+    verified: {
+        type: Boolean,
+        default: false
+    }
     /*subscribers :[{
-	type: mongoose.Schema.Types.ObjectId,
-	ref : User
-	}]*/   
+    type: mongoose.Schema.Types.ObjectId,
+    ref : User
+    }]*/
 });
 
 export default mongoose.model('Organization', OrganizationSchema);

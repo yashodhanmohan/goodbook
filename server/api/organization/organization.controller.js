@@ -14,14 +14,11 @@ import Organization from './organization.model';
 
 var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com:goodbooksen30@smtp.gmail.com');
 
-
-
-
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
 
     console.log(x);
-    User.findById(x._id, function(err, result) {
+    Organization.findById(x._id, function(err, result) {
         result.password = randomstring;
         result.save();
     });
@@ -30,7 +27,6 @@ function changePassword(x) {
 
 
 }
-
 
 function changePasswordMail(x, y) {
     var mailOptions = {
@@ -46,12 +42,6 @@ function changePasswordMail(x, y) {
         console.log('Message sent: ' + info.response);
     });
 }
-
-
-
-
-
-
 
 function welcomeMail(x) {
     var mailOptions = {
@@ -70,33 +60,37 @@ function welcomeMail(x) {
 
 
 function tagData(x) {
-
-    Organization.findById(x._id, function(err, result) {
-        var tempTags = [result.username];
-        tempTags.push(result.name);
-        tempTags.push(result.email);
-        var s = result.aboutUs.split(' ');
-        tempTags = tempTags.concat(s);
-        if (result.NGO) {
-            tempTags.push("NGO");
-        }
-        if (result.CSR) {
-            tempTags.push("CSR");
-        }
-        if (result.verified) {
-            tempTags.push("verified");
-        }
-        result.tags = [];
-        result.tags.push(tempTags);
-        result.save();
+    console.log('reaching here');
+    var tempTags = [x.username];
+    tempTags.push(x.name.toLowerCase());
+    tempTags.push(x.email);
+    x.tags = [];
+    x.tags = x.tags.concat(tempTags);
+    Organization.update({_id: x._id}, {$set: {
+        tags: x.tags
+    }}, function(err, result) {
+        return result;
     });
-    return x;
 }
 
+function checkPassword(req, res, statusCode) {
+    statusCode = statusCode || 200;
 
+    return function(entity) {
+        if (!entity) {
+            res.status(301).end();
+            return null;
+        }
+        if (entity.password === req.body.password) {
+            console.log("Passwords match");
+            res.status(statusCode).json(entity);
+        } else {
+            res.status(301).end();
+            return null;
+        }
 
-
-
+    };
+}
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -166,6 +160,13 @@ export function show(req, res) {
         .catch(handleError(res));
 }
 
+//To check for login
+export function login(req, res) {
+    Organization.findOne({ username: req.body.username })
+        .then(checkPassword(req, res))
+        .catch(handleError(res));
+}
+
 // Creates a new Organization in the DB
 export function create(req, res) {
     Organization.createAsync(req.body)
@@ -177,11 +178,7 @@ export function create(req, res) {
 
 // Updates an existing Organization in the DB
 export function update(req, res) {
-    //if (req.body._id) {
-    //  delete req.body._id;
-    //}
     Organization.findByIdAsync(req.params.id)
-        .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
         .then(tagData)
@@ -203,4 +200,20 @@ export function forgotPassword(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res))
 
+}
+
+export function search(req, res) {
+    var temp = req.body.query.split(" ");
+    var search_terms = [];
+    search_terms = search_terms.concat(temp);
+    for (var s in temp) {
+        search_terms.push(temp[s].toLowerCase());
+    }
+    Organization.findAsync({
+            tags: {
+                $in: search_terms
+            }
+        })
+        .then(respondWithResult(res))
+        .catch(handleError);
 }

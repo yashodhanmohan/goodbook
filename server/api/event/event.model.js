@@ -5,16 +5,16 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var EventSchema = new mongoose.Schema({
     name: String,
-    location: Number,
-    /*location: {
+    // location: Number,
+    location: {
         type: [Number],
         index: '2d'
-    },*/
+    },
     project: Boolean,
     startDate: Date,
     endDate: Date,
-    organizations:[Number],
-    volunteers:[Number],
+    organizations:[String],
+    volunteers:[String],
     /*organizations: [{
 	type: mongoose.Schema.Types.ObjectId,
 	ref : NGO
@@ -25,7 +25,8 @@ var EventSchema = new mongoose.Schema({
 	}],*/				
     skilled: Boolean,
     description: String,
-    scale: Number
+    scale: Number,
+    tags: [String]
 });
 
 export default mongoose.model('Event', EventSchema);

@@ -7,9 +7,11 @@ var router = express.Router();
 
 router.get('/:id', controller.show);
 router.get('/', controller.index);
-router.post('/forgotpassword/', controller.forgotPassword);
-router.post('/login/', controller.login);
-router.post('/register/', controller.register);
+router.post('/search', controller.search);
+router.post('/forgotpassword', controller.forgotPassword);
+router.post('/login', controller.login);
+router.post('/logout', controller.logout);
+router.post('/register', controller.register);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);

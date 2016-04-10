@@ -1,21 +1,68 @@
+<usernavbar></usernavbar>
 <div class="row">
     <userpanel></userpanel>
     <div class="col offset-s2 s10">
         <div class="row">
             <div class="col s8">
                 <div class="col s9 input-field">
-                    <label>Search</label>
+                    <label id="searchlabel">Search</label>
                     <input type="text" ng-model="search.query"></input>
                 </div>
-                <div class="col s3" style="margin-top: 2%">
+                <div class="col s3" style="margin-top: 2%" ng-click="search.search()">
                     <a class="waves-effect waves-light btn light-blue"><i class="material-icons right">search</i>Search</a>
                 </div>
             </div>
-            <div class="col s3 offset-s1 flow-text" style="margin-top: 1.5%;">
+            <div class="col s3 offset-s1 flow-text" style="margin-top: 1.5%;" ng-show="search.query">
                 <span style="float: right;">{{search.resultCount}} results found</span>
             </div>
         </div>
-        <div class="row" ng-repeat="rows in search.groupedResults">
+        <div class="row z-depth-0">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s4" ng-click="search.changeTab(0)"><a  class="white-text blue" style="padding-right: 10%;" href="">Users<span class="right white-text">{{search.userResults.length}}</span></a></li>
+                    <li class="tab col s4" ng-click="search.changeTab(1)"><a  class="white-text blue" style="padding-right: 10%;" href="">Organizations<span class="right white-text">{{search.orgResults.length}}</span></a></li>
+                    <li class="tab col s4" ng-click="search.changeTab(2)"><a  class="white-text blue" style="padding-right: 10%;" href="">Events<span class="right white-text">{{search.eventResults.length}}</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" ng-show="search.showUsers" ng-repeat="rows in search.groupedUserResults">
+            <div class="col s4" ng-repeat="result in rows">
+                <div class="card small hoverable">
+                    <div class="card-image" style="max-height: 50%">
+                        <img src="http://i.imgur.com/iHEPHB2.png">
+                        <span class="card-title blue darken-2 white-text" style="opacity: 0.8; min-width: 100%; padding: 2px 0px 2px 4%">{{result.firstName+" "+result.lastName}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-weight: 300; font-size: 90%">{{result.aboutMe}}</p>
+                    </div>
+                    <div class="card-action">
+                        <center>
+                            <a ng-href="/user/{{result.username}}" class="btn indigo white-text">View info</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="search.showOrgs" ng-repeat="rows in search.groupedOrgResults">
+            <div class="col s4" ng-repeat="result in rows">
+                <div class="card small hoverable">
+                    <div class="card-image" style="max-height: 50%">
+                        <img src="http://i.imgur.com/88yXLNF.jpg?1">
+                        <span class="card-title light-blue white-text" style="opacity: 0.8; min-width: 100%; padding: 2px 0px 2px 4%">{{result.name}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p style="font-weight: 300; font-size: 75%">{{result.aboutUs}}</p>
+                    </div>
+                    <div class="card-action">
+                        <center>
+                            <a href="#" class="btn green white-text">Subscribe</a>
+                            <a href="/organization/{{result.username}}" class="btn indigo white-text">View info</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="search.showEvents" ng-repeat="rows in search.groupedEventResults">
             <div class="col s4" ng-repeat="result in rows">
                 <div class="card small hoverable">
                     <div class="card-image" style="max-height: 50%">
