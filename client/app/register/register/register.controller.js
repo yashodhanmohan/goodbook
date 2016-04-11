@@ -20,9 +20,6 @@
             this.accept_conditions = false;
             this.valid_username = true;
             this.valid_email = true;
-            this.myFile = "";
-            this.reader = new FileReader();
-            this.binaryData = "";
         }
 
         register = () => {
@@ -35,6 +32,7 @@
                         username: this.username,
                         password: this.password
                     }, (data, status) => {
+                        console.log(data);
                         this.cache.user = data;
                         this.cache.loggedIn = true;
                         this.cache.ind = this.ind;

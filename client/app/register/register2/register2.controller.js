@@ -12,11 +12,18 @@
             this.cache = MyCache;
             this.ind = this.cache.ind;
             // NG Models
-            this.first_name = "";
-            this.last_name = "";
-            this.org_name = "";
+            // Common
             this.email = "";
             this.contactNo = "";
+            this.profilepic = "";
+            // Individual
+            this.first_name = "";
+            this.last_name = "";
+            this.dob = "";
+            this.aboutMe = "";
+            this.gender = "";
+            // Organization
+            this.org_name = "";
             this.yoe = "";
             this.regNo = "";
             this.address = "";
@@ -24,23 +31,30 @@
             this.aow = [false, false, false, false, false, false];
             this.scale = "";
             this.founder = "";
-            this.profilepic = "";
-
+            console.log(this.ind);
             if (this.ind) {
-                this.first_name = this.cache.user.first_name;
-                this.last_name = this.cache.user.last_name;
+                this.first_name = this.cache.user.firstName;
+                this.last_name = this.cache.user.lastName;
                 this.email = this.cache.user.email;
+                this.username = this.cache.user.username;
             } else {
                 this.org_name = this.cache.org.name;
                 this.email = this.cache.org.email;
+                this.username = this.cache.org.username;
             }
 
+            if (this.ind)
+                this.imagefile = document.getElementById('imagefile2');
+            else
+                this.imagefile = document.getElementById('imagefile');
 
-            this.imagefile = document.getElementById('imagefile');
             this.imagefile.onchange = () => {
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    document.getElementById("profilepic").src = e.target.result;
+                    if (this.ind)
+                        document.getElementById("profilepic2").src = e.target.result;
+                    else
+                        document.getElementById("profilepic").src = e.target.result;
                     this.profilepic = e.target.result;
                 };
                 reader.readAsDataURL(this.imagefile.files[0]);
@@ -75,7 +89,24 @@
                     profilePic: this.profilepic,
                     aow: aow
                 }, (data, status) => {
-                })
+                    if (status == 200) {
+                        this.cache.org = data;
+                        this.cache.loggedIn = true;
+                    }
+                });
+            } else {
+                this.UserService.putUser(this.cache.user._id, {
+                    firstName: this.first_name,
+                    lastName: this.last_name,
+                    contactNo: this.contactNo,
+                    aboutMe: this.aboutMe,
+                    profilePic: this.profilepic
+                }, (data, status) => {
+                    if (status == 200) {
+                        this.cache.user = data;
+                        this.cache.loggedIn = true;
+                    }
+                });
             }
         }
     }

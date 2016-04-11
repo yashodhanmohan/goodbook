@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <form>
+    <form ng-show="!register2.ind">
         <div class="col s8 offset-s4">
             <div class="row">
                 <div class="col s7">
@@ -28,9 +28,13 @@
                         <input id="name" type="text" ng-model="register2.org_name" class="validate">
                         <label for="name" class="active">Name</label>
                     </div>
-                    <div class="col s10 input-field">
+                    <div class="col s6 input-field">
                         <input disabled id="email" type="email" ng-model="register2.email" class="validate">
                         <label for="email" class="active">Email</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input disabled id="username" type="email" ng-model="register2.username" class="validate">
+                        <label for="username" class="active">Username</label>
                     </div>
                     <div class="col s7 input-field">
                         <input id="contact" type="text" ng-model="register2.contactNo" class="validate">
@@ -149,6 +153,122 @@
                     <label for="founder">Founder</label>
                 </div>
                 <div class="col s6">
+                    <center>
+                        <button type="submit" ng-click="register2.save()" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Save</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form ng-show="register2.ind">
+        <div class="col s8 offset-s4">
+            <div class="row">
+                <div class="col s7">
+                    <div class="col s6 input-field">
+                        <input id="name" type="text" ng-model="register2.first_name" class="validate">
+                        <label for="name" class="active">First Name</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input id="name" type="text" ng-model="register2.last_name" class="validate">
+                        <label for="name" class="active">Last Name</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input disabled id="email" type="email" ng-model="register2.email" class="validate">
+                        <label for="email" class="active">Email</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input disabled id="username" type="text" ng-model="register2.username" class="validate">
+                        <label for="username" class="active">Username</label>
+                    </div>
+                    <div class="col s7 input-field">
+                        <input id="contact" type="text" ng-model="register2.contactNo" class="validate">
+                        <label for="contact">Contact No.</label>
+                    </div>
+                    <div class="col s5 input-field">
+                        <label class="active">Gender</label>
+                        <span>
+                            <input name="gender" type="radio" id="male" ng-model="register2.gender" ng-value="male"/>
+                            <label for="male">Male</label>
+                        </span>
+                        <span>
+                            <input name="gender" type="radio" id="female" ng-model="register2.gender" ng-value="female"/>
+                            <label for="female">Female</label>
+                        </span>
+                    </div>
+                    <div class="col s7 input-field">
+                        <input id="date" type="date" ng-model="register2.dob" class="datepicker">
+                        <label>Date of birth</label>
+                    </div>
+                </div>
+                <div class="col s5" style="height: inherit;">
+                    <div class="row flow-text">
+                        <center>Profile picture</center>
+                    </div>
+                    <div class="row" style="padding-top: 2%">
+                        <div class="col s12">
+                            <center>
+                                <img src="" id="profilepic2" class="z-depth-2" style="height: 140px; width: 140px">
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row file-field input-field">
+                        <div class="btn light-blue">
+                            <span>File</span>
+                            <input type="file" id="imagefile2">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="aboutUs" class="materialize-textarea" ng-model="register2.aboutUs" required></textarea>
+                    <label for="aboutUs">About You</label>
+                </div>
+                <div class="col s6">
+                    <div class="row">
+                        <label style="font-size: 100%">Interests:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <span>
+                                <input type="checkbox" id="c1" ng-model="register2.aow[0]" />
+                                <label for="c1">Education</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c2" ng-model="register2.aow[1]" />
+                                <label for="c2">Graphic Design</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c3" ng-model="register2.aow[2]" />
+                                <label for="c3">Animals</label>
+                            </span>
+                        </div>
+                        <div class="col s6">
+                            <span>
+                                <input type="checkbox" id="c4" ng-model="register2.aow[3]" />
+                                <label for="c4">Save Girl Child</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c5" ng-model="register2.aow[4]" />
+                                <label for="c5">Environment</label>
+                            </span>
+                            <br>
+                            <span>
+                                <input type="checkbox" id="c6" ng-model="register2.aow[5]" />
+                                <label for="c6">Women Empowerment</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
                     <center>
                         <button type="submit" ng-click="register2.save()" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Save</button>
                     </center>

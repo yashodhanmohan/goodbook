@@ -56,6 +56,7 @@ function welcomeMail(x) {
     //}
     //console.log('Message sent: ' + info.response);
     //});
+    return x;
 }
 
 function tagData(x) {
@@ -80,6 +81,7 @@ function tagData(x) {
     }, function(err, result) {
         return result;
     });
+    return x;
 }
 
 
