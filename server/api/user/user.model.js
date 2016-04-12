@@ -3,18 +3,43 @@ var NGO = require('../organization/organization.model');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var UserSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
     dob: Date,
-    email: String,
-    username: String,
-    password: String,
+    email: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     contactNo: String,
     interests: [String],
     creditCard: String,
     wallet: String,
-    lastLogin: Date,
-    karma: Number,
+    lastLogin: {
+        type: String,
+        default: Date.now
+    },
+    karma: {
+        type: Number,
+        default: 0
+    },
+    rating: {
+        type: Number,
+        default: 0
+    },
     location: {
         type: [Number],
         index: '2d'
@@ -24,12 +49,11 @@ var UserSchema = new mongoose.Schema({
     aboutMe: String,
     gender: String,
     tags: [String],
-    donated: Number,
+    donated: {
+        type: Number,
+        default: 0
+    },
     profilePic: String,
-    /*subscribedNGO :[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref : NGO
-    }]*/
     subscribedNGO: [String]
 });
 

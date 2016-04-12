@@ -11,7 +11,8 @@
             this.OrgService = OrgService;
             this.EventService = EventService;
             this.user = this.cache.getObject('user');
-            this.grading = '7/10';
+            console.log(this.user);
+            this.grading = this.user.rating.toString()+'/10';
             this.karma = this.user.karma;
             this.donated = this.user.donated;
             this.events = [];

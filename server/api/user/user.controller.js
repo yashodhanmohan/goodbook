@@ -193,6 +193,7 @@ export function show(req, res) {
 
 // Creates a new User in the DB
 export function create(req, res) {
+
     User.createAsync(req.body)
         .then(respondWithResult(res, 201))
         .then(tagData)
