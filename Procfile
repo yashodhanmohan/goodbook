@@ -1,1 +1,1 @@
-grunt serve:production
+web: grunt serve:production
