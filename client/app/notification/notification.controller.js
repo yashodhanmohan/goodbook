@@ -3,10 +3,10 @@
 (function() {
 
     class NotificationController {
-        constructor($http, $location, $routeParams, MyCache) {
+        constructor($http, $location, $cookies, $routeParams) {
 
-            this.cache = MyCache;
-            if (this.cache.loggedIn==false) {
+            this.cache = $cookies;
+            if (this.cache.get('loggedIn')=='false') {
                 $location.path('/login/redirect/notification');
             } else {
                 this.$http = $http;

@@ -3,12 +3,11 @@
 (function() {
     class GeolocationService {
 
-        constructor($http, $location, googleMapApiUrl, googleMapKey, MyCache) {
+        constructor($http, $location, googleMapApiUrl, googleMapKey) {
             this.$http = $http;
             this.$location = $location;
             this.googleMapKey = googleMapKey;
             this.googleMapApiUrl = googleMapApiUrl;
-            this.cache = MyCache;
         }
 
         location = (latitude, longitude, callback) => {

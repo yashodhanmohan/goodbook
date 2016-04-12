@@ -3,14 +3,14 @@
 (function() {
 
     class Register2Controller {
-        constructor($scope, $http, $location, UserService, OrgService, MyCache) {
+        constructor($scope, $http, $location, $cookies, UserService, OrgService) {
             // Services
             this.$http = $http;
             this.$location = $location;
             this.UserService = UserService;
             this.OrgService = OrgService;
-            this.cache = MyCache;
-            this.ind = this.cache.ind;
+            this.cache = $cookies;
+            this.ind = (this.cache.get('ind')=='true');
             // NG Models
             // Common
             this.email = "";
@@ -33,14 +33,14 @@
             this.founder = "";
             console.log(this.ind);
             if (this.ind) {
-                this.first_name = this.cache.user.firstName;
-                this.last_name = this.cache.user.lastName;
-                this.email = this.cache.user.email;
-                this.username = this.cache.user.username;
+                this.first_name = this.cache.getObject('user').firstName;
+                this.last_name = this.cache.getObject('user').lastName;
+                this.email = this.cache.getObject('user').email;
+                this.username = this.cache.getObject('user').username;
             } else {
-                this.org_name = this.cache.org.name;
-                this.email = this.cache.org.email;
-                this.username = this.cache.org.username;
+                this.org_name = this.cache.getObject('org').name;
+                this.email = this.cache.getObject('org').email;
+                this.username = this.cache.getObject('org').username;
             }
 
             if (this.ind)
@@ -67,7 +67,7 @@
         }
 
         save = () => {
-            if (!this.cache.ind) {
+            if (!this.ind) {
                 var aow = [];
                 if (this.aow[0])
                     aow.push('education');
@@ -81,7 +81,7 @@
                     aow.push('environment');
                 if (this.aow[5])
                     aow.push('women empowerment');
-                this.OrgService.putOrg(this.cache.org._id, {
+                this.OrgService.putOrg(this.cache.getObject('org')._id, {
                     name: this.org_name,
                     contactNo: this.contactNo,
                     address: this.address,
@@ -90,12 +90,13 @@
                     aow: aow
                 }, (data, status) => {
                     if (status == 200) {
-                        this.cache.org = data;
-                        this.cache.loggedIn = true;
+                        this.cache.putObject('org', data);
+                        this.cache.put('loggedIn', 'true');
+                        this.$location.path('/dashboard');
                     }
                 });
             } else {
-                this.UserService.putUser(this.cache.user._id, {
+                this.UserService.putUser(this.cache.getObject('user')._id, {
                     firstName: this.first_name,
                     lastName: this.last_name,
                     contactNo: this.contactNo,
@@ -103,8 +104,9 @@
                     profilePic: this.profilepic
                 }, (data, status) => {
                     if (status == 200) {
-                        this.cache.user = data;
-                        this.cache.loggedIn = true;
+                        this.cache.putObject('user', data);
+                        this.cache.put('loggedIn', 'true');
+                        this.$location.path('/dashboard');
                     }
                 });
             }

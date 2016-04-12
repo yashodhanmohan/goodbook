@@ -3,15 +3,15 @@
 (function() {
     class UserService {
 
-        constructor($http, $location, api, userRoute, searchRoute, googleMapApiUrl, googleMapKey, MyCache) {
+        constructor($http, $location, $cookies, api, userRoute, searchRoute, googleMapApiUrl, googleMapKey) {
             this.$http = $http;
+            this.cache = $cookies;
             this.api = api;
             this.userRoute = userRoute;
             this.searchRoute = searchRoute;
             this.googleMapKey = googleMapKey;
             this.googleMapApiUrl = googleMapApiUrl;
             this.$location = $location;
-            this.cache = MyCache;
         }
 
         getUserByName = (username, callback) => {
@@ -78,7 +78,8 @@
         }
 
         checkLogin = (redirectUrl, callback) => {
-            if (!this.cache.loggedIn) {
+            console.log('this is executing');
+            if (!this.cache.get('loggedIn')=='true' || !this.cache.get('loggedIn')) {
                 this.$location.path('/login/redirect' + redirectUrl);
             } else {
                 callback();

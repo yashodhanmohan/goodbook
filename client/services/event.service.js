@@ -3,13 +3,12 @@
 (function() {
     class EventService {
 
-        constructor($http, $location, api, eventRoute, searchRoute, MyCache) {
+        constructor($http, $location, api, eventRoute, searchRoute) {
             this.$http = $http;
             this.$location = $location;
             this.api = api;
             this.eventRoute = eventRoute;
             this.searchRoute = searchRoute;
-            this.cache = MyCache;
         }
 
         getEventById = (id, callback) => {

@@ -30,7 +30,7 @@ var OrganizationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    profilePic: Buffer
+    profilePic: String
     /*subscribers :[{
     type: mongoose.Schema.Types.ObjectId,
     ref : User

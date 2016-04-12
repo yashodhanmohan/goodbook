@@ -216,6 +216,7 @@ export function logout(req, res) {
                 res.send(200);
             });
         })
+        .catch(handleError(res));
 }
 
 export function register(req, res) {
@@ -231,6 +232,7 @@ export function update(req, res) {
     //if (req.body._id) {
     //  delete req.body._id;
     //}
+    console.log(req.body);
     User.findByIdAsync(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))

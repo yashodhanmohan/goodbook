@@ -76,25 +76,22 @@ function handleError(res, statusCode) {
 // Gets a list of Events
 export function index(req, res) {
     if (!_.isEmpty(req.query)) {
-        if(req.query.organization) {
+        if (req.query.organization) {
             Event.findAsync({
-                organizations: {
-                    $in: req.query.organization
-                }
-            })
-            .then(respondWithResult(res))
-            .catch(handleError(res));
-        }
-        else if(req.query.volunteer){
+                    organizations: {
+                        $in: req.query.organization
+                    }
+                })
+                .then(respondWithResult(res))
+                .catch(handleError(res));
+        } else if (req.query.volunteer) {
             Event.findAsync({
-                volunteers: {
-                    $in: req.query.volunteer
-                }
-            })
-            .then(respondWithResult(res))
-            .catch(handleError(res));
+                    volunteers: req.query.volunteer
+                })
+                .then(respondWithResult(res))
+                .catch(handleError(res));
         }
-        
+
     }
 }
 

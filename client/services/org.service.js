@@ -3,7 +3,7 @@
 (function() {
     class OrgService {
 
-        constructor($http, $location, api, orgRoute, searchRoute, googleMapApiUrl, googleMapKey, MyCache) {
+        constructor($http, $location, api, orgRoute, searchRoute, googleMapApiUrl, googleMapKey) {
             this.$http = $http;
             this.api = api;
             this.orgRoute = orgRoute;
@@ -11,7 +11,6 @@
             this.googleMapKey = googleMapKey;
             this.googleMapApiUrl = googleMapApiUrl;
             this.$location = $location;
-            this.cache = MyCache;
         }
 
         getOrgByName = (username, callback) => {
@@ -69,7 +68,7 @@
         }
 
         checkLogin = (redirectUrl, callback) => {
-            if (!this.cache.loggedIn) {
+            if (!this.cache.get('loggedIn')=='true') {
                 this.$location.path('/login/redirect' + redirectUrl);
             } else {
                 callback();

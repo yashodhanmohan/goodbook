@@ -3,7 +3,7 @@
 (function() {
 
     class LoginController {
-        constructor($http, $location, $routeParams, UserService, OrgService, MyCache) {
+        constructor($http, $location, $cookies, $routeParams, UserService, OrgService) {
             this.$http = $http;
             this.$location = $location;
             this.UserService = UserService;
@@ -11,10 +11,10 @@
             this.username = '';
             this.password = '';
             this.error = false;
-            this.cache = MyCache;
+            this.cache = $cookies;
             this.redirect = "/dashboard";
-            if($routeParams.route)
-                this.redirect = "/"+$routeParams.route;
+            if ($routeParams.route)
+                this.redirect = "/" + $routeParams.route;
         }
 
         login = () => {
@@ -22,20 +22,19 @@
                 if (status == 200 && data) {
                     if (data.password)
                         delete data.password;
-                    this.cache.user = data;
-                    this.cache.loggedIn = true;
-                    this.cache.org = false;
-                    // this.$location.path('/user/' + data.username);
+                    this.cache.putObject('user', data);
+                    this.cache.put('loggedIn', 'true');
+                    this.cache.put('org', 'false');
                     this.disabled = false;
                     this.$location.path(this.redirect);
                 } else {
-                    this.OrgService.login({username: this.username, password: this.password}, (data, status) => {
-                        if(status==200 && data) {
-                            if(data.password)
+                    this.OrgService.login({ username: this.username, password: this.password }, (data, status) => {
+                        if (status == 200 && data) {
+                            if (data.password)
                                 delete data.password;
-                            this.cache.user = data;
-                            this.cache.loggedIn = true;
-                            this.cache.org = true;
+                            this.cache.putObject('user', data);
+                            this.cache.put('loggedIn', 'true');
+                            this.cache.put('org', 'true');
                             this.disabled = false;
                             this.$location.path(this.redirect);
                         }

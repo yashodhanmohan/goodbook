@@ -3,12 +3,12 @@
 (function() {
 
     class RegisterController {
-        constructor($scope, $http, $location, UserService, OrgService, MyCache) {
+        constructor($scope, $http, $location, $cookies, UserService, OrgService) {
             this.$http = $http;
             this.$location = $location;
             this.UserService = UserService;
             this.OrgService = OrgService;
-            this.cache = MyCache;
+            this.cache = $cookies;
             this.error = false;
             this.ind = true;
             this.first_name = "";
@@ -32,10 +32,9 @@
                         username: this.username,
                         password: this.password
                     }, (data, status) => {
-                        console.log(data);
-                        this.cache.user = data;
-                        this.cache.loggedIn = true;
-                        this.cache.ind = this.ind;
+                        this.cache.putObject('user', data);
+                        this.cache.put('loggedIn', 'true');
+                        this.cache.put('ind', this.ind.toString());
                         this.$location.path('/register/step2');
                     });
                 } else {
@@ -45,9 +44,9 @@
                         username: this.username,
                         password: this.password
                     }, (data, status) => {
-                        this.cache.org = data;
-                        this.cache.loggedIn = true;
-                        this.cache.ind = this.ind;
+                        this.cache.putObject('org', data);
+                        this.cache.put('loggedIn', 'true');
+                        this.cache.put('ind', this.ind.toString());
                         this.$location.path('/register/step2');
                     })
                 }

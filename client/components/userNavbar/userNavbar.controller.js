@@ -1,23 +1,29 @@
 'use strict';
 
 class UserNavbarController {
-    constructor($location, UserService, MyCache) {
+    constructor($location, $cookies, UserService) {
         this.$location = $location;
         this.UserService = UserService;
-        this.cache = MyCache;
-        this.firstName = MyCache.user.firstName;
-        this.lastName = MyCache.user.lastName;
+        this.cache = $cookies;
+        this.firstName = this.cache.getObject('user').firstName;
+        this.lastName = this.cache.getObject('user').lastName;
         this.search_terms = "";
     }
 
     search = () => {
-        this.cache.search_terms = this.search_terms;
+        this.cache.put('search_terms', this.search_terms);
         this.$location.path('/search');
     }
 
     logout = () => {
-        this.UserService.logout(this.cache.user._id, (data, status) => {
-            delete this.cache.user;
+        this.UserService.logout(this.cache.getObject('user')._id, (data, status) => {
+            var all_cookies = this.cache.getAll();
+            for (var key in all_cookies) {
+                if (all_cookies.hasOwnProperty(key)) {
+                    this.cache.remove(key);
+                }
+            }
+            delete this.cache.remove('user');
             this.$location.path('/login');
         })
     }

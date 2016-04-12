@@ -1,0 +1,91 @@
+<userNavbar></userNavbar>
+<div class="row">
+    <userpanel></userpanel>
+    <div class="col s10 offset-s2">
+        <div class="row">
+            <div class="col s6 center" style="padding-top: 3%">
+                <div class="row s12">
+                    <div class="col s6 flow-text" style="float: left;">
+                        Your ratings
+                    </div>
+                    <div class="col s6">
+                        <div class="row">
+                            <div class="col progress s6">
+                                <div class="determinate light-blue" style="width: 70%"></div>
+                            </div>
+                            <div class="col s6">{{dashboard.grading}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row flow-text">
+                    <div class="col s6 flow-text" style="float: left;">
+                        Karma Hours
+                    </div>
+                    <div class="col s6 flow-text">
+                        <span style="display: inline-flex;vertical-align: middle">
+                            <i class="material-icons small light-blue-text">av_timer</i>
+                            <span class="flow-text" style="padding-left: 10px">{{dashboard.karma}} hours</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 flow-text" style="float: left;">
+                        Karma Hours
+                    </div>
+                    <div class="col s6 flow-text">
+                        <span style="display: inline-flex;vertical-align: middle">
+                            <i class="material-icons small light-blue-text">stars</i>
+                            <span class="flow-text" style="padding-left: 10px">Rs. {{dashboard.donated}}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <form ng-submit="dashboard.search()">
+                    <div class="row">
+                        <div class="col s8 offset-s1 input-field">
+                            <i class="material-icons prefix">search</i>
+                            <input type="search" ng-model="dashboard.search_terms" ng-required></input>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </div>
+                </form>
+                <div class="row flow-text center">
+                    Or browse using one of these filters !
+                </div>
+                <div class="row center">
+                    <div class="col s10 offset-s1">
+                        <div class="chip waves-effect waves-dark " style="margin-top: 1%" ng-repeat="filter in dashboard.filters" ng-click="dashboard.search_terms=filter; dashboard.search()">
+                            <a>{{filter}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row flow-text z-depth-2">
+            <div class="col s12 light-blue white-text">
+                <center>News Feed</center>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4" ng-repeat="event in dashboard.events" ng-show="!(dashboard.events.length==0)">
+                <div class="card small hoverable" ng-click="dashboard.eventClick($index)">
+                    <div class="card-image">
+                        <img src="assets/images/yeoman.png">
+                        <span class="card-title blue darken-2 white-text" style="min-width: 100%; opacity: 0.6; padding: 2px 0px 2px 4%">{{event.name}}</span>
+                    </div>
+                    <div class="card-content">
+                        {{event.description}}
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 flow-text grey-text" ng-show="(dashboard.events.length==0)">
+                <div class="row" style="margin-top: 10%">
+                    <div class="col s12 center">
+                        No recent events
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
