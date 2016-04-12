@@ -65,6 +65,46 @@ function tagDataO(x) {
     });
     return x;
 }
+function assignOrgsToEvents(){
+        var uids = ["peta", "bolbala", "unicef", "cry"];
+        Organization.findOne({username:"bolbala"}, function(err, result){
+
+            Event.findOne({name:"Eye Donation Camp"}, function(err2,result2){
+                result2.organizations.push(result._id);
+                result2.save();
+            });
+
+        });
+
+        Organization.findOne({username:"unicef"}, function(err, result){
+
+            Event.findOne({name:"Eye Donation Camp"}, function(err2,result2){
+                result2.organizations.push(result._id);
+                result2.save();
+            });
+
+        });
+
+
+        Organization.findOne({username:"unicef"}, function(err, result){
+
+            Event.findOne({name:"Soccer Tournament"}, function(err2,result2){
+                result2.organizations.push(result._id);
+                result2.save();
+            });
+
+        });
+
+
+        Organization.findOne({username:"cry"}, function(err, result){
+
+            Event.findOne({name:"Cycle Distribution"}, function(err2,result2){
+                result2.organizations.push(result._id);
+                result2.save();
+            });
+
+        });
+}
 
 function assignEvents(){
         var uids = ["201301047", "201301048"];
@@ -538,7 +578,7 @@ function createEvents() {
         "location": [33.8765, 151.2070],
         "project": false,
         "startDate": "2016-07-30T06:03:53-07:00",
-        "endDate": "2016-07-30T09:03:53-07:00",
+        "endDate": "2016-07-31T09:03:53-07:00",
         "skilled": false,
         "description": "Protecting the environment",
         "scale": 9,
@@ -553,7 +593,8 @@ User.find({}).removeAsync()
             .then(assignUsersandNGOs)
                 .then(assignEvents)
                     .then(createEventRequests)
-                        .then(createNotifications);
+                        .then(createNotifications)
+                            .then(assignOrgsToEvents);
 
 function createUsers() {
 
