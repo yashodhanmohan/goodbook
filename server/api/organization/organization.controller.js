@@ -16,15 +16,18 @@ var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com
 
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
-
+    if(x){
     Organization.findById(x._id, function(err, result) {
         result.password = randomstring;
         result.save();
     });
+
     changePasswordMail(x, randomstring);
     return x;
-
-
+    }
+    else{
+        return null;        
+    }
 }
 
 function changePasswordMail(x, y) {
@@ -202,8 +205,9 @@ export function forgotPassword(req, res) {
         .then(changePassword)
         .then(respondWithResult(res))
         .catch(handleError(res))
-
 }
+
+
 
 export function search(req, res) {
     var temp = req.body.query.split(" ");
