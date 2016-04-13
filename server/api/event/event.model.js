@@ -5,11 +5,11 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var EventSchema = new mongoose.Schema({
     name: String,
-    // location: Number,
-    location: {
-        type: [Number],
-        index: '2d'
-    },
+    location: String,
+    // location: {
+    //     type: [Number],
+    //     index: '2d'
+    // },
     project: Boolean,
     startDate: Date,
     endDate: Date,

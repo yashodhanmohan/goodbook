@@ -5,6 +5,7 @@ var controller = require('./user.controller');
 
 var router = express.Router();
 
+router.put('/:id/subscription', controller.subscription);
 router.get('/:id', controller.show);
 router.get('/', controller.index);
 router.post('/search', controller.search);

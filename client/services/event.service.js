@@ -55,6 +55,25 @@
                     callback(response.data, response.status);
                 })
         }
+
+        volunteer = (eventId, userId, callback) => {
+            this.$http.put(this.api + this.eventRoute + '/' + eventId + '/volunteer?volunteer='+ userId)
+                .then((response)=>{
+                    callback(response.data, response.status);
+                }, (response)=>{
+                    callback(response.data, response.status);
+                });
+        }
+
+        unvolunteer = (eventId, userId, callback) => {
+            this.$http.put(this.api + this.eventRoute + '/' + eventId + '/volunteer?unvolunteer='+ userId)
+                .then((response)=>{
+                    callback(response.data, response.status);
+                }, (response)=>{
+                    callback(response.data, response.status);
+                });
+        }
+
     };
 
 

@@ -24,6 +24,9 @@ function respondWithResult(res, statusCode) {
 function tagData(x) {
     var tempTags = [];
     tempTags.push(x.name.toLowerCase());
+    tempTags.concat(x.name.toLowerCase().split(" "));
+    tempTags.concat(x.description.toLowerCase().split(" "));
+    console.log(tempTags);
     x.tags = [];
     x.tags = x.tags.concat(tempTags);
     Event.update({ _id: x._id }, {
@@ -38,7 +41,7 @@ function tagData(x) {
 function saveUpdates(updates) {
     return function(entity) {
         var updated = _.merge(entity, updates);
-        return updated.saveAsync()
+        return updated.save()
             .spread(updated => {
                 return updated;
             });
@@ -48,7 +51,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
-            return entity.removeAsync()
+            return entity.remove()
                 .then(() => {
                     res.status(204).end();
                 });
@@ -77,15 +80,13 @@ function handleError(res, statusCode) {
 export function index(req, res) {
     if (!_.isEmpty(req.query)) {
         if (req.query.organization) {
-            Event.findAsync({
-                    organizations: {
-                        $in: req.query.organization
-                    }
+            Event.find({
+                    organizations: req.query.organization
                 })
                 .then(respondWithResult(res))
                 .catch(handleError(res));
         } else if (req.query.volunteer) {
-            Event.findAsync({
+            Event.find({
                     volunteers: req.query.volunteer
                 })
                 .then(respondWithResult(res))
@@ -97,7 +98,7 @@ export function index(req, res) {
 
 // Gets a single Event from the DB
 export function show(req, res) {
-    Event.findByIdAsync(req.params.id)
+    Event.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -105,7 +106,7 @@ export function show(req, res) {
 
 // Creates a new Event in the DB
 export function create(req, res) {
-    Event.createAsync(req.body)
+    Event.create(req.body)
         .then(respondWithResult(res, 201))
         .then(tagData)
         .catch(handleError(res));
@@ -116,7 +117,7 @@ export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Event.findByIdAsync(req.params.id)
+    Event.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
@@ -126,7 +127,7 @@ export function update(req, res) {
 
 // Deletes a Event from the Database
 export function destroy(req, res) {
-    Event.findByIdAsync(req.params.id)
+    Event.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
@@ -139,11 +140,41 @@ export function search(req, res) {
     for (var s in temp) {
         search_terms.push(temp[s].toLowerCase());
     }
-    Event.findAsync({
+    Event.find({
             tags: {
                 $in: search_terms
             }
         })
         .then(respondWithResult(res))
         .catch(handleError);
+}
+
+
+export function volunteer(req, res) {
+    if(req.query) {
+        if(req.query.volunteer) {
+            Event.findOne({_id: req.params.id})
+                .then(function(result){
+                    result.volunteers = _.merge(result.volunteers, [req.query.volunteer]);
+                    result.markModified('volunteers');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                .catch(handleError(res))
+        }
+        else if(req.query.unvolunteer) {
+            Event.findOne({_id: req.params.id})
+                .then(function(result){
+                    _.pull(result.volunteers, req.query.unvolunteer);
+                    result.markModified('volunteers');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                .catch(handleError(res))
+        }
+        else 
+            respondWithResult(res, 200)({});
+    }
+    else
+        respondWithResult(res, 200)({});
 }

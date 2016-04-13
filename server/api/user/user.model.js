@@ -40,12 +40,13 @@ var UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    location: {
-        type: [Number],
-        index: '2d'
-    },
-	studiedAt: String,
-	livesAt: String,
+    // location: {
+    //     type: [Number],
+    //     index: '2d'
+    // },
+    location: String,
+	// studiedAt: String,
+	// livesAt: String,
     aboutMe: String,
     gender: String,
     tags: [String],
@@ -53,7 +54,6 @@ var UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    profilePic: String,
     subscribedNGO: [String]
 });
 

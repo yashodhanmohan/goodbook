@@ -40,6 +40,9 @@ function tagData(x) {
 function tagDataE(x) {
     var tempTags = [];
     tempTags.push(x.name.toLowerCase());
+    tempTags = tempTags.concat(x.name.toLowerCase().split(" "));
+    tempTags = tempTags.concat(x.description.toLowerCase().split(" "));
+    console.log(tempTags);
     x.tags = [];
     x.tags = x.tags.concat(tempTags);
     Event.update({ _id: x._id }, {
@@ -543,7 +546,8 @@ function createEvents() {
     Event.find({}).removeAsync();
     Event.create({
             "name": "Eye Donation Camp",
-            "location": [11.6234, 92.7625],
+            // "location": [11.6234, 92.7625],
+            "location": "Gandhinagar",
             "project": false,
             "startDate": "2017-04-30T09:03:53-07:00",
             "endDate": "2018-05-30T09:03:53-07:00",
@@ -555,7 +559,8 @@ function createEvents() {
 
     Event.create({
             "name": "Soccer Tournament",
-            "location": [10.5593, 72.6358],
+            // "location": [10.5593, 72.6358],
+            "location": "Gandhinagar",
             "project": false,
             "startDate": "2016-04-30T09:03:53-07:00",
             "endDate": "2016-05-30T09:03:53-07:00",
@@ -568,7 +573,8 @@ function createEvents() {
 
     Event.create({
             "name": "Cycle Distribution",
-            "location": [33.8765, 151.2070],
+            // "location": [33.8765, 151.2070],
+            "location": "Gandhinagar",
             "project": false,
             "startDate": "2016-07-30T06:03:53-07:00",
             "endDate": "2016-07-31T09:03:53-07:00",
@@ -599,10 +605,11 @@ function createUsers() {
         "username": "201301225",
         "password": "yashodhan",
         "contactNo": "(01170) 03723",
-        "studiedAt": "DA-IICT",
-        "livesAt": "E-***",
+        // "studiedAt": "DA-IICT",
+        // "livesAt": "E-***",
         "aboutMe": "Lorem Ipsum Lorem Ipsom ",
-        "location": [12.9716, 77.5946],
+        // "location": [12.9716, 77.5946],
+        "location": "Gandhinagar",
         "donated": "15000",
         "karma": "225",
         "gender": "male",
@@ -619,10 +626,11 @@ function createUsers() {
             "username": "201301047",
             "password": "yashwant",
             "contactNo": "940868",
-            "studiedAt": "DA-IICT",
-            "livesAt": "H-105",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "H-105",
             "aboutMe": "Abra Abra Abra Abra ",
-            "location": [12.9716, 77.5946],
+            // "location": [12.9716, 77.5946],
+            "location": "Gandhinagar",
             "donated": "15",
             "karma": "47",
             "gender": "male",
@@ -639,10 +647,11 @@ function createUsers() {
             "username": "201301048",
             "password": "manish",
             "contactNo": "456456",
-            "studiedAt": "DA-IICT",
-            "livesAt": "G-121",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "G-121",
             "aboutMe": "Deputy Convenor ",
-            "location": [23.0225, 72.5714],
+            // "location": [23.0225, 72.5714],
+            "location": "Gandhinagar",
             "donated": "1522",
             "karma": "48",
             "gender": "male",
@@ -659,10 +668,11 @@ function createUsers() {
             "username": "201301417",
             "password": "shreyas",
             "contactNo": "3456",
-            "studiedAt": "DA-IICT",
-            "livesAt": "G-***",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "G-***",
             "aboutMe": "Designer ",
-            "location": [12.9716, 77.5946],
+            // "location": [12.9716, 77.5946],
+            "location": "Gandhinagar",
             "donated": "1500",
             "karma": "417",
             "gender": "male",
@@ -679,10 +689,11 @@ function createUsers() {
             "username": "201301433",
             "password": "pradeet",
             "contactNo": "(01170) 03723",
-            "studiedAt": "DA-IICT",
-            "livesAt": "C-***",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "C-***",
             "aboutMe": "Android SPC ",
-            "location": [17.3850, 78.4867],
+            // "location": [17.3850, 78.4867],
+            "location": "Gandhinagar",
             "donated": "15",
             "karma": "433",
             "gender": "male",
@@ -699,10 +710,11 @@ function createUsers() {
             "username": "201301100",
             "password": "saumya",
             "contactNo": "(01170) 03723",
-            "studiedAt": "DA-IICT",
-            "livesAt": "J/K- ***",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "J/K- ***",
             "aboutMe": "Lorem  Lorem  ",
-            "location": [23.0225, 72.5714],
+            // "location": [23.0225, 72.5714],
+            "location": "Gandhinagar",
             "donated": "15",
             "karma": "100",
             "gender": "female",
@@ -719,10 +731,11 @@ function createUsers() {
             "username": "201301104",
             "password": "roshani",
             "contactNo": "03723",
-            "studiedAt": "DA-IICT",
-            "livesAt": "J/K ***",
+            // "studiedAt": "DA-IICT",
+            // "livesAt": "J/K ***",
             "aboutMe": "Ipsum Ipsom ",
-            "location": [22.3072, 73.1812],
+            // "location": [22.3072, 73.1812],
+            "location": "Gandhinagar",
             "donated": "15",
             "karma": "104",
             "gender": "female",
@@ -738,10 +751,11 @@ function createUsers() {
         "username": "201301435",
         "password": "deeksha",
         "contactNo": "7232425",
-        "studiedAt": "DA-IICT",
-        "livesAt": "J/K-***",
+        // "studiedAt": "DA-IICT",
+        // "livesAt": "J/K-***",
         "aboutMe": "Lorem Ipsum",
-        "location": [12.9716, 77.5946],
+        // "location": [12.9716, 77.5946],
+        "location": "Gandhinagar",
         "donated": "15",
         "karma": "435",
         "gender": "female",
@@ -769,7 +783,8 @@ function createOrgs(callback) {
         "NGO": true,
         "CSR": false,
         "verified": true,
-        "location": [12.9716, 77.5946]
+        // "location": [12.9716, 77.5946]
+        "location": "Gandhinagar",
     }).then(tagDataO);
 
     Organization.create({
@@ -788,7 +803,8 @@ function createOrgs(callback) {
         "NGO": true,
         "CSR": false,
         "verified": true,
-        "location": [22.3039, 70.8022]
+        // "location": [22.3039, 70.8022]
+        "location": "Gandhinagar"
     }).then(tagDataO);
 
     Organization.create({
@@ -807,7 +823,8 @@ function createOrgs(callback) {
         "NGO": true,
         "CSR": false,
         "verified": true,
-        "location": [32.2643, 75.8022]
+        // "location": [32.2643, 75.8022]
+        "location": "Gandhinagar"
     }).then(tagDataO);
 
     Organization.create({
@@ -826,6 +843,7 @@ function createOrgs(callback) {
         "NGO": true,
         "CSR": true,
         "verified": false,
-        "location": [12.23, 55.8022]
+        // "location": [12.23, 55.8022]
+        "location": "Gandhinagar"
     }).then(tagDataO)
 };

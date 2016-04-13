@@ -23,7 +23,7 @@
         }
 
         getOrgById = (id, callback) => {
-            this.$http.get(this.api + this.orgRoute + id)
+            this.$http.get(this.api + this.orgRoute + '/' + id)
                 .then((response) => {
                     callback(response.data, response.status);
                 }, (response) => {
@@ -68,7 +68,7 @@
         }
 
         checkLogin = (redirectUrl, callback) => {
-            if (!this.cache.get('loggedIn')=='true') {
+            if (!this.cache.get('loggedIn') == 'true') {
                 this.$location.path('/login/redirect' + redirectUrl);
             } else {
                 callback();
@@ -83,6 +83,25 @@
                     callback(response.data, response.status);
                 })
         }
+
+        subscribe = (orgId, userId, callback) => {
+            this.$http.put(this.api + this.orgRoute + '/' + orgId + '/subscription?subscribe=' + userId)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                });
+        }
+
+        unsubscribe = (orgId, userId, callback) => {
+            this.$http.put(this.api + this.orgRoute + '/' + orgId + '/subscription?unsubscribe=' + userId)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                });
+        }
+
     };
 
 

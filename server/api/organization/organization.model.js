@@ -5,11 +5,11 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var OrganizationSchema = new mongoose.Schema({
     name: String,
-    // location: [String],
-    location: {
-        type: [Number],
-        index: '2d'
-    },
+    location: String,
+    // location: {
+    //     type: [Number],
+    //     index: '2d'
+    // },
     email: String,
     username: String,
     password: String,

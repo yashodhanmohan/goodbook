@@ -14,19 +14,18 @@
 
             // Query terms from another controller
             this.query = this.cache.get('search_terms');
-            this.cache.remove('search_terms');
+            // this.cache.remove('search_terms');
             
             // Result storage
             this.requestCount = 0;
-            this.userResults = [];
-            this.groupedUserResults = [];
             this.orgResults = [];
             this.groupedOrgResults = [];
+            this.isUserSubscribed = [];
             this.eventResults = [];
             this.groupedEventResults = [];
+            this.isUserVolunteer = [];
 
             // CSS variables
-            this.showUsers = true;
             this.showOrgs = false;
             this.showEvents = false;
 
@@ -57,35 +56,21 @@
             this.resultCount = 0;
             this.orgResults = [];
             this.eventResults = [];
-            this.userResults = [];
-            this.UserService.search(this.query, (data, status) => {
-                this.userResults = data;
-                for (var i in this.userResults) {
-                    if (this.userResults[i].username == this.cache.getObject('user').username) {
-                        this.userResults.splice(i, 1);
-                        break;
-                    }
-                }
-                this.groupedUserResults = this.group(this.userResults, 3);
-                this.requestCount += 1;
-                console.log(this.requestCount);
-                if(this.requestCount==3){
-                    this.requestCount = 0;
-                    console.log('reaching here1');
-                    this.selectTab();
-                }
-                this.resultCount += this.userResults.length;
-            });
 
             this.OrgService.search(this.query, (data, status) => {
                 this.orgResults = data;
                 this.groupedOrgResults = this.group(this.orgResults, 3);
                 this.resultCount += this.orgResults.length;
+                for(var i in this.groupedOrgResults){
+                    var row = [];
+                    for(var j in this.groupedOrgResults[i]){
+                        row.push(this.groupedOrgResults[i][j].subscribers.indexOf(this.cache.getObject('user')._id)!=-1)
+                    }
+                    this.isUserSubscribed.push(row);
+                }
                 this.requestCount += 1;
-                console.log(this.requestCount);
-                if(this.requestCount==3){
+                if(this.requestCount==2){
                     this.requestCount = 0;
-                    console.log('reaching here2');
                     this.selectTab();
                 }
             });
@@ -94,45 +79,90 @@
                 this.eventResults = data;
                 this.groupedEventResults = this.group(this.eventResults, 3);
                 this.resultCount += this.eventResults.length;
+                for(var i in this.groupedEventResults){
+                    var row = [];
+                    for(var j in this.groupedEventResults[i]){
+                        row.push(this.groupedEventResults[i][j].volunteers.indexOf(this.cache.getObject('user')._id)!=-1)
+                    }
+                    this.isUserVolunteer.push(row);
+                }
                 this.requestCount += 1;
-                console.log(this.requestCount);
-                if(this.requestCount==3){
+                if(this.requestCount==2){
                     this.requestCount = 0;
-                    console.log('reaching here3');
                     this.selectTab();
                 }
             });
         }
 
         changeTab = (x) => {
-            if (x == 0) {
-                console.log('Clicking on user');
-                this.showUsers = true;
-                this.showOrgs = false;
-                this.showEvents = false;
-            } else if (x == 1) {
-                console.log('Clicking on organisation');
-                this.showUsers = false;
+            if (x == 1) {
                 this.showOrgs = true;
                 this.showEvents = false;
             } else if (x == 2) {
-                console.log('Clicking on events');
-                this.showUsers = false;
                 this.showOrgs = false;
                 this.showEvents = true;
             }
         }
 
         selectTab = () => {
-            if(this.userResults.length!=0)
-                this.changeTab(0);
-            else if(this.orgResults.length!=0)
+            if(this.orgResults.length!=0)
                 this.changeTab(1);
             else if (this.eventResults.length!=0)
                 this.changeTab(2);
             else
-                this.changeTab(0);
+                this.changeTab(1);
         }
+
+        subscribe = (i, j) => {
+            this.OrgService.subscribe(this.groupedOrgResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
+                if (status == 200) {
+                    this.groupedOrgResults[i][j] = data;
+                }
+            });
+
+            this.UserService.subscribe(this.cache.getObject('user')._id, this.groupedOrgResults[i][j]._id, (data, status) => {
+                if (status == 200) {
+                    this.cache.putObject('user', data);
+                }
+            })
+
+            this.isUserSubscribed[i][j] = true;
+        }
+
+        unsubscribe = (i, j) => {
+            this.OrgService.unsubscribe(this.groupedOrgResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
+                if (status == 200) {
+                    this.groupedOrgResults[i][j] = data;
+                }
+            });
+
+            this.UserService.unsubscribe(this.cache.getObject('user')._id, this.groupedOrgResults[i][j]._id, (data, status) => {
+                if (status == 200) {
+                    this.cache.putObject('user', data);
+                }
+            })
+
+            this.isUserSubscribed[i][j] = false;
+        }
+
+        volunteer = (i, j) => {
+            this.EventService.volunteer(this.groupedEventResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
+                if(status==200) {
+                    this.groupedEventResults[i][j] = data;
+                    this.isUserVolunteer[i][j] = true;
+                }
+            });
+        }
+
+        unvolunteer = (i, j) => {
+            this.EventService.unvolunteer(this.groupedEventResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
+                if(status==200) {
+                    this.groupedEventResults[i][j] = data;
+                    this.isUserVolunteer[i][j] = false;
+                }
+            });
+        }
+
     }
 
     angular.module('goodbookApp')

@@ -79,7 +79,7 @@
 
         checkLogin = (redirectUrl, callback) => {
             console.log('this is executing');
-            if (!this.cache.get('loggedIn')=='true' || !this.cache.get('loggedIn')) {
+            if (!this.cache.get('loggedIn') == 'true' || !this.cache.get('loggedIn')) {
                 this.$location.path('/login/redirect' + redirectUrl);
             } else {
                 callback();
@@ -95,6 +95,23 @@
                 })
         }
 
+        subscribe = (userId, orgId, callback) => {
+            this.$http.put(this.api + this.userRoute + '/' + userId + '/subscription?subscribe=' + orgId)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                });
+        }
+
+        unsubscribe = (userId, orgId, callback) => {
+            this.$http.put(this.api + this.userRoute + '/' + userId + '/subscription?unsubscribe=' + orgId)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                });
+        }
     };
 
 

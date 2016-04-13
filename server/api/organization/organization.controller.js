@@ -97,6 +97,8 @@ function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
         if (entity) {
+            console.log('=============');
+            console.log(entity);
             res.status(statusCode).json(entity);
             return entity;
         }
@@ -107,7 +109,7 @@ function saveUpdates(updates) {
     return function(entity) {
         entity.subscribers = [];
         var updated = _.merge(entity, updates);
-        return updated.saveAsync()
+        return updated.save()
             .spread(updated => {
                 return updated;
             });
@@ -117,7 +119,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
-            return entity.removeAsync()
+            return entity.remove()
                 .then(() => {
                     res.status(204).end();
                 });
@@ -145,7 +147,7 @@ function handleError(res, statusCode) {
 // Gets a list of Organizations
 export function index(req, res) {
     if (!_.isEmpty(req.query)) {
-        Organization.findAsync(req.query)
+        Organization.findOne(req.query)
             .then(respondWithResult(res))
             .catch(handleError(res));
     } else {
@@ -155,7 +157,7 @@ export function index(req, res) {
 
 // Gets a single Organization from the DB
 export function show(req, res) {
-    Organization.findByIdAsync(req.params.id)
+    Organization.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -170,7 +172,7 @@ export function login(req, res) {
 
 // Creates a new Organization in the DB
 export function create(req, res) {
-    Organization.createAsync(req.body)
+    Organization.create(req.body)
         .then(respondWithResult(res, 201))
         .then(tagData)
         .then(welcomeMail)
@@ -179,7 +181,7 @@ export function create(req, res) {
 
 // Updates an existing Organization in the DB
 export function update(req, res) {
-    Organization.findByIdAsync(req.params.id)
+    Organization.findById(req.params.id)
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
         .then(tagData)
@@ -188,7 +190,7 @@ export function update(req, res) {
 
 // Deletes a Organization from the DB
 export function destroy(req, res) {
-    Organization.findByIdAsync(req.params.id)
+    Organization.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
@@ -210,11 +212,42 @@ export function search(req, res) {
     for (var s in temp) {
         search_terms.push(temp[s].toLowerCase());
     }
-    Organization.findAsync({
+    Organization.find({
             tags: {
                 $in: search_terms
             }
         })
         .then(respondWithResult(res))
         .catch(handleError);
+}
+
+export function subscription(req, res) {
+    if(req.query) {
+        if(req.query.subscribe) {
+            Organization.findById(req.params.id)
+                .then(function(result){
+                    result.subscribers = _.merge(result.subscribers, [req.query.subscribe]);
+                    result.markModified('subscribers');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                .catch(handleError(res))
+        }
+        else if(req.query.unsubscribe) {
+            Organization.findById(req.params.id)
+                .then(function(result){
+                    console.log(result.subscribers);
+                    _.pull(result.subscribers, req.query.unsubscribe);
+                    console.log(result.subscribers);
+                    result.markModified('subscribers');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                .catch(handleError(res))
+        }
+        else 
+            respondWithResult(res, 200)({});
+    }
+    else
+        respondWithResult(res, 200)({});
 }

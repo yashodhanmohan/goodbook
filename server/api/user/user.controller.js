@@ -112,7 +112,7 @@ function registerCheck(req, res, statusCode) {
             res.status(302).end();
             return null;
         } else {
-            User.createAsync(tagData(req.body));
+            User.create(tagData(req.body));
             res.status(statusCode).json(entity);
         }
     };
@@ -123,6 +123,7 @@ function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
         if (entity) {
+            console.log(entity);
             res.status(statusCode).json(entity);
             return entity;
         }
@@ -135,7 +136,7 @@ function saveUpdates(updates) {
         entity.interests = [];
         entity.tags = [];
         var updated = _.merge(entity, updates);
-        return updated.saveAsync()
+        return updated.save()
             .spread(updated => {
                 return updated;
             });
@@ -145,7 +146,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
-            return entity.removeAsync()
+            return entity.remove()
                 .then(() => {
                     res.status(204).end();
                 });
@@ -175,7 +176,7 @@ function handleError(res, statusCode) {
 // Gets a list of Users
 export function index(req, res) {
     if (!_.isEmpty(req.query)) {
-        User.findAsync(req.query)
+        User.find(req.query)
             .then(respondWithResult(res))
             .catch(handleError(res));
     } else {
@@ -185,7 +186,7 @@ export function index(req, res) {
 
 // Gets a single User from the DB
 export function show(req, res) {
-    User.findByIdAsync(req.params.id)
+    User.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -194,7 +195,7 @@ export function show(req, res) {
 // Creates a new User in the DB
 export function create(req, res) {
 
-    User.createAsync(req.body)
+    User.create(req.body)
         .then(respondWithResult(res, 201))
         .then(tagData)
         .then(welcomeMail)
@@ -210,10 +211,10 @@ export function login(req, res) {
 }
 
 export function logout(req, res) {
-    User.findByIdAsync(req.body._id)
+    User.findById(req.body._id)
         .then((result) => {
             result.lastLogin = Date.now();
-            result.saveAsync(() => {
+            result.save(() => {
                 res.send(200);
             });
         })
@@ -234,7 +235,7 @@ export function update(req, res) {
     //  delete req.body._id;
     //}
     console.log(req.body);
-    User.findByIdAsync(req.params.id)
+    User.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
@@ -244,7 +245,7 @@ export function update(req, res) {
 
 // Deletes a User from the DB
 export function destroy(req, res) {
-    User.findByIdAsync(req.params.id)
+    User.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
@@ -265,11 +266,43 @@ export function search(req, res) {
     for (var s in temp) {
         search_terms.push(temp[s].toLowerCase());
     }
-    User.findAsync({
+    User.find({
             tags: {
                 $in: search_terms
             }
         })
         .then(respondWithResult(res))
         .catch(handleError);
+}
+
+export function subscription(req, res) {
+    if(req.query) {
+        if(req.query.subscribe) {
+            User.findById(req.params.id)
+                .then(function(result){
+                    result.subscribedNGO = _.merge(result.subscribedNGO, [req.query.subscribe]);
+                    result.markModified('subscribedNGO');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                // .catch(handleError(res))
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else if(req.query.unsubscribe) {
+            User.findById(req.params.id)
+                .then(function(result){
+                    _.pull(result.subscribedNGO, req.query.unsubscribe);
+                    result.markModified('subscribedNGO');
+                    result.save()
+                        .then(respondWithResult(res))
+                })
+                .catch(handleError(res))
+        }
+        else 
+            respondWithResult(res, 200)({});
+    }
+    else
+        respondWithResult(res, 200)({});
 }
