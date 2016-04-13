@@ -18,12 +18,18 @@ var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com
 
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
+    if(x){
     User.findById(x._id, function(err, result) {
         result.password = randomstring;
         result.save();
     });
+
     changePasswordMail(x, randomstring);
     return x;
+    }
+    else{
+        return null;        
+    }
 }
 
 
