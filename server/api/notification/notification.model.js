@@ -3,9 +3,9 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 
 var SingleNotification = new mongoose.Schema({
     type: Number,
-    nNo: Number,
     content: String,
-    eventId: String
+    eventId: String,
+    userId: String,
 });
 
 var NotificationSchema = new mongoose.Schema({
@@ -20,3 +20,5 @@ export default mongoose.model('Notification', NotificationSchema);
 // Notification types:
 // 1: Volunteer call
 // 2: Query reply
+// 3: Donation received
+// 4: Subscription

@@ -5,6 +5,7 @@ class UserpanelController {
     constructor($location, $cookies, UserService, GeolocationService) {
         this.cache = $cookies;
         this.user = this.cache.getObject('user');
+        this.org = this.cache.get('org') == 'true';
         UserService.checkLogin($location.path(), () => {
             this.$location = $location;
             this.name = this.user.firstName + " " + this.user.lastName;

@@ -24,7 +24,7 @@ function respondWithResult(res, statusCode) {
 function saveUpdates(updates) {
     return function(entity) {
         var updated = _.merge(entity, updates);
-        return updated.saveAsync()
+        return updated.save()
             .spread(updated => {
                 return updated;
             });
@@ -34,7 +34,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
-            return entity.removeAsync()
+            return entity.remove()
                 .then(() => {
                     res.status(204).end();
                 });
@@ -61,14 +61,19 @@ function handleError(res, statusCode) {
 
 // Gets a list of Notifications
 export function index(req, res) {
-    Notification.findAsync()
-        .then(respondWithResult(res))
-        .catch(handleError(res));
+    if (!_.isEmpty(req.query)) {
+        Notification.find({
+                userId: req.query.user
+            })
+            .then(respondWithResult(res))
+            .catch(handleError(res));
+    } else
+        respondWithResult(res)({});
 }
 
 // Gets a single Notification from the DB
 export function show(req, res) {
-    Notification.findByIdAsync(req.params.id)
+    Notification.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -76,7 +81,7 @@ export function show(req, res) {
 
 // Creates a new Notification in the DB
 export function create(req, res) {
-    Notification.createAsync(req.body)
+    Notification.create(req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
@@ -86,7 +91,7 @@ export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Notification.findByIdAsync(req.params.id)
+    Notification.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
@@ -95,7 +100,7 @@ export function update(req, res) {
 
 // Deletes a Notification from the DB
 export function destroy(req, res) {
-    Notification.findByIdAsync(req.params.id)
+    Notification.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));

@@ -13,9 +13,12 @@
             this.cache = $cookies;
 
             // Query terms from another controller
+            this.user = this.cache.getObject('user');
+            console.log(this.cache.get('org'));
+            this.org = this.cache.get('org') == 'true';
             this.query = this.cache.get('search_terms');
             // this.cache.remove('search_terms');
-            
+
             // Result storage
             this.requestCount = 0;
             this.orgResults = [];
@@ -30,10 +33,13 @@
             this.showEvents = false;
 
             // If query from another page, search
-            if (this.query && this.query != ""){
+            if (this.query && this.query != "") {
                 $('#searchlabel').addClass('active');
                 this.search();
             }
+            $(document).ready(function() {
+                $('ul.tabs').tabs();
+            });
         }
 
         group = (results, groupSize) => {
@@ -44,7 +50,7 @@
                     paddedResults.push(temp);
                     temp = [];
                 } else {
-                    temp.push(results[i-1])
+                    temp.push(results[i - 1])
                 }
             }
             if (temp.length > 0)
@@ -62,15 +68,15 @@
                 this.orgResults = data;
                 this.groupedOrgResults = this.group(this.orgResults, 3);
                 this.resultCount += this.orgResults.length;
-                for(var i in this.groupedOrgResults){
+                for (var i in this.groupedOrgResults) {
                     var row = [];
-                    for(var j in this.groupedOrgResults[i]){
-                        row.push(this.groupedOrgResults[i][j].subscribers.indexOf(this.cache.getObject('user')._id)!=-1)
+                    for (var j in this.groupedOrgResults[i]) {
+                        row.push(this.groupedOrgResults[i][j].subscribers.indexOf(this.cache.getObject('user')._id) != -1)
                     }
                     this.isUserSubscribed.push(row);
                 }
                 this.requestCount += 1;
-                if(this.requestCount==2){
+                if (this.requestCount == 2) {
                     this.requestCount = 0;
                     this.selectTab();
                 }
@@ -80,15 +86,15 @@
                 this.eventResults = data;
                 this.groupedEventResults = this.group(this.eventResults, 3);
                 this.resultCount += this.eventResults.length;
-                for(var i in this.groupedEventResults){
+                for (var i in this.groupedEventResults) {
                     var row = [];
-                    for(var j in this.groupedEventResults[i]){
-                        row.push(this.groupedEventResults[i][j].volunteers.indexOf(this.cache.getObject('user')._id)!=-1)
+                    for (var j in this.groupedEventResults[i]) {
+                        row.push(this.groupedEventResults[i][j].volunteers.indexOf(this.cache.getObject('user')._id) != -1)
                     }
                     this.isUserVolunteer.push(row);
                 }
                 this.requestCount += 1;
-                if(this.requestCount==2){
+                if (this.requestCount == 2) {
                     this.requestCount = 0;
                     this.selectTab();
                 }
@@ -106,9 +112,9 @@
         }
 
         selectTab = () => {
-            if(this.orgResults.length!=0)
+            if (this.orgResults.length != 0)
                 this.changeTab(1);
-            else if (this.eventResults.length!=0)
+            else if (this.eventResults.length != 0)
                 this.changeTab(2);
             else
                 this.changeTab(1);
@@ -148,7 +154,7 @@
 
         volunteer = (i, j) => {
             this.EventService.volunteer(this.groupedEventResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
-                if(status==200) {
+                if (status == 200) {
                     this.groupedEventResults[i][j] = data;
                     this.isUserVolunteer[i][j] = true;
                 }
@@ -157,7 +163,7 @@
 
         unvolunteer = (i, j) => {
             this.EventService.unvolunteer(this.groupedEventResults[i][j]._id, this.cache.getObject('user')._id, (data, status) => {
-                if(status==200) {
+                if (status == 200) {
                     this.groupedEventResults[i][j] = data;
                     this.isUserVolunteer[i][j] = false;
                 }
@@ -166,7 +172,7 @@
 
         navigate = (i, j) => {
             this.OrgService.getOrgById(this.groupedEventResults[i][j].organizations[0], (data, status) => {
-                this.$location.path('/organization'+'/'+data.username);
+                this.$location.path('/organization' + '/' + data.username);
             })
         }
 

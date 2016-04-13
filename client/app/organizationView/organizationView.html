@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <userNavbar></userNavbar>
 <div class="row">
     <userpanel></userpanel>
@@ -16,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row flow-text">
+                        <div class="row flow-text" ng-if="!organizationView.isOrg">
                             <center ng-if="!organizationView.isUserSubscribed">
                                 <button ng-click="organizationView.subscribe()" class="btn green waves-effect waves-light">Subscribe</button>
                             </center>
@@ -43,9 +44,9 @@
                                     <br>
                                     <center><span class="flow-text" style="font-weight: bold">{{organizationView.events.length}}</span></center>
                                 </div>
-                                <div class="row">
+                                <div class="row" ng-if="!organizationView.isOrg">
                                     <center>
-                                        <button class="btn waves-effect waves-light green flow-text">Donate Now</button>
+                                        <button class="btn waves-effect waves-light green flow-text">Donate</button>
                                     </center>
                                 </div>
                             </div>
@@ -75,7 +76,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col s4">
+                                    <div class="col s4" ng-if="!organizationView.isOrg">
                                         <center ng-if="!organizationView.isUserVolunteer[$index]">
                                             <button ng-click="organizationView.volunteer($index)" class="btn green waves-effect waves-light">Volunteer</button>
                                         </center>

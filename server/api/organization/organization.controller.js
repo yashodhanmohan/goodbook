@@ -97,8 +97,6 @@ function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
         if (entity) {
-            console.log('=============');
-            console.log(entity);
             res.status(statusCode).json(entity);
             return entity;
         }
@@ -236,9 +234,7 @@ export function subscription(req, res) {
         else if(req.query.unsubscribe) {
             Organization.findById(req.params.id)
                 .then(function(result){
-                    console.log(result.subscribers);
                     _.pull(result.subscribers, req.query.unsubscribe);
-                    console.log(result.subscribers);
                     result.markModified('subscribers');
                     result.save()
                         .then(respondWithResult(res))

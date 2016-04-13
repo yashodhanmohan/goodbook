@@ -1,6 +1,7 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <usernavbar></usernavbar>
 <div class="row">
-    <userpanel></userpanel>
+    <userpanel ng-if="!search.org"></userpanel>
     <div class="col offset-s2 s10">
         <div class="row">
             <div class="col s8">
@@ -17,10 +18,10 @@
             </div>
         </div>
         <div class="row z-depth-0">
-            <div class="col s12">
+            <div class="col s8 offset-s2">
                 <ul class="tabs">
-                    <li class="tab col s6" ng-click="search.changeTab(1)"><a class="white-text blue" style="padding-right: 10%;" href="">Organizations<span class="right white-text">{{search.orgResults.length}}</span></a></li>
-                    <li class="tab col s6" ng-click="search.changeTab(2)"><a class="white-text blue" style="padding-right: 10%;" href="">Events<span class="right white-text">{{search.eventResults.length}}</span></a></li>
+                    <li class="tab col s6 light-blue"  ng-click="search.changeTab(1)"><a class="white-text" style="padding-right: 10%;" href="">Organizations<span class="right white-text">{{search.orgResults.length}}</span></a></li>
+                    <li class="tab col s6 light-blue white-text" ng-click="search.changeTab(2)"><a class="white-text"style="padding-right: 10%;" href="">Events<span class="right white-text">{{search.eventResults.length}}</span></a></li>
                 </ul>
             </div>
         </div>

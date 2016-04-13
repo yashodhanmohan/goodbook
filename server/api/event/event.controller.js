@@ -26,7 +26,6 @@ function tagData(x) {
     tempTags.push(x.name.toLowerCase());
     tempTags.concat(x.name.toLowerCase().split(" "));
     tempTags.concat(x.description.toLowerCase().split(" "));
-    console.log(tempTags);
     x.tags = [];
     x.tags = x.tags.concat(tempTags);
     Event.update({ _id: x._id }, {
@@ -92,8 +91,11 @@ export function index(req, res) {
                 .then(respondWithResult(res))
                 .catch(handleError(res));
         }
-
+        else
+            respondWithResult(res)({});
     }
+    else
+        respondWithResult(res)({});
 }
 
 // Gets a single Event from the DB

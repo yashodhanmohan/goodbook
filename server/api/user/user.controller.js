@@ -18,17 +18,16 @@ var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com
 
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
-    if(x){
-    User.findById(x._id, function(err, result) {
-        result.password = randomstring;
-        result.save();
-    });
+    if (x) {
+        User.findById(x._id, function(err, result) {
+            result.password = randomstring;
+            result.save();
+        });
 
-    changePasswordMail(x, randomstring);
-    return x;
-    }
-    else{
-        return null;        
+        changePasswordMail(x, randomstring);
+        return x;
+    } else {
+        return null;
     }
 }
 
@@ -129,7 +128,6 @@ function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
         if (entity) {
-            console.log(entity);
             res.status(statusCode).json(entity);
             return entity;
         }
@@ -166,7 +164,6 @@ function handleEntityNotFound(res) {
             res.status(404).end();
             return null;
         }
-        console.log(entity);
         return entity;
     };
 }
@@ -240,7 +237,6 @@ export function update(req, res) {
     //if (req.body._id) {
     //  delete req.body._id;
     //}
-    console.log(req.body);
     User.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
@@ -282,33 +278,27 @@ export function search(req, res) {
 }
 
 export function subscription(req, res) {
-    if(req.query) {
-        if(req.query.subscribe) {
+    if (req.query) {
+        if (req.query.subscribe) {
             User.findById(req.params.id)
-                .then(function(result){
+                .then(function(result) {
                     result.subscribedNGO = _.merge(result.subscribedNGO, [req.query.subscribe]);
                     result.markModified('subscribedNGO');
                     result.save()
                         .then(respondWithResult(res))
                 })
-                // .catch(handleError(res))
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
-        else if(req.query.unsubscribe) {
+                .catch(handleError(res));
+        } else if (req.query.unsubscribe) {
             User.findById(req.params.id)
-                .then(function(result){
+                .then(function(result) {
                     _.pull(result.subscribedNGO, req.query.unsubscribe);
                     result.markModified('subscribedNGO');
                     result.save()
                         .then(respondWithResult(res))
                 })
                 .catch(handleError(res))
-        }
-        else 
+        } else
             respondWithResult(res, 200)({});
-    }
-    else
+    } else
         respondWithResult(res, 200)({});
 }

@@ -61,7 +61,7 @@
                     <li class="hoverable" ng-repeat="event in console.events">
                         <div class="collapsible-header" style="padding-top: 5%">
                             <div class="row">
-                                <div class="col s8">
+                                <div class="col s9">
                                     <div class="row">
                                         <div class="col s12">
                                             <span class="flow-text">{{event.name}}</span>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col s4 flow-text">
+                                <div class="col s3 flow-text">
                                     <center ng-if="event.volunteers.length>1">
                                         {{event.volunteers.length}} Volunteers registered
                                     </center>
@@ -90,17 +90,38 @@
                             </div>
                         </div>
                         <div class="collapsible-body" style="padding-left: 5%; padding-top: 2%; padding-bottom: 2%;font-size: 125%">
-                            <span class="light-blue-text">Description: </span>
-                            <span>{{event.description}}</span>
-                            <br>
-                            <span class="light-blue-text">Skilled event: </span>
-                            <span>{{event.skilled?"Yes":"No"}}</span>
-                            <br>
-                            <span class="light-blue-text">Number of volunteers registered: </span>
-                            <span>{{event.volunteers.length}}</span>
-                            <br>
-                            <span class="light-blue-text">Number of participating organizations: </span>
-                            <span>{{event.organizations.length}}</span>
+                            <div class="row">
+                                <div class="col s2 indigo">
+                                    <center><img src="assets/images/yeoman.png"></center>
+                                </div>
+                                <div class="col s7">
+                                    <span class="light-blue-text">Description: </span>
+                                    <span>{{event.description}}</span>
+                                    <br>
+                                    <span class="light-blue-text">Skilled event: </span>
+                                    <span>{{event.skilled?"Yes":"No"}}</span>
+                                    <br>
+                                    <span class="light-blue-text">Number of volunteers registered: </span>
+                                    <span>{{event.volunteers.length}}</span>
+                                    <br>
+                                    <span class="light-blue-text">Number of participating organizations: </span>
+                                    <span>{{event.organizations.length}}</span>
+                                </div>
+                                <a class="modal-trigger" href="#modal1">
+                                    <div class="col s2 btn waves-effect waves-light green">
+                                        Edit
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="modal1" class="modal">
+                                <div class="modal-content">
+                                    <h4>Modal Header</h4>
+                                    <p>A bunch of text</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -108,3 +129,4 @@
         </div>
     </div>
 </div>
+<!-- Dropdown Trigger -->

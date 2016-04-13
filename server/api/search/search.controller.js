@@ -22,26 +22,22 @@ function respondWithResult(req, res, statusCode) {
     return function(entity) {
         if (entity) {
             for (var x = 0; x < entity.length; x++) {
-        	var w=entity[x]["tags"];
-        	var count = 0;
-		for (var y = 0; y < req.body.tags.length; y++) {
-			console.log(req.body.tags[y]);
-			if (w.indexOf(req.body.tags[y]) > -1) {
-				count = count + 1;
-			}
-		}
-		entity[x].score= count;
-		console.log("Printing count");
-		console.log(entity[x]["score"]);
-		console.log("**************8");
-    		}
-	    entity.sort( function(a,b) {
-			return parseFloat(b.score) - parseFloat(a.score);
-			});        
-	    res.status(statusCode).json(entity);
-	    
-	}
-	
+                var w = entity[x]["tags"];
+                var count = 0;
+                for (var y = 0; y < req.body.tags.length; y++) {
+                    if (w.indexOf(req.body.tags[y]) > -1) {
+                        count = count + 1;
+                    }
+                }
+                entity[x].score = count;
+            }
+            entity.sort(function(a, b) {
+                return parseFloat(b.score) - parseFloat(a.score);
+            });
+            res.status(statusCode).json(entity);
+
+        }
+
     };
 }
 
@@ -70,24 +66,23 @@ function handleError(res, statusCode) {
 
 // Gets a list of Users
 export function searchUser(req, res) {
-    User.findAsync({'tags' : { $in : req.body.tags }})
+    User.findAsync({ 'tags': { $in: req.body.tags } })
         .then(handleEntityNotFound(res))
-	.then(respondWithResult(req,res))
+        .then(respondWithResult(req, res))
         .catch(handleError(res));
 }
 
 // Gets a single User from the DB
 export function searchEvent(req, res) {
-    Event.findAsync({'tags' : { $in : req.body.tags }})
+    Event.findAsync({ 'tags': { $in: req.body.tags } })
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function searchNgo(req, res) {
-    Org.findAsync({'tags' : { $in : req.body.tags }})
+    Org.findAsync({ 'tags': { $in: req.body.tags } })
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
-

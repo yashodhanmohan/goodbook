@@ -26,7 +26,7 @@
                     this.cache.putObject('user', data);
                     this.cache.put('loggedIn', 'true');
                     this.cache.put('org', 'false');
-                    this.disabled = false;
+                    this.error = false;
                     this.$location.path(this.redirect);
                 } else {
                     this.OrgService.login({ username: this.username, password: this.password }, (data, status) => {
@@ -37,9 +37,11 @@
                             this.cache.putObject('user', data);
                             this.cache.put('loggedIn', 'true');
                             this.cache.put('org', 'true');
-                            this.disabled = false;
+                            this.error = false;
                             this.$location.path('/console');
                         }
+                        else
+                            this.error = true;
                     });
                 }
             });

@@ -11,11 +11,14 @@
             this.OrgService = OrgService;
             this.UserService = UserService;
             this.EventService = EventService;
-            this.org = {};
             this.isUserVolunteer = [];
+
+            this.user = this.cache.getObject('user');
+            this.isOrg = this.cache.get('org') == 'true';
+            console.log(this.cache.get('org'));
             $(document).ready(function() {
                 $('.collapsible').collapsible({
-                    accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                    accordion: false 
                 });
             });
             OrgService.getOrgByName(this.$routeParams.username, (data, status) => {
