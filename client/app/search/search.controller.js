@@ -53,6 +53,7 @@
         }
 
         search = () => {
+            this.cache.search_terms = this.search_terms;
             this.resultCount = 0;
             this.orgResults = [];
             this.eventResults = [];
@@ -161,6 +162,12 @@
                     this.isUserVolunteer[i][j] = false;
                 }
             });
+        }
+
+        navigate = (i, j) => {
+            this.OrgService.getOrgById(this.groupedEventResults[i][j].organizations[0], (data, status) => {
+                this.$location.path('/organization'+'/'+data.username);
+            })
         }
 
     }

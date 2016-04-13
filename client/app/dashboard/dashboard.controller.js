@@ -11,6 +11,7 @@
             this.OrgService = OrgService;
             this.EventService = EventService;
             this.user = this.cache.getObject('user');
+            this.ind = !(this.cache.get('org')=='true');
             console.log(this.user);
             this.grading = this.user.rating;
             this.karma = this.user.karma;
