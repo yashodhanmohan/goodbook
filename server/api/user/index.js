@@ -5,6 +5,7 @@ var controller = require('./user.controller');
 
 var router = express.Router();
 
+router.get('/count', controller.count1)
 router.put('/:id/subscription', controller.subscription);
 router.get('/:id', controller.show);
 router.get('/', controller.index);

@@ -302,3 +302,8 @@ export function subscription(req, res) {
     } else
         respondWithResult(res, 200)({});
 }
+
+export function count1(req, res){
+    User.find().count()
+    .then(respondWithResult(res));
+}

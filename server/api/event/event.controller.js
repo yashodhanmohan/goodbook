@@ -151,6 +151,11 @@ export function search(req, res) {
         .catch(handleError);
 }
 
+export function count1(req, res){
+    Event.find().count()
+    .then(respondWithResult(res));
+}
+
 
 export function volunteer(req, res) {
     if(req.query) {

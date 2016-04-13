@@ -5,7 +5,9 @@ var SingleNotification = new mongoose.Schema({
     type: Number,
     content: String,
     eventId: String,
-    userId: String,
+    sender: String,
+    query: Boolean,
+    queryId: String
 });
 
 var NotificationSchema = new mongoose.Schema({

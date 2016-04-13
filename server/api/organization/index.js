@@ -5,6 +5,7 @@ var controller = require('./organization.controller');
 
 var router = express.Router();
 
+router.get('/count', controller.count1);
 router.get('/', controller.index);
 router.post('/forgotpassword/', controller.forgotPassword);
 router.put('/:id/subscription', controller.subscription)
