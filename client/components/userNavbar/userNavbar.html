@@ -1,14 +1,10 @@
-<ul id="dropdown1" class="dropdown-content black">
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li><a href="#!">three</a></li>
-</ul>
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper light-blue">
             <div class="row">
                 <div class="col s2">
-                    <a href="/dashboard" class="brand-logo">Goodbook</a>
+                    <a ng-if="!userNav.org"href="/dashboard" class="brand-logo">Goodbook</a>
+                    <a ng-if="userNav.org"href="/console" class="brand-logo">Goodbook</a>
                 </div>
                 <div class="col s6 offset-s2">
                     <form ng-submit="userNav.search()">
@@ -22,7 +18,8 @@
                 <div class="col s4">
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="/notification"><i class="material-icons">add_alert</i></a></li>
-                        <li><a href="/profile">{{userNav.firstName+" "+userNav.lastName}}</a></li>
+                        <li ng-if="!userNav.org"><a href="/profile">{{userNav.user.firstName+" "+userNav.user.lastName}}</a></li>
+                        <li ng-if="userNav.org"><a href="/profile">{{userNav.user.name}}</a></li>
                         <li><a href="#!" ng-click="userNav.logout()">Logout<i class="material-icons right">exit_to_app</i></a></li>
                     </ul>
                 </div>

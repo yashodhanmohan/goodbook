@@ -92,7 +92,7 @@
                     if (status == 200) {
                         this.cache.putObject('org', data);
                         this.cache.put('loggedIn', 'true');
-                        this.$location.path('/dashboard');
+                        this.$location.path('/console');
                     }
                 });
             } else {

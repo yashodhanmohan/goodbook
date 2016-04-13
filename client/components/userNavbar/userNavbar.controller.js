@@ -5,8 +5,8 @@ class UserNavbarController {
         this.$location = $location;
         this.UserService = UserService;
         this.cache = $cookies;
-        this.firstName = this.cache.getObject('user').firstName;
-        this.lastName = this.cache.getObject('user').lastName;
+        this.user = this.cache.getObject('user');
+        this.org = this.cache.get('org') == 'true';
         this.search_terms = "";
     }
 

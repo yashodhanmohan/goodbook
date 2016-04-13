@@ -1,0 +1,110 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<userNavbar></userNavbar>
+<div class="row">
+    <div class="row">
+        <div class="col s8">
+            <div class="row z-depth-1" style="margin-top: 1%;">
+                <div class="col s4">
+                    <div class="row" style=" margin-top: 4%; margin-bottom: 2%">
+                        <div class="col s10 offset-s1">
+                            <div class="row">
+                                <center><img src="assets/images/yeoman.png" style="height: 100%; width: 100%;"></center>
+                            </div>
+                            <div class="row flow-text">
+                                <center>{{console.org.name}}</center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s8" style="">
+                    <div class="row" style=" margin-top: 2%; margin-bottom: 2%; padding-left: 2%; padding-top: 1%">
+                        <span style="font-size: 95%; text-align: justify-all;">{{console.org.aboutUs}}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">phone</i>{{console.org.contactNo}}</span>
+                            <br>
+                            <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">email</i>{{console.org.email}}</span>
+                            <br>
+                            <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">room</i>{{console.org.location}}</span>
+                        </div>
+                        <div class="col s6 ">
+                            <div class="row">
+                                Number of events organized
+                                <br>
+                                <span class="flow-text" style="font-weight: bold">{{console.events.length}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s3">
+            <div class="row">
+                <div class="col s10">
+                    <ul class="collection">
+                        <a href="/newevent" class="collection-item light-blue-text"><i class="material-icons left">assignment</i>Create new event</a>
+                        <a href="/subscribers" class="collection-item light-blue-text"><i class="material-icons left">group</i>Subscribers</a>
+                        <a href="/donations" class="collection-item light-blue-text"><i class="material-icons left">attach_money</i>Donations</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s8">
+            <div class="row flow-text light-blue-text" style="padding-left: 2%">
+                <span>Upcoming events</span>
+            </div>
+            <div class="row">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li class="hoverable" ng-repeat="event in console.events">
+                        <div class="collapsible-header" style="padding-top: 5%">
+                            <div class="row">
+                                <div class="col s8">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <span class="flow-text">{{event.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <span class="" style="display: inline-flex;vertical-align: middle;"><i class="material-icons" style="padding-right: 10%">today</i>{{event.startDate}}</span>
+                                        </div>
+                                        <div class="col s6">
+                                            <span class="" style="display: inline-flex;vertical-align: middle;"><i class="material-icons" style="padding-right: 10%">room</i>{{event.location}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s4 flow-text">
+                                    <center ng-if="event.volunteers.length>1">
+                                        {{event.volunteers.length}} Volunteers registered
+                                    </center>
+                                    <center ng-if="event.volunteers.length==0">
+                                        No Volunteers registered
+                                    </center>
+                                    <center ng-if="event.volunteers.length==1">
+                                        1 Volunteer registered
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapsible-body" style="padding-left: 5%; padding-top: 2%; padding-bottom: 2%;font-size: 125%">
+                            <span class="light-blue-text">Description: </span>
+                            <span>{{event.description}}</span>
+                            <br>
+                            <span class="light-blue-text">Skilled event: </span>
+                            <span>{{event.skilled?"Yes":"No"}}</span>
+                            <br>
+                            <span class="light-blue-text">Number of volunteers registered: </span>
+                            <span>{{event.volunteers.length}}</span>
+                            <br>
+                            <span class="light-blue-text">Number of participating organizations: </span>
+                            <span>{{event.organizations.length}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
