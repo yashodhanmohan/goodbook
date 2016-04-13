@@ -251,3 +251,9 @@ export function subscription(req, res) {
     else
         respondWithResult(res, 200)({});
 }
+
+
+export function count1(req, res){
+    Organization.find().count()
+    .then(respondWithResult(res));
+}

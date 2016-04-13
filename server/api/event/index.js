@@ -5,6 +5,7 @@ var controller = require('./event.controller');
 
 var router = express.Router();
 
+router.get('/count', controller.count1);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.put('/:id/volunteer', controller.volunteer);
