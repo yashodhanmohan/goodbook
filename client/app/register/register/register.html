@@ -73,15 +73,15 @@
                             <label for="org">Organization</label>
                         </div>
                     </div>
-                    <div class="input-field col s5 offset-s1 flow-text" ng-show="register.ind">
+                    <div class="input-field col s5 offset-s1 flow-text" ng-if="register.ind">
                         <input id="first_name" type="text" class="validate" ng-model="register.first_name" ng-required="true">
-                        <label for="first_name">First Name</label>
+                        <label for="first_name" class="active">First Name</label>
                     </div>
-                    <div class="input-field col s5 flow-text" ng-show="register.ind">
+                    <div class="input-field col s5 flow-text" ng-if="register.ind">
                         <input id="last_name" type="text" class="validate" ng-model="register.last_name" ng-required="true">
-                        <label for="last_name">Last Name</label>
+                        <label for="last_name" class="active">Last Name</label>
                     </div>
-                    <div class="input-field col s10 offset-s1 flow-text" ng-hide="register.ind">
+                    <div class="input-field col s10 offset-s1 flow-text" ng-if="!register.ind">
                         <input id="org_name" type="text" class="validate" ng-model="register.org_name" ng-required="true">
                         <label for="org_name">Organization name</label>
                     </div>
