@@ -14,6 +14,8 @@ import Organization from './organization.model';
 
 var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com:goodbooksen30@smtp.gmail.com');
 
+//This function changes the password and sends an email to the organization informing
+//him/her about the same
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
     if(x){
@@ -30,6 +32,8 @@ function changePassword(x) {
     }
 }
 
+//This function is a utility function that is used to send an email to the organization
+//with the new password included in the mail.
 function changePasswordMail(x, y) {
     var mailOptions = {
         from: '"Project Goodbook" <info@goodbook.com>', // sender address
@@ -45,6 +49,8 @@ function changePasswordMail(x, y) {
     });
 }
 
+
+//This function sends a mail to the organization welcoming him/her to the platform
 function welcomeMail(x) {
     var mailOptions = {
         from: '"Project Goodbook" <info@goodbook.com>', // sender address
@@ -54,15 +60,15 @@ function welcomeMail(x) {
     };
 
     return x;
-    //transporter.sendMail(mailOptions,function(error, info){
-    //if(error){
-    //  return console.log(error);
-    //}
-    //console.log('Message sent: ' + info.response);
-    //});
+    transporter.sendMail(mailOptions,function(error, info){
+    if(error){
+     return console.log(error);
+    }
+    console.log('Message sent: ' + info.response);
+    });
 }
 
-
+//This function is used to create tags when a profile is created or updated.
 function tagData(x) {
     var tempTags = [x.username];
     tempTags.push(x.name.toLowerCase());
@@ -77,6 +83,9 @@ function tagData(x) {
     return x;
 }
 
+
+//This function is used to check if the password entered by the organization for login purpose 
+//is correct or incorrect
 function checkPassword(req, res, statusCode) {
     statusCode = statusCode || 200;
 
@@ -96,6 +105,7 @@ function checkPassword(req, res, statusCode) {
     };
 }
 
+
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -106,6 +116,8 @@ function respondWithResult(res, statusCode) {
     };
 }
 
+
+//Function to save updates.
 function saveUpdates(updates) {
     return function(entity) {
         entity.subscribers = [];
@@ -117,6 +129,7 @@ function saveUpdates(updates) {
     };
 }
 
+//Function to delete entry from db
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
@@ -128,6 +141,8 @@ function removeEntity(res) {
     };
 }
 
+//Function to handle the case when entity
+//is not found in db
 function handleEntityNotFound(res) {
     return function(entity) {
         if (!entity) {
@@ -138,6 +153,7 @@ function handleEntityNotFound(res) {
     };
 }
 
+//Function to handle other errors.
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
@@ -197,6 +213,8 @@ export function destroy(req, res) {
         .catch(handleError(res));
 }
 
+//When an organization requests for a password change,
+//this function is called
 export function forgotPassword(req, res) {
     Organization.findOne({ username: req.body.username })
         .then(handleEntityNotFound(res))
@@ -206,7 +224,7 @@ export function forgotPassword(req, res) {
 }
 
 
-
+//Search for organizations with certain tags.
 export function search(req, res) {
     var temp = req.body.query.split(" ");
     var search_terms = [];
@@ -223,6 +241,7 @@ export function search(req, res) {
         .catch(handleError);
 }
 
+//Add/remove subscribers.
 export function subscription(req, res) {
     if(req.query) {
         if(req.query.subscribe) {
@@ -252,7 +271,7 @@ export function subscription(req, res) {
         respondWithResult(res, 200)({});
 }
 
-
+//To return the count of Organizations
 export function count1(req, res){
     Organization.find().count()
     .then(respondWithResult(res));

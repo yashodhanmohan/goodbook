@@ -12,6 +12,7 @@
 import _ from 'lodash';
 import Query from './query.model';
 
+//Function to send back response to the client.
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -21,6 +22,7 @@ function respondWithResult(res, statusCode) {
     };
 }
 
+//Function to save updates in the database
 function saveUpdates(updates) {
     return function(entity) {
         var updated = _.merge(entity, updates);
@@ -31,6 +33,7 @@ function saveUpdates(updates) {
     };
 }
 
+//Function to remove an entry from the database.
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
@@ -42,6 +45,8 @@ function removeEntity(res) {
     };
 }
 
+//Function to handle the case where an entity is 
+//not present in the database.
 function handleEntityNotFound(res) {
     return function(entity) {
         if (!entity) {
@@ -52,6 +57,7 @@ function handleEntityNotFound(res) {
     };
 }
 
+//Function to handle other errors.
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
