@@ -16,7 +16,7 @@ import Org from '../organization/organization.model';
 
 
 
-
+//Thisfunction responds with results.
 function respondWithResult(req, res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -46,7 +46,7 @@ function respondWithResult(req, res, statusCode) {
 }
 
 
-
+//To handle the case when no entity is found.
 function handleEntityNotFound(res) {
     return function(entity) {
         if (!entity) {
@@ -57,7 +57,7 @@ function handleEntityNotFound(res) {
     };
 }
 
-
+//To handle other errors.
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
@@ -68,7 +68,8 @@ function handleError(res, statusCode) {
 
 
 
-// Gets a list of Users
+// Search the users db for relevant users
+//with tags specified
 export function searchUser(req, res) {
     User.findAsync({'tags' : { $in : req.body.tags }})
         .then(handleEntityNotFound(res))
@@ -76,7 +77,7 @@ export function searchUser(req, res) {
         .catch(handleError(res));
 }
 
-// Gets a single User from the DB
+// Search Events db with relevant tags specified
 export function searchEvent(req, res) {
     Event.findAsync({'tags' : { $in : req.body.tags }})
         .then(handleEntityNotFound(res))
@@ -84,6 +85,7 @@ export function searchEvent(req, res) {
         .catch(handleError(res));
 }
 
+//Search for NGO with relevant tags
 export function searchNgo(req, res) {
     Org.findAsync({'tags' : { $in : req.body.tags }})
         .then(handleEntityNotFound(res))

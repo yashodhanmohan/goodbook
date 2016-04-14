@@ -16,6 +16,9 @@ import User from './user.model';
 var transporter = nodemailer.createTransport('smtps://sen%2Egoodbook%40gmail.com:goodbooksen30@smtp.gmail.com');
 // send mail with defined transport object
 
+
+//This function changes the password and sends an email to the user informing
+//him/her about the same
 function changePassword(x) {
     var randomstring = Math.random().toString(36).slice(-8);
     if(x){
@@ -33,6 +36,8 @@ function changePassword(x) {
 }
 
 
+//This function is a utility function that is used to send an email to the user
+//with the new password included in the mail.
 function changePasswordMail(x, y) {
     var mailOptions = {
         from: '"Project Goodbook" <info@goodbook.com>', // sender address
@@ -49,6 +54,7 @@ function changePasswordMail(x, y) {
 }
 
 
+//This function sends a mail to the user welcoming him/her to the platform
 function welcomeMail(x) {
     var mailOptions = {
         from: '"Project Goodbook" <info@goodbook.com>', // sender address
@@ -56,15 +62,16 @@ function welcomeMail(x) {
         subject: 'Welcome to Project Goodbook', // Subject line
         text: 'Dear ' + x.firstName + ' ' + x.lastName + ',\n\nWelcome to Project Goodbook. Let us work together to make this world a better place to live in.\n\nTeam Project Goodbook' // 
     };
-    //transporter.sendMail(mailOptions,function(error, info){
-    //if(error){
-    //  return console.log(error);
-    //}
-    //console.log('Message sent: ' + info.response);
-    //});
+    transporter.sendMail(mailOptions,function(error, info){
+    if(error){
+     return console.log(error);
+    }
+    console.log('Message sent: ' + info.response);
+    });
     return x;
 }
 
+//This function is used to create tags when a profile is created or updated.
 function tagData(x) {
     var tempTags = [x.username];
     tempTags.push(x.firstName.toLowerCase());
@@ -91,6 +98,8 @@ function tagData(x) {
 }
 
 
+//This function is used to check if the password entered by the user for login purpose 
+//is correct or incorrect
 function checkPassword(req, res, statusCode) {
     statusCode = statusCode || 200;
 
@@ -111,6 +120,9 @@ function checkPassword(req, res, statusCode) {
 }
 
 
+//This function checks if the username with which a user wants 
+//to register is alraedy in use or not. If not, it will create 
+//a new user with the details that have been sent.
 function registerCheck(req, res, statusCode) {
     return function(entity) {
         statusCode = statusCode || 200;
@@ -124,7 +136,7 @@ function registerCheck(req, res, statusCode) {
     };
 }
 
-
+//Function to send back response to the client.
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
     return function(entity) {
@@ -136,6 +148,7 @@ function respondWithResult(res, statusCode) {
     };
 }
 
+//Function to save updates in the database
 function saveUpdates(updates) {
     return function(entity) {
         entity.subscribedNGO = [];
@@ -149,6 +162,7 @@ function saveUpdates(updates) {
     };
 }
 
+//Function to remove an entry from the database.
 function removeEntity(res) {
     return function(entity) {
         if (entity) {
@@ -160,6 +174,8 @@ function removeEntity(res) {
     };
 }
 
+//Function to handle the case where an entity is 
+//not present in the database.
 function handleEntityNotFound(res) {
     return function(entity) {
         if (!entity) {
@@ -172,6 +188,7 @@ function handleEntityNotFound(res) {
 }
 
 
+//Function to handle other errors.
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function(err) {
@@ -216,6 +233,7 @@ export function login(req, res) {
         .catch(handleError(res));
 }
 
+//This function is called, when the user is logging out. 
 export function logout(req, res) {
     User.findById(req.body._id)
         .then((result) => {
@@ -227,6 +245,7 @@ export function logout(req, res) {
         .catch(handleError(res));
 }
 
+//Function is called when the user registers.
 export function register(req, res) {
     User.findOne({ username: req.body.username })
         .then(registerCheck(req, res))
@@ -237,9 +256,6 @@ export function register(req, res) {
 
 // Updates an existing User in the DB
 export function update(req, res) {
-    //if (req.body._id) {
-    //  delete req.body._id;
-    //}
     console.log(req.body);
     User.findById(req.params.id)
         .then(handleEntityNotFound(res))
@@ -257,6 +273,7 @@ export function destroy(req, res) {
         .catch(handleError(res));
 }
 
+// Called when the user accesses the forgotPassword option.
 export function forgotPassword(req, res) {
     User.findOne({ username: req.body.username })
         .then(handleEntityNotFound(res))
@@ -264,6 +281,7 @@ export function forgotPassword(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res))
 }
+
 
 export function search(req, res) {
     var temp = req.body.query.split(" ");
@@ -281,6 +299,7 @@ export function search(req, res) {
         .catch(handleError);
 }
 
+//When user wants to subscribe to an NGO
 export function subscription(req, res) {
     if(req.query) {
         if(req.query.subscribe) {
@@ -313,6 +332,7 @@ export function subscription(req, res) {
         respondWithResult(res, 200)({});
 }
 
+//To count the total number of users.
 export function count1(req, res){
     User.find().count()
     .then(respondWithResult(res));
