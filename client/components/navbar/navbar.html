@@ -1,20 +1,26 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-    <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">goodbook</a>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper light-blue">
+            <div class="row">
+                <div class="col s2">
+                    <a href="/login" class="brand-logo">Goodbook</a>
+                </div>
+                <div class="col s4 offset-s4">
+                    <ul id="nav-mobile" class="center hide-on-med-and-down">
+                        <li><a href="" style="font-size: 150%">Home</a></li>
+                        <li><a href="" style="font-size: 150%">What to do</a></li>
+                        <li><a href="" style="font-size: 150%">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col s4" style="padding-left: 11%">
+                    <center>
+                        <ul id="nav-mobile" class="center hide-on-med-and-down">
+                            <span class="light-blue darken-2"><li><a href="/login"  style="font-size: 150%">Login</a></li></span>
+                            <span class="light-blue darken-2"><li><a href="/register" style="font-size: 150%">Signup</a></li></span>
+                        </ul>
+                    </center>
+                </div>
+            </div>
         </div>
-        <div collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
-                    <a ng-href="{{item.link}}">{{item.title}}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </nav>
 </div>

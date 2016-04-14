@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+<nav class="light-blue">
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">GOODBOOK</a>
+        <a href="" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="login-area right hide-on-med-and-down">
+            <li class="login"><a href="">login</a></li>
+            <li class="signup"><a href="">SignUp</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="">Home</a></li>
+            <li><a href="#whattodo">What to Do?</a></li>
+            <li><a href="#contactus">Contact Us</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a href="">Home</a></li>
+            <li><a href="#whattodo">What to Do?</a></li>
+            <li><a href="#contactus">Contact Us</a></li>
+            <li class="login"><a href="">login</a></li>
+            <li class="signup"><a href="">SignUp</a></li>
+        </ul>
+    </div>
+</nav>
+<div>
+    <div class="row">
+    <div class="slider col s8">
+        <ul class="slides">
+            <li>
+                <img src="http://lorempixel.com/580/250/nature/1">
+                <div class="caption blue" style="right: 0">
+                    <h3>This is our big Tagline!</h3>
+                    <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    <button>Press</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div class="page-slider">
+        <div ng-repeat="slide in landing.slides" class="page-slide slide-animation nonDraggableImage" ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()" ng-hide="!isCurrentSlideIndex($index)">
+            <div class="main-details">
+                <div class="image">
+                    <img class="image" ng-src="{{slide.image}}">
+                </div>
+                <div class="slide-snackbar ">
+                    <div class="slide-snackbar-title">
+                        {{slide.title}}
+                    </div>
+                    <div class="slide-snackbar-details">
+                        <div class="date">
+                            <img class="icon-48" src="assets/images/calendar.png">
+                            <div class="center-align">{{slide.date}}</div>
+                        </div>
+                        <div class="location">
+                            <img class="icon-48" src="assets/images/map-marker.png">
+                            <div class="center-align">{{slide.location}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-details">
+                <div class="slide-details-upper">
+                    <!-- <div class="mycontainer"> -->
+                    <div class="title">{{slide.title}}</div>
+                    <div class="description">{{slide.description}}</div>
+                    <!-- </div> -->
+                </div>
+                <div class="slide-details-lower">
+                    <div class="details">{{slide.details}}</div>
+                    <button type="button" class="join-button">JOIN</button>
+                </div>
+            </div>
+        </div>
+        <a href="" class="arrow prev" ng-click="nextSlide()"></a>
+        <a href="" class="arrow next" ng-click="prevSlide()"></a>
+        <page-slider-nav class="page-slider-nav">
+            <div class="wrapper">
+                <ul class="dots">
+                    <li class="dot" ng-repeat="slide in landing.slides">
+                        <a href="" ng-class="{'active':isCurrentSlideIndex($index)}" ng-click="setCurrentSlideIndex($index);"></a>
+                    </li>
+                </ul>
+            </div>
+        </page-slider-nav>
+    </div>
+    <div class="about-goodbook">
+        <div class="title">ABOUT GOODBOOK</div>
+        <div class="infographics">
+            <p>Infographics goes here</p>
+        </div>
+        <div class="details">Project GOODBOOK is a platform which brings together people and so such descriptive content goes here. Project GOODBOOK is a platform which brings together people and so such descriptive content goes here. Project GOODBOOK is a platform which brings together people and so such descriptive content goes here. Project GOODBOOK is a platform which brings together people and so such descriptive content goes here. Project GOODBOOK is a platform which brings together people and so such descriptive content goes here.</div>
+    </div>
+    <div class="goodbook-stats">
+        <div class="row">
+            <div class="col s6">
+                <div class="center promo promo-example">
+                    <!-- <i class="material-icons">flash_on</i> -->
+                    <img src="assets/images/NGO_stats.png">
+                    <p class="promo-caption"><span>{{landing.stats.NGO_COUNT}} NGOs</span> from across the country</p>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="center promo promo-example">
+                    <!-- <i class="material-icons">group</i> -->
+                    <img src="assets/images/volunteer_stats.png">
+                    <p class="promo-caption"><span>{{landing.stats.VOLUNTEER_COUNT}} Volunteers</span> from across the country</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <div class="center promo promo-example">
+                    <!-- <i class="material-icons">settings</i> -->
+                    <img src="assets/images/help_stats.png">
+                    <p class="promo-caption"><span>Rs. {{landing.stats.DONATION_COUNT}}</span> worth Donation</p>
+                </div>
+            </div>
+            <div class="col s6">
+                <div class="center promo promo-example">
+                    <!-- <i class="material-icons">settings</i> -->
+                    <img src="assets/images/calendar_stats.png">
+                    <p class="promo-caption"><span>{{landing.stats.EVENTS_COUNT}} Events</span> covered till now</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row valign-wrapper">
+                <div class="col s5 valign">
+                    <img class="footer-goodbook-image" src="assets/images/goodbook_footer.png">
+                </div>
+                <div class="col s7 valign">
+                    <div class="col s3">
+                        <a href="/contactus" class="waves-effect waves-light btn-flat white-text">Contact US</a>
+                    </div>
+                    <div class="col s5">
+                        <a class="waves-effect waves-light btn-flat white-text">Terms & Conditions</a>
+                    </div>
+                    <div class="col s4">
+                        <a class="waves-effect waves-light btn-flat white-text">Help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Sen30
+            </div>
+        </div>
+    </footer>
+</div>

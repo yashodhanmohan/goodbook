@@ -5,12 +5,13 @@ angular.module('goodbookApp', [
         'ngCookies',
         'ngResource',
         'ngSanitize',
+        'ngAnimate',
         'ngRoute'
     ])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/login'
             });
         $locationProvider.html5Mode(true);
 

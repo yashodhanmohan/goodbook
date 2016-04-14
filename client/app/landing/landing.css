@@ -1,0 +1,348 @@
+body {
+    background-color: #FFF;
+}
+
+
+/**
+ * Hello Git Gutter This is new Line
+ */
+
+.page-slider {
+    width: auto;
+    height: 530px;
+    min-width: 800px;
+    position: relative;
+    background: #e6e6e6;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-slide {
+    height: 100%;
+    position: relative;
+}
+
+.main-details {
+    position: absolute;
+    left: 0;
+    width: 75%;
+    float: left;
+    height: 100%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
+.slide-snackbar {
+    background-color: #000;
+    opacity: 0.75;
+    color: #FEF;
+    position: absolute;
+    z-index: 2;
+    height: 70px;
+    padding-left: 30px;
+    width: 100%;
+    bottom: 0;
+    display: -webkit-flex;
+    /* Safari */
+    -webkit-align-items: center;
+    /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.slide-snackbar-title {
+    font-size: 35px;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    float: left;
+    flex: 1;
+}
+
+.slide-snackbar-details {
+    display: inline-block;
+    float: left;
+    flex: 5;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.slide-snackbar-details > .date {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.slide-snackbar-details > .location {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.date > .center-align {
+    float: right;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.location > .center-align {
+    float: right;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.icon-48 {
+    width: 30px;
+    height: 30px;
+}
+
+.slide-details {
+    position: absolute;
+    width: 25%;
+    color: black;
+    float: right;
+    height: 100%;
+    right: 0;
+}
+
+.slide-details-upper {
+    width: 100%;
+    height: 50%;
+    background: #00A6DB;
+    padding: 10%;
+    padding-right: 20%;
+    padding-left: 20%;
+    text-align: center;
+}
+
+.slide-details-lower {
+    width: 100%;
+    height: 50%;
+    background: #4D5658;
+    padding: 10%;
+    padding-right: 10%;
+    position: relative;
+    padding-left: 10%;
+    /*text-align: center;*/
+}
+
+.slide-details-upper > .title {
+    font-size: 45px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.slide-details-upper > .description {
+    font-size: 26px;
+    color: #FFF;
+}
+
+.slide-details-lower > .details {
+    font-size: 18px;
+    color: #FFF;
+}
+
+.slide-details-lower > .join-button {
+    background-color: #00A6DB;
+    border: none;
+    color: white;
+    position: absolute;
+    bottom: 10%;
+    left: 35%;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+/*---------------------------------
+Arrows
+-----------------------------------*/
+
+.arrow {
+    position: absolute;
+    z-index: 1002;
+    display: block;
+    top: 50%;
+    margin-top: -35px;
+    width: 36px;
+    height: 71px;
+    outline: none;
+    cursor: pointer;
+    background: url(../../assets/images/blank.gif) no-repeat;
+}
+
+.arrow.prev {
+    opacity: 0.2;
+    left: 20px;
+    background-image: url(../../assets/images/paddle_prev_999.png);
+    transition: 0.2s linear all;
+}
+
+.arrow.next {
+    opacity: 0.2;
+    right: 20px;
+    background-image: url(../../assets/images/paddle_next_999.png);
+    transition: 0.2s linear all;
+}
+
+.arrow.prev:hover {
+    opacity: 1;
+    background-image: url(../../assets/images/paddle_prev_fff.png);
+}
+
+.arrow.next:hover {
+    opacity: 1;
+    background-image: url(../../assets/images/paddle_next_fff.png);
+}
+
+
+/*---------------------------------------------------------
+NAV
+---------------------------------------------------------*/
+
+.page-slider-nav {
+    /*text-align: center;*/
+    display: block;
+    position: absolute;
+    z-index: 1002;
+    left: 0;
+    bottom: 0px;
+    right: 0;
+    height: 48px;
+    margin-bottom: 5%;
+    margin-left: 28%;
+}
+
+.nonDraggableImage {
+    -webkit-user-drag: none;
+}
+
+.page-slider-nav .wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding: 1em 0 .8em;
+}
+
+.page-slider-nav ul {
+    margin: 0;
+    width: 100%;
+}
+
+.page-slider-nav .dot,
+.page-slider-nav .dot a {
+    display: inline-block;
+    zoom: 1;
+}
+
+.dots .dot {
+    position: relative;
+    margin: 0 8px;
+    width: 12px;
+    height: 12px;
+}
+
+.dots .dot a {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #FFF;
+    opacity: 0.3;
+    border: 1px solid transparent;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: background-color 0.25s, border-color 0.25s;
+    -moz-transition: background-color 0.25s, border-color 0.25s;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.dots .dot a.active {
+    border-color: #FFF;
+    background-color: #FFF;
+    opacity: 1;
+}
+
+
+/************************************
+ ABOUT GOODBOOK
+ ************************************/
+
+.about-goodbook {
+    margin-top: 35px;
+    height: auto;
+    text-align: center;
+}
+
+.about-goodbook > .title {
+    font-size: 25px;
+}
+
+.about-goodbook > .infographics {
+    height: 200px;
+    border: 2px solid black;
+    border-color: #000;
+    color: #00A5DA;
+    font-size: 50px;
+    margin-top: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.about-goodbook > .infographics > p {
+    top: 50%;
+    width: 100%;
+}
+
+.about-goodbook > .details {
+    font-size: 15px;
+    margin-top: 20px;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+
+/***************************
+ GOODBOOK STATS
+ ***************************/
+
+.goodbook-stats {
+    text-align: center;
+    margin-top: 5%;
+    margin-right: 25%;
+    margin-left: 25%;
+    font-size: 22px;
+}
+
+span {
+    color: #00A6DB;
+}
+
+
+/**********************************
+ PAGE FOOTER
+ **********************************/
+
+.page-footer {
+    background-color: #00A6DB !important;
+}
+
+.footer-goodbook-image {
+    height: 50px !important;
+    width: 170px !important;
+}

@@ -1,19 +1,71 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<navbar></navbar>
 <div class="row">
-    <div class="col s4 offset-s4">
+    <div class="col s7" style="font-weight: lighter">
+        <div class="row flow-text blue-text">
+            <div class="col offset-s3 s9" style="font-size: 150%; max-width: 100%; font-weight: lighter">
+                Welcome to
+                <br>Project Goodbook
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <div class="row">
+                    <div class="col s5">
+                        <div class="row" style="margin-top: 5%">
+                            <center><img src="assets/images/NGO_stats.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">56 NGOs</span>
+                                <br>across the country</center>
+                        </div>
+                    </div>
+                    <div class="col s5">
+                        <div class="row" style="margin-top: 5%">
+                            <center><img src="assets/images/volunteer_stats.png"></center>
+                        </div>
+                        <div class="row " style="font-size: 125%">
+                            <center><span class="blue-text">1200 Volunteers</span>
+                                <br>across the country</center>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s5">
+                        <div class="row" style="margin-top: 5%">
+                            <center><img src="assets/images/help_stats.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">Rs. 1,50,000</span>
+                                <br>worth of donations</center>
+                        </div>
+                    </div>
+                    <div class="col s5">
+                        <div class="row" style="margin-top: 5%">
+                            <center><img src="assets/images/calendar_stats.png"></center>
+                        </div>
+                        <div class="row" style="font-size: 125%">
+                            <center><span class="blue-text">87 events</span>
+                                <br>covered till now</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s4" style="margin-top: 100px">
         <div class="card">
-            <center class="card-title light-blue white-text">Login</center>
             <div class="card-content">
                 <div class="column">
                     <form ng-submit="login.login()">
                         <div class="input-field">
                             <i class="material-icons prefix light-blue-text">person</i>
-                            <label class="light-blue-text">Username</label>
+                            <label class="active">Username</label>
                             <input type="text" class="validate" ng-model="login.username" ng-required="true"></input>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix light-blue-text">lock</i>
-                            <label class="light-blue-text">Password</label>
+                            <label class=" active">Password</label>
                             <input type="password" class="validate" ng-model="login.password" ng-required="true"></input>
                         </div>
                         <div class="row">
