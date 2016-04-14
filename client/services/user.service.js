@@ -78,7 +78,6 @@
         }
 
         checkLogin = (redirectUrl, callback) => {
-            console.log('this is executing');
             if (!this.cache.get('loggedIn') == 'true' || !this.cache.get('loggedIn')) {
                 this.$location.path('/login/redirect' + redirectUrl);
             } else {

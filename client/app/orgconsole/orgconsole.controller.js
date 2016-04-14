@@ -11,7 +11,6 @@
             this.OrgService = OrgService;
             this.EventService = EventService;
             this.cache = $cookies;
-            console.log('reaching here');
             // Organization variables
             this.org = this.cache.getObject('user');
 

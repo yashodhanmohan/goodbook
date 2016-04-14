@@ -15,7 +15,6 @@
 
             this.user = this.cache.getObject('user');
             this.isOrg = this.cache.get('org') == 'true';
-            console.log(this.cache.get('org'));
             $(document).ready(function() {
                 $('.collapsible').collapsible({
                     accordion: false 

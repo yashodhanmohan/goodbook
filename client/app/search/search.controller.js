@@ -14,7 +14,6 @@
 
             // Query terms from another controller
             this.user = this.cache.getObject('user');
-            console.log(this.cache.get('org'));
             this.org = this.cache.get('org') == 'true';
             this.query = this.cache.get('search_terms');
             // this.cache.remove('search_terms');

@@ -140,10 +140,7 @@ function saveUpdates(updates) {
         entity.interests = [];
         entity.tags = [];
         var updated = _.merge(entity, updates);
-        return updated.save()
-            .spread(updated => {
-                return updated;
-            });
+        return updated.save();
     };
 }
 
@@ -164,7 +161,8 @@ function handleEntityNotFound(res) {
             res.status(404).end();
             return null;
         }
-        return entity;
+        else
+            return entity;
     };
 }
 
@@ -199,8 +197,8 @@ export function show(req, res) {
 export function create(req, res) {
 
     User.create(req.body)
-        .then(respondWithResult(res, 201))
         .then(tagData)
+        .then(respondWithResult(res, 201))
         .then(welcomeMail)
         .catch(handleError(res));
 }
@@ -240,8 +238,8 @@ export function update(req, res) {
     User.findById(req.params.id)
         .then(handleEntityNotFound(res))
         .then(saveUpdates(req.body))
-        .then(respondWithResult(res))
         .then(tagData)
+        .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
@@ -282,7 +280,9 @@ export function subscription(req, res) {
         if (req.query.subscribe) {
             User.findById(req.params.id)
                 .then(function(result) {
-                    result.subscribedNGO = _.merge(result.subscribedNGO, [req.query.subscribe]);
+                    console.log(result.subscribedNGO);
+                    result.subscribedNGO = _.uniq(result.subscribedNGO.concat([req.query.subscribe]));
+                    console.log(result.subscribedNGO);
                     result.markModified('subscribedNGO');
                     result.save()
                         .then(respondWithResult(res))

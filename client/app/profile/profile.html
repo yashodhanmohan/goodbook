@@ -1,0 +1,85 @@
+<usernavbar></usernavbar>
+<div class="row">
+    <userpanel></userpanel>
+    <div class="col s10 offset-s2">
+        <div class="row">
+            <div class="col s7">
+                <form ng-submit="profile.update()">
+                    <div class="input-field col s6">
+                        <label class="active">First Name</label>
+                        <input type="text" name="firstname" ng-model="profile.user.firstName" ng-required="true">
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Last Name</label>
+                        <input type="text" name="lastname" ng-model="profile.user.lastName" ng-required="true">
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Email</label>
+                        <input type="email" name="email" ng-model="profile.user.email" disabled>
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Username</label>
+                        <input type="text" ng-model="profile.user.username" disabled>
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Mobile number</label>
+                        <input type="text" name="contact" ng-model="profile.user.contactNo" ng-pattern="/^[0-9]{10,10}$/">
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Date of birth</label>
+                        <input type="date" data-value="{{profile.user.dob}}" ng-model="profile.user.dob" class="datepicker" ng-required="true">
+                    </div>
+                    <div class="input-field col s6">
+                        <label class="active">Location</label>
+                        <input type="text" ng-model="profile.user.location"></input>
+                    </div>
+                    <div class="col s6">
+                        <div class="chip" ng-repeat="interest in profile.user.interests">
+                            {{interest}}
+                            <i ng-click="profile.user.interests.splice($index, 1)" class="material-icons">close</i>
+                        </div>
+                        <div class="input-field col s12">
+                            <label class="active">Interests</label>
+                            <input placeholder="Comma separated words" type="text" ng-model="profile.interests"></input>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <label class="active">About you</label>
+                        <textarea class="materialize-textarea" placeholder="Write a short description about yourself" ng-model="profile.user.aboutMe"></textarea>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="col s3 offset-s9 flow-text light-blue btn waves-effect waves-light">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col s5">
+                <div class="row">
+                    <div class="col s6 offset-s3 flow-text white-text light-blue" style="text-align: center; border-radius: 5px; margin-top: 5px">
+                        Subscribed NGO
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="chip" ng-repeat="ngo in profile.subscribedNGO">
+                        {{ngo.name}}
+                        <i ng-click="profile.orgDelete($index)" class="material-icons">close</i>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s6 offset-s3 flow-text white-text light-blue" style="text-align: center; border-radius: 5px; margin-top: 5px">
+                        Wallet
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col s12 flow-text grey-text">
+                            <div class="row" style="margin-top: 10%">
+                                <div class="col s12 center">
+                                    Feature coming soon !
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

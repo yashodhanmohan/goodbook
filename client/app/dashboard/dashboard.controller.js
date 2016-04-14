@@ -12,7 +12,6 @@
             this.EventService = EventService;
             this.user = this.cache.getObject('user');
             this.ind = !(this.cache.get('org')=='true');
-            console.log(this.user);
             this.grading = this.user.rating;
             this.karma = this.user.karma;
             this.donated = this.user.donated;
@@ -20,7 +19,6 @@
             this.filters = ['Environment', 'Animals', 'Health', 'Child Education', 'Poverty and hunger', 'Farming'];
             this.EventService.getEventByVolunteer(this.user._id, (data, status) => {
                 if (status == 200) {
-                    console.log('dashboard events');
                     this.events = _.uniq(this.events.concat(data), '_id');
                     this.events.sort(function(a, b) {
                         a = new Date(a.startDate);
@@ -45,7 +43,6 @@
 
         eventClick = (x) => {
             this.OrgService.getOrgById(this.events[x].organizations[0], (data, status) => {
-                console.log(data);
                 this.$location.path('/organization/'+data.username)
             })
         }

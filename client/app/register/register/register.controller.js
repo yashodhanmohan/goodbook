@@ -56,15 +56,8 @@
         checkFile = () => {
             var fileReader = new FileReader();
             fileReader.onload = function(event) {
-                console.log(event.target.result);
             };
             this.binaryData = fileReader.readAsDataURL(this.myFile);
-            console.log(this.myFile.size);
-
-            console.log("Herererere");
-            //console.log(this.binaryData);
-            //console.log(this.reader.readAsDataURL(this.myFile))
-            // this.binaryData = new FileReader().readAsBinaryString(this.myFile);
 
             this.$http({
                     headers: { 'Authorization': 'Client-ID efd2a89d02947f6' },
@@ -74,15 +67,9 @@
                 })
                 .then(function successCallback(response) {
                     self.num = 2;
-                    console.log('called and successful', response);
                 }, function errorCallback(err) {
                     self.num = 3;
-                    console.log('called but error', err);
                 });
-            // this.$http.post({
-            //                 url:'https://api.imgur.com/3/upload',
-            //                 headers : {'Authorization': 'Client-ID efd2a89d02947f6'},
-            //                 data : {image: this.myFile});
         }
 
         check_username = () => {
@@ -114,7 +101,6 @@
                         this.valid_email = false;
                     } else {
                         this.OrgService.getOrgByEmail(this.email, (data, status) => {
-                            console.log(data);
                             if (status == 200 && data.length != 0) {
                                 this.valid_email = false;
                             }

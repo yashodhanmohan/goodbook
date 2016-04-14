@@ -31,7 +31,6 @@
             this.aow = [false, false, false, false, false, false];
             this.scale = "";
             this.founder = "";
-            console.log(this.ind);
             if (this.ind) {
                 this.first_name = this.cache.getObject('user').firstName;
                 this.last_name = this.cache.getObject('user').lastName;

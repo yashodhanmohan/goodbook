@@ -22,7 +22,6 @@
                 if (status == 200 && data) {
                     if (data.password)
                         delete data.password;
-                    console.log('reaching here');
                     this.cache.putObject('user', data);
                     this.cache.put('loggedIn', 'true');
                     this.cache.put('org', 'false');
@@ -33,7 +32,6 @@
                         if (status == 200 && data) {
                             if (data.password)
                                 delete data.password;
-                            console.log('reaching here');
                             this.cache.putObject('user', data);
                             this.cache.put('loggedIn', 'true');
                             this.cache.put('org', 'true');
