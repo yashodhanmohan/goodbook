@@ -17,7 +17,7 @@
             this.username = "";
             this.email = "";
             this.password = "";
-            this.accept_conditions = false;
+            this.accept_conditions = true;
             this.valid_username = true;
             this.valid_email = true;
         }
