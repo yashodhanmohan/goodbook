@@ -149,12 +149,9 @@ function respondWithResult(res, statusCode) {
 //Function to save updates in the database
 function saveUpdates(updates) {
     return function(entity) {
-        var updated = _.merge(entity, updates);
-        console.log(entity);
-        console.log(updates);
-        console.log(updated);
-        updated.markModified('interests');
-        return updated.save();
+        entity.set(updates);
+        entity.markModified('interests');
+        return entity.save();
     };
 }
 
@@ -257,7 +254,10 @@ export function update(req, res) {
         .then(saveUpdates(req.body))
         .then(tagData)
         .then(respondWithResult(res))
-        .catch(handleError(res));
+        // .catch(handleError(res));
+        .catch(err=>{
+            console.log(err);
+        })
 }
 
 // Deletes a User from the DB

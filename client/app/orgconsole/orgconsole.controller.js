@@ -13,7 +13,7 @@
             this.cache = $cookies;
             // Organization variables
             this.org = this.cache.getObject('user');
-
+            console.log(this.org);
             $(document).ready(function() {
                 $('.collapsible').collapsible({
                     accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style

@@ -120,12 +120,9 @@ function respondWithResult(res, statusCode) {
 //Function to save updates.
 function saveUpdates(updates) {
     return function(entity) {
-        entity.subscribers = [];
-        var updated = _.merge(entity, updates);
-        return updated.save()
-            .spread(updated => {
-                return updated;
-            });
+        // entity.subscribers = [];
+        entity.set(updates);
+        return entity.save();
     };
 }
 

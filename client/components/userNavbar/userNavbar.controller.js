@@ -6,7 +6,8 @@ class UserNavbarController {
         this.UserService = UserService;
         this.cache = $cookies;
         this.user = this.cache.getObject('user');
-        this.org = this.cache.get('org') == 'true';
+        console.log(this.user);
+        this.org = this.cache.get('ind') == 'false';
         this.showNotifPanel = false;
         this.search_terms = ""; 
         this.notifications = [{type: 4, subscriberCount: 5, link: '/subscribers'}, {type: 2, content: 'What is the duration of the event ?'},{type: 4, subscriberCount: 5, link: '/subscribers'}, {type: 2, content: 'What is the duration of the event ?'},{type: 4, subscriberCount: 5, link: '/subscribers'}];

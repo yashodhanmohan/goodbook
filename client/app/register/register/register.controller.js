@@ -44,7 +44,7 @@
                         username: this.username,
                         password: this.password
                     }, (data, status) => {
-                        this.cache.putObject('org', data);
+                        this.cache.putObject('user', data);
                         this.cache.put('loggedIn', 'true');
                         this.cache.put('ind', this.ind.toString());
                         this.$location.path('/register/step2');

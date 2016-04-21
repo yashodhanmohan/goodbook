@@ -37,9 +37,9 @@
                 this.email = this.cache.getObject('user').email;
                 this.username = this.cache.getObject('user').username;
             } else {
-                this.org_name = this.cache.getObject('org').name;
-                this.email = this.cache.getObject('org').email;
-                this.username = this.cache.getObject('org').username;
+                this.org_name = this.cache.getObject('user').name;
+                this.email = this.cache.getObject('user').email;
+                this.username = this.cache.getObject('user').username;
             }
 
             if (this.ind)
@@ -80,7 +80,7 @@
                     aow.push('environment');
                 if (this.aow[5])
                     aow.push('women empowerment');
-                this.OrgService.putOrg(this.cache.getObject('org')._id, {
+                this.OrgService.putOrg(this.cache.getObject('user')._id, {
                     name: this.org_name,
                     contactNo: this.contactNo,
                     address: this.address,
@@ -89,7 +89,7 @@
                     aow: aow
                 }, (data, status) => {
                     if (status == 200) {
-                        this.cache.putObject('org', data);
+                        this.cache.putObject('user', data);
                         this.cache.put('loggedIn', 'true');
                         this.$location.path('/console');
                     }

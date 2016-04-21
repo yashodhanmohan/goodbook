@@ -15,7 +15,6 @@
             this.redirect = "/dashboard";
             if ($routeParams.route)
                 this.redirect = "/" + $routeParams.route;
-            console.log(this.cache.get('loggedIn'));
             if(this.cache.get('loggedIn')=='true') {
                 this.$location.path(this.redirect);
             }

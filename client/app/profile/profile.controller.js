@@ -11,6 +11,7 @@
             this.UserService = UserService;
             this.OrgService = OrgService;
             this.user = this.cache.getObject('user');
+            this.user.dob = new Date(this.user.dob);
             this.interests = "";
             this.subscribedNGO = [];
             for (var x in this.user.subscribedNGO) {
@@ -21,13 +22,18 @@
 
             $('.datepicker').pickadate({
                 selectMonths: true, // Creates a dropdown to control month
-                selectYears: 15 // Creates a dropdown of 15 years to control year
+                selectYears: 150 // Creates a dropdown of 150 years to control year
             });
         }
 
         update = () => {
-            if (this.interests != "")
-                this.user.interests = _.uniq(this.user.interests.concat(this.interests.split(",")))
+            if (this.interests != "") {
+                // this.user.interests = _.filter(_.uniq(_.filter(_.map(this.user.interests.concat(this.interests.split(",")), _.trim), function(x) {return x!=''})))
+                var uniq_interests = _.uniq(_.map(this.interests.split(','), _.trim));
+                uniq_interests = _.filter(uniq_interests, function(x) {return x!='' && x!=' '});
+                this.user.interests = this.user.interests.concat(uniq_interests);
+                this.user.interests = _.uniq(_.map(this.user.interests, _.trim));
+            }
             this.UserService.putUser(this.user._id, this.user, (data, status) => {
                 if (status == 200) {
                     this.cache.putObject('user', data);

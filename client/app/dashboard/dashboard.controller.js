@@ -10,6 +10,9 @@
             this.UserService = UserService;
             this.OrgService = OrgService;
             this.EventService = EventService;
+            if(this.cache.get('loggedIn')!='true') {
+                this.$location.path('/login');
+            }
             this.user = this.cache.getObject('user');
             this.ind = !(this.cache.get('org')=='true');
             this.grading = this.user.rating;

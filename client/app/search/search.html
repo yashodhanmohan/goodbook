@@ -47,8 +47,8 @@
                         </div>
                         <div class="card-action">
                             <center>
-                                <a ng-if="!search.isUserSubscribed[$parent.$index][$index]" ng-click="search.subscribe($parent.$index, $index)" class="btn green waves-effect waves-light">Subscribe</a>
-                                <a ng-if="search.isUserSubscribed[$parent.$index][$index]" ng-click="search.unsubscribe($parent.$index, $index)" class="btn red waves-effect waves-light">Unsubscribe</a>
+                                <a ng-if="!search.isUserSubscribed[$parent.$index][$index]" ng-click="search.subscribe($parent.$parent.$index, $index)" class="btn green waves-effect waves-light">Subscribe</a>
+                                <a ng-if="search.isUserSubscribed[$parent.$index][$index]" ng-click="search.unsubscribe($parent.$parent.$index, $index)" class="btn red waves-effect waves-light">Unsubscribe</a>
                                 <a href="/organization/{{result.username}}" class="btn indigo white-text">View</a>
                             </center>
                         </div>
