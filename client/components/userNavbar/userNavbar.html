@@ -6,7 +6,7 @@
                     <a ng-if="!userNav.org" href="/dashboard" class="brand-logo">Goodbook</a>
                     <a ng-if="userNav.org" href="/console" class="brand-logo">Goodbook</a>
                 </div>
-                <div class="col s6 offset-s2">
+                <div class="col s4 offset-s2">
                     <form ng-submit="userNav.search()">
                         <div class="input-field">
                             <input id="search" type="search" ng-required ng-model="userNav.search_terms">
@@ -15,7 +15,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col s4">
+                <div class="col s6">
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li ng-if="!userNav.org"><a ng-href="/notification"><i class="material-icons">add_alert</i></a></li>
                         <li ng-if="userNav.org"><a ng-click="userNav.showNotifPanel = !userNav.showNotifPanel"><i class="material-icons">add_alert</i></a></li>
