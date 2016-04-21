@@ -149,9 +149,6 @@ function respondWithResult(res, statusCode) {
 //Function to save updates in the database
 function saveUpdates(updates) {
     return function(entity) {
-        entity.subscribedNGO = [];
-        entity.interests = [];
-        entity.tags = [];
         var updated = _.merge(entity, updates);
         return updated.save();
     };
