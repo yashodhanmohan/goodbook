@@ -34,12 +34,19 @@
             EventService.getEventByOrganization(this.org._id, (data, status) => {
                 if (status == 200) {
                     this.events = data;
+                    console.log(data);
                     for (var x in this.events) {
                         this.events[x].startDate = (new Date(this.events[x].startDate)).toDateString();
                         this.events[x].edit = false;
                     }
                 }
             })
+        }
+
+        editEvent = (i) => {
+            this.cache.putObject('editEvent', this.events[i]);
+            this.cache.put('editMode', 'true');
+            this.$location.path('/createEvent');
         }
     }
     angular.module('goodbookApp').controller('OrgconsoleController', OrgconsoleController);

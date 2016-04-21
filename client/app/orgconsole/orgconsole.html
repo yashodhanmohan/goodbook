@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col s10">
                     <ul class="collection">
-                        <a href="/newevent" class="collection-item light-blue-text"><i class="material-icons left">assignment</i>Create new event</a>
+                        <a href="/createEvent" class="collection-item light-blue-text"><i class="material-icons left">assignment</i>Create new event</a>
                         <a href="/subscribers" class="collection-item light-blue-text"><i class="material-icons left">group</i>Subscribers</a>
                         <a href="/donations" class="collection-item light-blue-text"><i class="material-icons left">attach_money</i>Donations</a>
                     </ul>
@@ -94,12 +94,15 @@
                                 <div class="col s2 indigo">
                                     <center><img src="assets/images/yeoman.png"></center>
                                 </div>
-                                <div class="col s7">
+                                <div class="col s7 flow-text" style="font-size: 100%">
                                     <span class="light-blue-text">Description: </span>
                                     <span>{{event.description}}</span>
                                     <br>
                                     <span class="light-blue-text">Skilled event: </span>
-                                    <span>{{event.skilled?"Yes":"No"}}</span>
+                                    <span>{{event.skilled==true?"Yes":"No"}}</span>
+                                    <br>
+                                    <span class="light-blue-text">Donations: </span>
+                                    <span>{{event.donations==true?'Yes':'No'}}</span>
                                     <br>
                                     <span class="light-blue-text">Number of volunteers registered: </span>
                                     <span>{{event.volunteers.length}}</span>
@@ -107,19 +110,10 @@
                                     <span class="light-blue-text">Number of participating organizations: </span>
                                     <span>{{event.organizations.length}}</span>
                                 </div>
-                                <a class="modal-trigger" href="#modal1">
-                                    <div class="col s2 btn waves-effect waves-light green">
+                                <div class="col s2 btn waves-effect waves-light green" ng-click="console.editEvent($index)">
+                                    <a class="white-text">
                                         Edit
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="modal1" class="modal">
-                                <div class="modal-content">
-                                    <h4>Modal Header</h4>
-                                    <p>A bunch of text</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                                    </a>
                                 </div>
                             </div>
                         </div>

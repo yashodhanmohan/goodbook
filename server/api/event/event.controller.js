@@ -17,11 +17,13 @@ function respondWithResult(res, statusCode) {
     return function(entity) {
         if (entity) {
             res.status(statusCode).json(entity);
+            return entity;
         }
     };
 }
 
 function tagData(x) {
+    console.log(x);
     var tempTags = [];
     tempTags.push(x.name.toLowerCase());
     tempTags.concat(x.name.toLowerCase().split(" "));
@@ -40,10 +42,10 @@ function tagData(x) {
 function saveUpdates(updates) {
     return function(entity) {
         var updated = _.merge(entity, updates);
-        return updated.save()
-            .spread(updated => {
-                return updated;
-            });
+        // entity.set(updates);
+        updated.markModified('organizations');
+        updated.save();
+        return updated;
     };
 }
 
@@ -111,12 +113,15 @@ export function create(req, res) {
     Event.create(req.body)
         .then(respondWithResult(res, 201))
         .then(tagData)
-        .catch(handleError(res));
+        // .catch(handleError(res));
+        .catch(err=>{
+            console.log(err);
+        })
 }
 
 // Updates an existing Event in the DB
 export function update(req, res) {
-    if (req.body._id) {
+    if(req.body._id) {
         delete req.body._id;
     }
     Event.findById(req.params.id)
@@ -124,7 +129,10 @@ export function update(req, res) {
         .then(saveUpdates(req.body))
         .then(respondWithResult(res))
         .then(tagData)
-        .catch(handleError(res));
+        // .catch(handleError(res));
+        .catch(err=>{
+            console.log(err);
+        })
 }
 
 // Deletes a Event from the Database

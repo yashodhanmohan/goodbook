@@ -1,0 +1,125 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<usernavbar></usernavbar>
+<div class="row">
+    <div class="col s5" style="height: 100vh">
+        <div class="row">
+            <div class="col s4">
+                <div class="row">
+                    <center>
+                        <img src="assets/images/yeoman.png" style="height: 100%; width: 100%">
+                    </center>
+                </div>
+                <div class="row flow-text" style="font-size: 200%">
+                    <center>{{createEvent.user.name}}</center>
+                </div>
+            </div>
+            <div class="col s8">
+                <div class="row">
+                    {{createEvent.user.aboutUs}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12" style="">
+                <div class="col s6">
+                    <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">phone</i>{{createEvent.user.contactNo}}</span>
+                    <br>
+                    <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">email</i>{{createEvent.user.email}}</span>
+                    <br>
+                    <span style="display: inline-flex;vertical-align: middle; margin-top: 5%"><i class="material-icons" style="margin-right: 5%;">room</i>{{createEvent.user.address}}</span>
+                </div>
+                <div class="col s6 ">
+                    <div class="row">
+                        Number of events organized
+                        <br>
+                        <span class="flow-text" style="font-weight: bold">{{createEvent.events.length}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s6 z-depth-2" style="padding: 1% 1% 1% 1%">
+        <form name="myForm">
+            <div class="row">
+                <div class="col s7">
+                    <div class="col s12 input-field">
+                        <input id="name" type="text" ng-model="createEvent.event.name" class="validate" ng-required="true">
+                        <label for="name" class="active">Name</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input id="start_date" type="date" ng-model="createEvent.event.startDate" ng-required="true">
+                        <label for="start_date" class="active"> Start Date</label>
+                    </div>
+                    <div class="col s6 input-field">
+                        <input id="end_date" type="date" ng-model="createEvent.event.endDate" ng-required="true">
+                        <label for="end_date" class="active"> End Date</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="location" type="text" ng-model="createEvent.event.location" class="validate" ng-required="true"></input>
+                        <label for="location" class="active">Location</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea id="description" class="materialize-textarea" ng-model="createEvent.event.description" required></textarea>
+                        <label for="description" class="active">Description</label>
+                    </div>
+                </div>
+                <div class="col s5" style="height: inherit;">
+                    <div class="row flow-text">
+                        <center>Event Picture</center>
+                    </div>
+                    <div class="row" style="padding-top: 2%">
+                        <div class="col s12">
+                            <center>
+                                <img src="" id="profilepic" class="z-depth-2" style="height: 140px; width: 140px">
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row file-field input-field">
+                        <div class="btn light-blue">
+                            <span class="white-text">File</span>
+                            <input type="file" id="imagefile">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 input-field">
+                    <center>
+                        <label class="active">Skilled Event ?</label>
+                        <span>
+	                    <input name="skill" type="radio" id="skilled" ng-model="createEvent.event.skilled" ng-value="true"/>
+	                    <label for="skilled">Yes</label>
+	                </span>
+                        <span>
+	                    <input name="skill" type="radio" id="unskilled" ng-model="createEvent.event.skilled" ng-value="false"/>
+	                    <label for="unskilled">No</label>
+	                </span>
+                    </center>
+                </div>
+                <div class="col s6 input-field">
+                    <center>
+                        <label class="active">Donations ?</label>
+                        <span>
+	                    <input name="donations" type="radio" id="donations_yes" ng-model="createEvent.event.donations" ng-value="true"/>
+	                    <label for="donations_yes">Yes</label>
+	                </span>
+                        <span>
+	                    <input name="donations" type="radio" id="donations_no" ng-model="createEvent.event.donations" ng-value="false"/>
+	                    <label for="donations_no">No</label>
+	                </span>
+                    </center>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5%">
+                <div class="col s3 offset-s9">
+                    <button type="submit" ng-click="if(myForm.$valid) createEvent.save()" ng-show="myForm.$dirty" class="btn waves-effect waves-light light-blue">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -23,6 +23,7 @@ var EventSchema = new mongoose.Schema({
 	type: mongoose.Schema.Types.ObjectId,
 	ref : User
 	}],*/				
+    donations: Boolean,
     skilled: Boolean,
     description: String,
     scale: Number,

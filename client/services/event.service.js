@@ -47,6 +47,15 @@
                 })
         }
 
+        putEvent = (id, event, callback) => {
+            this.$http.put(this.api + this.eventRoute + '/' + id, event)
+                .then((response) => {
+                    callback(response.data, response.status);
+                }, (response) => {
+                    callback(response.data, response.status);
+                })
+        }
+
         search = (searchString, callback) => {
             this.$http.post(this.api+this.eventRoute+this.searchRoute,{query: searchString})
                 .then((response)=>{
