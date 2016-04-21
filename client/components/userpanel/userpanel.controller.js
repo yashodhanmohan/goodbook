@@ -22,7 +22,7 @@ class UserpanelController {
             //     });
             // }
             this.location = this.user.location;
-            this.grading = '7/10';
+            this.grading = this.user.rating;
             this.donated = this.user.donated;
             this.karma = this.user.karma;
             this.description_original = this.user.aboutMe;
