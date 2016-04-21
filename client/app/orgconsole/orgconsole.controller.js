@@ -3,8 +3,9 @@
 (function() {
 
     class OrgconsoleController {
-        constructor($http, $location, $cookies, $routeParams, UserService, OrgService, EventService) {
+        constructor($window, $http, $location, $cookies, $routeParams, UserService, OrgService, EventService) {
             // Services initialization
+            this.$window = $window;
             this.$http = $http;
             this.$location = $location;
             this.UserService = UserService;
@@ -13,7 +14,7 @@
             this.cache = $cookies;
             // Organization variables
             this.org = this.cache.getObject('user');
-            console.log(this.org);
+            this.$window.document.title = 'Goodbook';
             $(document).ready(function() {
                 $('.collapsible').collapsible({
                     accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style

@@ -3,21 +3,22 @@
 (function() {
 
     class SearchController {
-        constructor($http, $location, $cookies, UserService, OrgService, EventService) {
+        constructor($window, $http, $location, $cookies, UserService, OrgService, EventService) {
             // Services
+            this.$window = $window;
             this.$http = $http;
             this.$location = $location;
             this.UserService = UserService;
             this.OrgService = OrgService;
             this.EventService = EventService;
             this.cache = $cookies;
-
             // Query terms from another controller
             this.user = this.cache.getObject('user');
             this.org = this.cache.get('org') == 'true';
             this.query = this.cache.get('search_terms');
             // this.cache.remove('search_terms');
 
+            this.$window.document.title = 'Search: ' + this.query;
             // Result storage
             this.requestCount = 0;
             this.orgResults = [];
@@ -104,13 +105,17 @@
             if (x == 1) {
                 this.showOrgs = true;
                 this.showEvents = false;
+                $('ul.tabs').tabs('select_tab', '#tab1');
             } else if (x == 2) {
                 this.showOrgs = false;
                 this.showEvents = true;
+                $('ul.tabs').tabs('select_tab', '#tab2');
             }
         }
 
         selectTab = () => {
+            console.log(this.orgResults);
+            console.log(this.eventResults);
             if (this.orgResults.length != 0)
                 this.changeTab(1);
             else if (this.eventResults.length != 0)

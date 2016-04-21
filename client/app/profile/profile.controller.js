@@ -3,7 +3,8 @@
 (function() {
 
     class ProfileController {
-        constructor($http, $location, $routeParams, $cookies, UserService, OrgService) {
+        constructor($window, $http, $location, $routeParams, $cookies, UserService, OrgService) {
+            this.$window = $window;
             this.$http = $http;
             this.$location = $location;
             this.$routeParams = $routeParams;
@@ -12,6 +13,7 @@
             this.OrgService = OrgService;
             this.user = this.cache.getObject('user');
             this.user.dob = new Date(this.user.dob);
+            this.$window.document.title = this.user.firstName + ' ' + this.user.lastName;
             this.interests = "";
             this.subscribedNGO = [];
             for (var x in this.user.subscribedNGO) {

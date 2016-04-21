@@ -3,7 +3,8 @@
 (function() {
 
     class DashboardController {
-        constructor($http, $location, $cookies, UserService, OrgService, EventService) {
+        constructor($window, $http, $location, $cookies, UserService, OrgService, EventService) {
+            this.$window = $window;
             this.$http = $http;
             this.$location = $location;
             this.cache = $cookies;
@@ -13,6 +14,7 @@
             if(this.cache.get('loggedIn')!='true') {
                 this.$location.path('/login');
             }
+            this.$window.document.title = 'Goodbook';
             this.user = this.cache.getObject('user');
             this.ind = !(this.cache.get('org')=='true');
             this.grading = this.user.rating;
