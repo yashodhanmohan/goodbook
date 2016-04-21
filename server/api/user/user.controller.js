@@ -150,6 +150,10 @@ function respondWithResult(res, statusCode) {
 function saveUpdates(updates) {
     return function(entity) {
         var updated = _.merge(entity, updates);
+        console.log(entity);
+        console.log(updates);
+        console.log(updated);
+        updated.markModified('interests');
         return updated.save();
     };
 }
