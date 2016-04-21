@@ -115,7 +115,7 @@
             </div>
             <div class="row" style="margin-top: 5%">
                 <div class="col s3 offset-s9">
-                    <button type="submit" ng-click="if(myForm.$valid) createEvent.save()" ng-show="myForm.$dirty" class="btn waves-effect waves-light light-blue">
+                    <button type="submit" ng-click="myForm.$valid && createEvent.save()" ng-show="myForm.$dirty" class="btn waves-effect waves-light light-blue">
                         Save
                     </button>
                 </div>
